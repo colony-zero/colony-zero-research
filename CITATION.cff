@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you refer to Colony Zero, please cite it as below."
+title: "Colony Zero: a colony of tiny AI models that compete, vote one out, and breed a smarter next generation"
+type: software
+authors:
+  - family-names: Ayers
+    given-names: Christopher
+repository-code: "https://github.com/colony-zero/colony-zero-research"
+date-released: 2026-10-24
+keywords:
+  - small language models
+  - multi-agent systems
+  - evolutionary selection
+  - evaluation
