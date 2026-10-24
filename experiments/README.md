@@ -1,6 +1,6 @@
 # Experiments
 
-Status words: SPECIFIED (design written), FREEZE PENDING (design final, commitments not yet published), RUNNING, REPORTED. Claim tags follow METHODOLOGY.md.
+Status words: SPECIFIED (design written), FREEZE PENDING (design final; freeze commitment root not yet published), RUNNING, REPORTED. Claim tags follow METHODOLOGY.md.
 
 | ID | Season | Question | Status | Claim tag |
 |---|---|---|---|---|
