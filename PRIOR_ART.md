@@ -83,4 +83,4 @@ We list no verified paper on evolutionary search over merges. Evolutionary model
 
 ## Mechanisms with no verified entry here
 
-Self-consistency voting as a named method, debate between models, elimination by leave-one-out or Shapley contribution, evolutionary search over model merges, and public randomness beacons all have established predecessors. We have not verified citations for them yet, so they are not listed. Until they are, we describe nothing here as a new mechanism. Any contribution of this project is at most a preregistered combination of known parts, tested under sealed evaluation.
+Self-consistency voting as a named method, debate between models, elimination by leave-one-out or Shapley contribution, evolutionary search over model merges, and public randomness beacons all have established predecessors. We have not verified citations for them yet, so they are not listed. Colony Zero aims to do things that have not been done before. We call a result new only after two checks: it is measured on sealed tasks, and a search of the published record finds no earlier example. Until both checks pass, a target stays PROPOSED.
