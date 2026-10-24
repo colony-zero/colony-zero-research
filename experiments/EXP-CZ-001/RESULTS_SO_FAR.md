@@ -21,6 +21,15 @@ An incident: the first run gave identical answers and token counts for all four 
 
 Phase 0 findings that led to checker fixes: graph reachability scored 0 of 13 for every model because the checker rejected "No" for a reference of "no" (a capitalization effect, fixed). Qwen3-0.6B writes step-by-step prose even when told to give a bare answer. Arithmetic and list transforms scored 0 for every model on 50 tasks, which is too few to conclude anything.
 
+Ledger roots for the four Phase 0 runs (second run):
+
+| Model | Ledger root |
+|---|---|
+| Granite-4.0-H-350M | 10f99a8b4bd6d32bacb9c45f2e6b12db18b99f0711ebaab72e1f778a453fd0dd |
+| SmolLM2-360M-Instruct | f37ee83f0de06538b6043a597c9742c89653bd106b06317ab1e625b71c9b6024 |
+| Qwen3-0.6B | 7fdda34302b6053ee18dedca1e2256d5d7a040b30d73f09a1c992ae40169ad16 |
+| Qwen3.5-0.8B | ee2bc44ff65c7376b93c61f6d00721f6f3bb66e4f0ec747a3684cb01a8ee0fdf |
+
 ## Phase 1: template selection, task suite 0.0.1
 
 400 dev tasks (100 per family), four templates, checker v3, 256-token output cap. Cells are solved of 400.
@@ -42,6 +51,27 @@ Per family for the selected templates (solved of 100):
 | SmolLM2 (P2) | 0 | 46 | 6 | 4 | 9,714 | 7 |
 
 Findings. List transforms failed the suite-validity rule R4: every model scored under 5 percent. Graph reachability sat at the guessing baseline: 54 of 100 dev answers were "no", and the models scored 44 to 54. The output cap was hit 52 times for Qwen3.5. The suite version 0.0.1 is REJECTED as a measuring instrument for these reasons, and it was rescaled before any claim. Arithmetic did discriminate once reasoning was allowed.
+
+Ledger roots for all 16 Phase 1 runs:
+
+| Model | Template | Solved | Ledger root |
+|---|---|---|---|
+| Granite-4.0-H-350M | P1 | 87 | 06d70623da66f9b1422fcdfc91b105e09180f1fc59ff80d487263506bdfe632a |
+| Granite-4.0-H-350M | P2 | 90 | 9e1acc0bd6433d7293295b3d338fefe7d0b1ccbe1f4b7a6d2b3b12ce29f5d104 |
+| Granite-4.0-H-350M | P3 | 94 | ee93bf67e13392197196ab1cedafde57d83a839433d7a458b12fa30dbe9e6daa |
+| Granite-4.0-H-350M | P4 | 110 | 023894af995dc36d324f4b8b13d8459d4797d11fed399b28f99a6a7d84b1b28b |
+| SmolLM2-360M-Instruct | P1 | 54 | 0843dc3c78efbabc5c5b5c9ed5c7e9e72ea6e4be1e449aa5daa6116c255bd320 |
+| SmolLM2-360M-Instruct | P2 | 56 | 9933bb04e060583185855ad742aef551315db89d7cd44d704d891cb4aed71251 |
+| SmolLM2-360M-Instruct | P3 | 54 | a01610bab72ba5320c0548e3eac9bcd7c41ea95d00e9cc831d6d32d8f3de9f80 |
+| SmolLM2-360M-Instruct | P4 | 13 | 5890262af9a39f658d399532cf3bff31075c273bf999f8fc206ad07c2b9f6ec5 |
+| Qwen3-0.6B | P1 | 59 | 80cec2e1197446cf65b2b53fa0b50f9558340a0bcdec4ae9b1c957c105a9805d |
+| Qwen3-0.6B | P2 | 91 | 672dc25bc6f12d9756ebc26ed1c5e829e56e83588e6f801d958f5e21b59a9e6f |
+| Qwen3-0.6B | P3 | 108 | 6ed57ba81ab8c3f56884471f3cb403ce4c589cd27288aabbdc844cc05e903e06 |
+| Qwen3-0.6B | P4 | 85 | db4a37756c3cd6fc97108fea5e322c2eaf312c9ef610d09d666425a63b5c30bf |
+| Qwen3.5-0.8B | P1 | 73 | e3d2430afd44298bcd2a242166d9e7d514acca3a550e6163b4d7fbe9c3b0e33a |
+| Qwen3.5-0.8B | P2 | 161 | 480c6df25a2839764977e270de206a6627e6a7c72b317149e0b6d49d253f8ff1 |
+| Qwen3.5-0.8B | P3 | 104 | f3fca07bcdbe907e40c3a0f70c7a2bcf76a3e23f6659d38b1e6aada374ce8acc |
+| Qwen3.5-0.8B | P4 | 169 | 8481cbac2117910ff2fa3bab05003fafcb7df05fde89eb6be8f834c0bdfaa636 |
 
 ## Phase 1 v2: template selection, task suite 0.0.2
 
@@ -94,7 +124,7 @@ Ledger roots for all 16 Phase 1 v2 runs:
 
 Contamination note: the first run of this matrix (Granite, P1) overlapped for a few minutes with another job on the same GPU. Answers are unaffected, because decoding was greedy and seeded, but that run's wall time and speed are not comparable.
 
-The ledgers themselves are not published in this repository. The roots let the ledgers be verified if they are released later.
+The ledgers themselves are not in this repository yet. They are released with the experiment's reveal package, and anyone can then check each one against the root above.
 
 ## What this does not show
 

@@ -15,7 +15,7 @@ Most AI progress comes from making one model bigger. Colony Zero asks the opposi
 Each season is one turn of the same loop, and each turn is also an experiment.
 
 1. Casting. A founding generation of different model families enters the colony.
-2. Trials. The colony works on fresh problems that a machine checker can grade exactly. The sealed answers are not visible to anyone in advance.
+2. Trials. The colony works on fresh problems that a machine checker can grade exactly. The sealed problems are not disclosed or used for any tuning before the run, and a published commitment makes any later change detectable.
 3. Council. Members vote on who contributes least. Each vote is a prediction, scored later.
 4. Elimination. The member that measurably contributes least is removed. A twin colony with no elimination runs alongside as the control.
 5. Next generation. Survivors produce offspring. An offspring enters only if it beats its parent on a sealed promotion test.
