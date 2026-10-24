@@ -1,6 +1,6 @@
 # EXP-CZ-001: Small-model baseline
 
-Run status: FREEZE PENDING. No sealed task has been run. The thresholds below are the ones frozen in the design and become binding when the freeze commitment root is published (see ../../public-commitments/EXP-CZ-001.md).
+Run status: FROZEN 2026-10-24T23:45:20Z, before any member saw a sealed task. Commitment root c95f852c4967ede66f40f29bdfff8d3666127c940efef2fbe858e3b222d52ef9 (see ../../public-commitments/EXP-CZ-001.md). The design below, including the deviations, is binding. The sealed run is next.
 
 ## Question
 
@@ -68,11 +68,16 @@ No sealed task was touched for any of these.
 1. 2026-10-24. The checker was revised so that yes/no answers ignore case and one trailing period, and answers of the wrong shape are reported as format failures. Reason: Phase 0 showed every member scored 0 on graph reachability because "No" was rejected, which measured capitalization.
 2. 2026-10-24. The checker was revised again to allow step-by-step reasoning, grading the value after the last "Answer:" line, and the step-by-step template was added. Reason: Phase 1 showed arithmetic near 0 for every member because a bare-answer rule forbade working. Reasoning tokens are charged in E3.
 3. Phase 1 results for the first three templates were re-scored offline from their recorded answers. No model was re-run for them.
-4. The task suite was rescaled from version 0.0.1 to 0.0.2 after Phase 1 (one family below 5 percent for every member, one at the guessing baseline), and the output cap was set to 512 tokens for every arm. Phase 1 v2 reran template selection on the new suite. See RESULTS_SO_FAR.md.
+4. The task suite was rescaled from version 0.0.1 to 0.0.2 after Phase 1 (one family below 5 percent for every member, one at the guessing baseline), and the output cap was set to 512 tokens for every arm. Phase 1 v2 reran template selection on the new suite. Selected: M1, M2 and M3 the format-line template, M4 the two-examples template. See RESULTS_SO_FAR.md.
+5. Arms trimmed: the Qwen think-mode arms, the 4-bit arm and M5 do not run in this experiment. Each can run later as its own preregistered arm. Qwen models run with thinking off.
+6. E5 (resource profile) is not measured in the sealed run. It comes from the Phase 0 record and a separate concurrency benchmark, so R3's memory tie-break uses parameter count as the proxy.
+7. Interpretations fixed in the analysis program before the run: R1 compares the E1 point estimate with the upper Wilson bound of the trivial baseline, the mean over families of the majority-class rate (graph reachability) or 0 (other families), computed conservatively. The random-text baseline is dropped because it scores 0 under exact matching. H1.3 is checked against published vendor IFEval scores in the report.
+8. Sampler settings are sent on every request: top-k 40, top-p 0.95, min-p 0.05. Greedy uses temperature 0 and seed 0. The sampling arm uses temperature 0.7 and seeds 1 to 8.
+9. The exploratory Laya arms below were added, with their sealed predictions fixed and hashed before the freeze.
 
 ## Exploratory arms: Laya decision arms
 
-Laya (convaiinnovations/laya, Apache-2.0) is an open encoder model. We will use it in two roles: as a router, deciding which member answers, and as a judge, deciding which answer the colony submits. Both are scored offline on logged outcomes against the best single member, per-family rules, majority vote and equal-compute self-consistency. These arms are exploratory. They never change the confirmatory standings or any decision rule above.
+Laya (convaiinnovations/laya, Apache-2.0) is an open encoder model. We will use it in two roles: as a router, deciding which member answers, and as a judge, deciding which answer the colony submits. Both are scored offline on logged outcomes against the best single member, per-family rules, majority vote and equal-compute self-consistency. These arms are exploratory. They never change the confirmatory standings or any decision rule above. Laya's routing choice for every sealed task, and its trained judge, were fixed and hashed before any member saw a sealed task; the hashes are inside the committed manifest. On 5-fold cross-validation over the dev split, no Laya arm beat the best single member (175 of 400): the best Laya router solved 167 and the best Laya judge 154. We report that as found.
 
 ## What this cannot tell you
 

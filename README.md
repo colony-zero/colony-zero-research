@@ -43,7 +43,8 @@ Every row carries one tag: PROPOSED (designed, not built or tested), IMPLEMENTED
 | Capacity probe of the four founding members | MEASURED | experiments/EXP-CZ-001/RESULTS_SO_FAR.md, Phase 0 |
 | Best prompt template per member, chosen on the dev split | MEASURED | experiments/EXP-CZ-001/RESULTS_SO_FAR.md, Phase 1 v2 |
 | Task suite version 0.0.1 as a measuring instrument | REJECTED | One family scored under 5 percent for every member and another sat at the guessing baseline; see Phase 1 |
-| Sealed run of EXP-CZ-001 and first standings | PROPOSED | experiments/EXP-CZ-001/PREREGISTRATION.md, freeze pending |
+| EXP-CZ-001 design frozen and committed before the sealed run | IMPLEMENTED | public-commitments/EXP-CZ-001.md, root c95f852c... with an OpenTimestamps proof |
+| Sealed run of EXP-CZ-001 and first standings | PROPOSED | experiments/EXP-CZ-001/PREREGISTRATION.md, next |
 | Elimination by popularity vote | REJECTED | METHODOLOGY.md: votes are predictions, measurement decides |
 | First Council and first measured elimination | PROPOSED | ROADMAP.md, Season 1 |
 | Randomized crowd-vote arm | PROPOSED | METHODOLOGY.md |
