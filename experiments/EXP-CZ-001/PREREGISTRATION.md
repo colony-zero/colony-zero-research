@@ -12,7 +12,7 @@ Each can fail.
 
 - H1.1 At least one tested model reaches a lower 95 percent Wilson bound of 0.25 on the sealed suite with greedy decoding and at least 0.90 format validity.
 - H1.2 The strict small-weight model (Granite-4.0-H-350M) clears the same bar. If it does not, "this weight class is too small for the suite" is the recorded result.
-- H1.3 Model rank by verified solve rate matches rank by the vendors' published instruction-following scores. A mismatch is reported, not explained away.
+- H1.3 Model rank by verified solve rate matches rank by the vendors' published IFEval scores. A mismatch is reported, not explained away.
 
 ## Arms
 
@@ -48,7 +48,7 @@ Task suite: four machine-checked families (arithmetic chains, graph reachability
 - R1 (viable): the lower Wilson bound of E1 is at least 0.25, E2 is at least 0.90, and E1 is above the upper bound of the best trivial baseline.
 - R2 (strict class): if M2 and M1 both fail R1, record "the strict small-weight class is too small for this suite". The track stays as a failure baseline.
 - R3 (working backbone): among arms that meet R1, choose the highest E3. If intervals overlap, prefer plain attention, Apache-2.0 and lower peak memory.
-- R4 (suite validity): if all models score above 95 percent or below 5 percent on a family, that family is rescaled in a versioned suite before any claim is made.
+- R4 (suite validity): if all models score above 95 percent or below 5 percent on a family, or the reference program does not score 100 percent, that family is rescaled in a versioned suite before any claim is made.
 
 ## Procedure
 

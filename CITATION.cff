@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you refer to Colony Zero, please cite it as below."
-title: "Colony Zero: a colony of tiny AI models that compete, vote one out, and breed a smarter next generation"
+title: "Colony Zero: small-model colonies under measured selection and sealed evaluation"
 type: software
 authors:
   - family-names: Ayers

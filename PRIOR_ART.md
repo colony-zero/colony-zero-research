@@ -83,4 +83,4 @@ We list no verified paper on evolutionary search over merges. Evolutionary model
 
 ## Mechanisms with no verified entry here
 
-Self-consistency voting as a named method, debate between models, elimination by leave-one-out or Shapley contribution, and public randomness beacons all have prior work. We have not verified citations for them yet, so they are not listed.
+Self-consistency voting as a named method, debate between models, elimination by leave-one-out or Shapley contribution, evolutionary search over model merges, and public randomness beacons all have established predecessors. We have not verified citations for them yet, so they are not listed. Until they are, we describe nothing here as a new mechanism. Any contribution of this project is at most a preregistered combination of known parts, tested under sealed evaluation.

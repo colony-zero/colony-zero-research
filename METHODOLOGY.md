@@ -8,7 +8,7 @@ Every capability statement carries one tag.
 
 - PROPOSED: designed, not built or tested.
 - IMPLEMENTED: built and tested, with no result claimed.
-- MEASURED: a result exists and links to a ledger entry and its manifest hash.
+- MEASURED: a result exists, and its run ledger's root hash is published with it. The full ledgers are released with the experiment's reveal package, and anyone can then check them against the published roots.
 - REJECTED: tried or considered, and set aside for a stated reason.
 
 Results use one outcome vocabulary: SUPPORTED, PARTIAL, NOT SUPPORTED, INCONCLUSIVE, INFRASTRUCTURE. INFRASTRUCTURE means the run failed for reasons that say nothing about the question, such as a broken setup. Why: it stops a tooling failure from being read as a negative result, and stops a negative result from being hidden as a tooling failure.
@@ -19,7 +19,7 @@ Every model call, answer, grade, vote and verdict is appended to a ledger. Each 
 
 ## Sealed evaluation, committed before and revealed after
 
-Task splits are dev (public), test (public, for analysis development) and sealed. The sealed split is generated from a secret salt. Before any run we publish a commitment to the salt and a hash of the sealed task file. After the run we reveal them, and anyone can check that the revealed bytes match. Why: it proves the sealed tasks were fixed before the models were run, and the secret keeps anyone, including us, from tuning to them. Each preregistration field can also be committed with its own salted hash under one root, so a design can be fixed before a run and selectively revealed after. See public-commitments/README.md.
+Task splits are dev (public), test (public, for analysis development) and sealed. The sealed split is generated from a secret salt. Before any run we publish a commitment to the salt and a hash of the sealed task file. After the run we reveal them, and anyone can check that the revealed bytes match. Why: it proves the sealed tasks were fixed before the models were run, and it prevents anyone, including us, from inspecting them before the run. Secrecy alone does not rule out every kind of contamination. The tasks are freshly generated, so no model can have seen these exact items in training, but a model can still be familiar with the task style. Revealed sealed sets are retired and never used for a sealed claim again, and claims of transfer are limited to separately built held-out families. Each preregistration field can also be committed with its own salted hash under one root, so a design can be fixed before a run and selectively revealed after. See public-commitments/README.md.
 
 ## Fail-closed promotion
 
@@ -35,7 +35,7 @@ Wilson intervals for rates, exact McNemar tests on paired tasks, paired bootstra
 
 ## Elimination by measured contribution
 
-The member that leaves is the one whose removal hurts the colony least, measured by re-running the colony without it on the evaluator's tasks. Rare specialists get protection so a narrow but vital member is not removed for being narrow. The Council still meets, but each vote is a prediction ("this member contributes least"), scored against the measurement. Whether the colony's social judgment tracks real contribution becomes a measured quantity. Why: a popularity vote that decides survival would contaminate the science, and removing members changes which tasks the survivors see.
+The member that leaves is the one whose removal hurts the colony least, measured by re-running the colony without it on the evaluator's tasks. Rare specialists can be protected so a narrow but vital member is not removed for being narrow, but only under a threshold, task partition and tie-break rule written down before the season. No exception made after results are visible can change an elimination. The Council still meets, but each vote is a prediction ("this member contributes least"), scored against the measurement. Whether the colony's social judgment tracks real contribution becomes a measured quantity. Why: a popularity vote that decides survival would contaminate the science, and removing members changes which tasks the survivors see.
 
 ## The no-elimination twin
 
@@ -43,7 +43,7 @@ Every run with elimination has a twin with the same seeds and no elimination. Wh
 
 ## Crowd votes as a randomized arm
 
-Before a season we publish a menu of vetted, preregistered options. Viewers vote on the menu only. The season's budget is then split between three arms: CROWD (in proportion to votes), RANDOM (uniform over the menu) and PLAN (the maintainers' preregistered choice). All draws derive from a public random value fixed in advance, so anyone can recompute them. Votes sit in a hash-chained ledger with receipts and never touch sealed evaluation, checkers, promotion or scoring. Free-text suggestions are never training input. Why: the votes really move compute, and the comparison of crowd against random against plan is an experiment of its own. Does crowd direction beat chance, and does it beat the maintainers? Status: PROPOSED. The mechanism is built; no public vote has been held.
+Before a season we publish a menu of vetted, preregistered options. Viewers vote on the menu only. The season's budget is then split between three arms: CROWD (in proportion to votes), RANDOM (uniform over the menu) and PLAN (the maintainers' preregistered choice). All draws derive from a public random value fixed in advance, so anyone can recompute them. Votes sit in a hash-chained ledger with receipts and never touch sealed evaluation, checkers, promotion or scoring. Free-text suggestions are never training input. Why: the votes really move compute, and the comparison of crowd against random against plan is an experiment of its own. Does crowd direction beat chance, and does it beat the maintainers? Status: PROPOSED. No public vote has been held.
 
 ## Final Exam from a public randomness source after the freeze
 

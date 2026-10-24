@@ -4,7 +4,7 @@ A colony of tiny, different open models competes on fresh, machine-checked probl
 
 Created and directed by Christopher Ayers.
 
-We make no claim of general intelligence; the project only says so at the top rung of the Climb with independent replication.
+We make no claim of general intelligence. The top rung of the Climb is a narrowly defined benchmark result that must be independently replicated, and any report of it will name exactly what was measured.
 
 This repository is the public research record. It holds the question, the high-level design, preregistrations, commitments and results. Implementation code is not published here.
 
@@ -73,7 +73,7 @@ No season has been completed. No member has been eliminated. All numbers publish
 5. Decision rules are written down before the run. Negative results are published the same way as positive ones.
 6. Every capability statement carries one tag, and a MEASURED statement points to its evidence.
 7. Prior art is acknowledged in PRIOR_ART.md for every mechanism that has a close predecessor.
-8. Nothing is called general intelligence without passing the pre-announced top rungs of the Climb and an independent replication.
+8. No result is called general intelligence. Climb results are reported as the defined benchmark measurements they are, and the top rungs need independent replication.
 
 ## Hardware
 

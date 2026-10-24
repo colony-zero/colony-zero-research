@@ -17,7 +17,7 @@ The fingerprint is a SHA-256 hash. Anyone can hash the same bytes and compare. I
 2. During the run: nothing is revealed.
 3. After the run: we reveal the bytes. You verify them as above.
 
-A commitment published after the run it covers is worth nothing, so each page records when its values were added to the repository history. Check the commit dates.
+A commitment published after the run it covers is worth nothing. Commit dates alone are not timing evidence, because whoever makes a commit can set its date. So before any sealed run, each commitment is pushed to this public repository and its hash is timestamped with OpenTimestamps, which anchors the hash in the Bitcoin blockchain. The proof file is published beside the commitment, and anyone can check it with the standard OpenTimestamps tools.
 
 ## Pages
 
