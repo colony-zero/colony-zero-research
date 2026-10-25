@@ -18,7 +18,7 @@ Every member has a name, so the colony can be followed season after season. A na
 
 Architecture, size and licence come from each model's Hugging Face card and repository metadata at the revision we pin; exact revisions and file hashes are recorded with each experiment.
 
-Quinn and Quentin come from one lab. Grace and Graham are IBM siblings of almost the same size, one with Mamba layers and one without, which makes them a useful architecture comparison. The second casting runs the same procedure as the first: template choice on the dev split, then a sealed test on a fresh, newly committed sealed set.
+Quinn and Quentin come from one lab. Grace and Graham are IBM siblings of almost the same size, one with Mamba layers and one without, which makes them a useful architecture comparison. The second casting (EXP-CZ-009) runs the same procedure as the first: template choice on the dev split, then a sealed test on a fresh, newly committed sealed set. Its design was frozen on 2026-10-25 before any member saw that set.
 
 ## Season 0 standings (first casting)
 

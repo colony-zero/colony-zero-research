@@ -51,7 +51,7 @@ Every row carries one tag: PROPOSED (designed, not built or tested), IMPLEMENTED
 | EXP-CZ-001 design frozen and committed before the sealed run | IMPLEMENTED | public-commitments/EXP-CZ-001.md, root c95f852c... with an OpenTimestamps proof |
 | Sealed run of EXP-CZ-001 and first standings | MEASURED | experiments/EXP-CZ-001/RESULTS.md: no member viable alone under the frozen bar; best member 44.8% |
 | Sealed set, salts and manifest revealed; every commitment verifies | IMPLEMENTED | public-commitments/reveal/EXP-CZ-001/, verify_reveal.py |
-| Second casting: five more founding members | PROPOSED | COLONY.md |
+| Second casting: five more founding members, design frozen and committed | IMPLEMENTED | experiments/EXP-CZ-009/PREREGISTRATION.md, root 1d3dc845... with an OpenTimestamps proof |
 | Elimination by popularity vote | REJECTED | METHODOLOGY.md: votes are predictions, measurement decides |
 | First Council and first measured elimination | PROPOSED | ROADMAP.md, Season 1 |
 | Randomized crowd-vote arm | PROPOSED | METHODOLOGY.md |
