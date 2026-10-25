@@ -25,12 +25,17 @@ The colony is finished when it stops improving: three generations in a row fail 
 
 ## The founding colony (Generation 0)
 
-| Member | Family | Size | Licence | Observed so far (dev split only) |
+Every member has a name, so the colony can be followed season after season. The full registry is COLONY.md.
+
+| Name | Model | Lab, architecture | Size | Season 0 sealed result |
 |---|---|---|---|---|
-| Granite-4.0-H-350M | IBM, hybrid Mamba | 340M | Apache-2.0 | Follows the answer format: 0 of 400 dev answers failed on format |
-| SmolLM2-360M-Instruct | Hugging Face | 362M | Apache-2.0 | The floor control: lowest dev score |
-| Qwen3-0.6B | Alibaba Qwen | 600M | Apache-2.0 | Writes step-by-step prose even when asked for a bare answer |
-| Qwen3.5-0.8B | Alibaba Qwen, hybrid DeltaNet | 800M | Apache-2.0 | Highest dev score: 175 of 400 |
+| Quinn | Qwen3.5-0.8B | Alibaba Qwen, hybrid DeltaNet | 800M | 44.8% solved; reasons on graph questions |
+| Quentin | Qwen3-0.6B | Alibaba Qwen, transformer | 600M | 28.6% |
+| Grace | Granite-4.0-H-350M | IBM, hybrid Mamba | 340M | 25.1%; 99.8% of answers well formed |
+| Sam | SmolLM2-360M-Instruct | Hugging Face, transformer | 362M | 16.3%; the floor control |
+| Graham, Rowan, Erin, Bastien, Mina | Granite-4.0-350M, RWKV-7 0.4B, ERNIE-4.5-0.3B, Baguettotron, MiniCPM4-0.5B | IBM, RWKV, Baidu, PleIAs, OpenBMB | 350M to 608M | Second casting, in progress |
+
+All nine are Apache-2.0.
 
 ## Where we are
 
@@ -44,14 +49,16 @@ Every row carries one tag: PROPOSED (designed, not built or tested), IMPLEMENTED
 | Best prompt template per member, chosen on the dev split | MEASURED | experiments/EXP-CZ-001/RESULTS_SO_FAR.md, Phase 1 v2 |
 | Task suite version 0.0.1 as a measuring instrument | REJECTED | One family scored under 5 percent for every member and another sat at the guessing baseline; see Phase 1 |
 | EXP-CZ-001 design frozen and committed before the sealed run | IMPLEMENTED | public-commitments/EXP-CZ-001.md, root c95f852c... with an OpenTimestamps proof |
-| Sealed run of EXP-CZ-001 and first standings | PROPOSED | experiments/EXP-CZ-001/PREREGISTRATION.md, next |
+| Sealed run of EXP-CZ-001 and first standings | MEASURED | experiments/EXP-CZ-001/RESULTS.md: no member viable alone under the frozen bar; best member 44.8% |
+| Sealed set, salts and manifest revealed; every commitment verifies | IMPLEMENTED | public-commitments/reveal/EXP-CZ-001/, verify_reveal.py |
+| Second casting: five more founding members | PROPOSED | COLONY.md |
 | Elimination by popularity vote | REJECTED | METHODOLOGY.md: votes are predictions, measurement decides |
 | First Council and first measured elimination | PROPOSED | ROADMAP.md, Season 1 |
 | Randomized crowd-vote arm | PROPOSED | METHODOLOGY.md |
 | A generation replaced by offspring that beat their parents | PROPOSED | ROADMAP.md, Season 3 |
 | The colony reaching the top rung of the Climb | PROPOSED | ROADMAP.md |
 
-No season has been completed. No member has been eliminated. All numbers published so far are dev-split numbers, and dev results are not sealed results.
+Season 0's first casting is complete and revealed. No member has been eliminated; eliminations start in Season 1.
 
 ## Seasons
 
@@ -78,12 +85,13 @@ No season has been completed. No member has been eliminated. All numbers publish
 
 ## Hardware
 
-Everything runs on a single consumer GPU. Members share base models and take turns, so a colony does not need one loaded model per member.
+Everything runs on a single consumer GPU (an AMD Radeon RX 9070 XT, 16 GB). Members share base models and take turns, so a colony does not need one loaded model per member.
 
 ## Files
 
 | Path | What |
 |---|---|
+| COLONY.md | Every member by name, with model, lab, architecture and status |
 | ROADMAP.md | Seasons, experiments and the Climb |
 | METHODOLOGY.md | How the evidence is produced and protected |
 | experiments/README.md | Index of experiments and their status |

@@ -4,7 +4,7 @@ Status words: SPECIFIED (design written), FREEZE PENDING (design final; freeze c
 
 | ID | Season | Question | Status | Claim tag |
 |---|---|---|---|---|
-| EXP-CZ-001 | 0 | What can one frozen tiny model solve, objectively verified? | FROZEN 2026-10-24. Dev-split phases done; sealed run next | Dev results MEASURED; sealed results PROPOSED |
+| EXP-CZ-001 | 0 | What can one frozen tiny model solve, objectively verified? | REPORTED 2026-10-25; sealed set revealed | Dev and sealed results MEASURED (RESULTS.md) |
 | EXP-CZ-002 | 1 | At equal total tokens, does a small team beat one model and best-of-N? | SPECIFIED | PROPOSED |
 | EXP-CZ-003 | 2 | Does a learned router improve success per unit of compute? | SPECIFIED | PROPOSED |
 | EXP-CZ-004 | 3 | Do verified skills transfer to unseen problems and across models? | SPECIFIED | PROPOSED |

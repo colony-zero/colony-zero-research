@@ -1,0 +1,57 @@
+{
+  "exp_id": "EXP-CZ-001",
+  "title": "Small-model baseline: what one frozen tiny model solves without tools under an exact verifier",
+  "hypotheses": [
+    "H1.1 At least one tested model reaches a lower 95% Wilson bound of 0.25 on the sealed suite with greedy decoding and at least 0.90 format validity.",
+    "H1.2 The strict small-weight model (Granite-4.0-H-350M) clears the same bar. If it does not, 'this weight class is too small for the suite' is the recorded result.",
+    "H1.3 Model rank by verified solve rate matches rank by vendor IFEval; a mismatch is reported, not explained away."
+  ],
+  "arms": [
+    "M1 HuggingFaceTB__SmolLM2-360M-Instruct-q8_0, template P3, greedy",
+    "M2 ibm-granite__granite-4.0-h-350m-q8_0, template P3, greedy",
+    "M3 Qwen__Qwen3-0.6B-q8_0, template P3, greedy, enable_thinking false",
+    "M4 Qwen__Qwen3.5-0.8B-q8_0, template P2, greedy, enable_thinking false",
+    "Sampling arm: each of M1-M4 on its template, 8 samples per task, temperature 0.7, seeds 1-8",
+    "Exploratory (never confirmatory): router laya-logistic, router laya-knn, selector laya-logistic, selector laya-knn, selector laya-raw; baselines best-single, per-family rule, oracle, majority vote, equal-compute self-consistency (best member, samples 1-4)"
+  ],
+  "primary_endpoint": "E1: verified solve rate on the sealed suite, greedy, with Wilson 95% interval, overall and per family and per (family, difficulty) cell. Secondary: E2 format validity (reason not starting 'format:'), E3 verified solves per million all-in tokens plus FLOP proxy 2 x params x tokens, E4 coverage@8, pairwise exact McNemar Holm-adjusted at 0.05. E5 resource profile comes from the Phase 0 record and the separate concurrency benchmark, not from this run.",
+  "decision_rule": "R1 viable: lower Wilson bound of E1 >= 0.25 AND E2 >= 0.90 AND E1 point estimate > upper Wilson bound of the overall trivial baseline (mean over families of the majority-class rate; graph_reach majority read back from verdicts, undetermined tasks counted for the majority; other families 0). R2: if M2 and M1 both fail R1, record 'the strict small-weight class is too small for this suite'. R3: among R1 passers the highest E3; if E3 intervals overlap prefer plain attention, then Apache-2.0, then fewer parameters (proxy for peak memory), then higher E3, then model id. R4: a family where every model is above 0.95 or below 0.05, or where the reference program does not score 100%, is rescaled in a versioned suite before any claim. Computed by `cz analyze` exactly as built (binary hash in task_spec.artifacts).",
+  "failure_criteria": "H1.1 fails if no arm meets R1. H1.2 fails if M2 does not meet R1. H1.3 fails if the E1 rank order differs from the vendor IFEval rank order. A ledger that fails verification, a replay that differs from live state, token totals that do not match the result JSON, or an exceeded cap voids the affected arm and is reported.",
+  "task_spec": {
+    "forge": "cz.forge.v0.0.2",
+    "checker": "cz.checker.v3",
+    "split": "sealed",
+    "n_tasks": 1200,
+    "per_family": 300,
+    "per_cell": 60,
+    "sealed_file_sha256": "0a60bd438ddabbea9e2cc92d640b6b0437ffac7f7db8bddf34881003d0cd8388",
+    "sealed_salt_commitment": "944c6a61135558626cf27bc7897b3ced84bd8f71920bf8304dfbfd10587ebe4b",
+    "sealed_salt_commitment_recipe": "sha256(b'cz-salt-commit-v1|' + 32 raw salt bytes)",
+    "reference_program": "cz-forge solver, independent of generation code paths; references are solver output, so the reference program scores 100% by construction",
+    "templates": "P2 two worked examples from dev 400-479; P3 the Forge prompt plus a one-line format reminder",
+    "max_tokens": 512,
+    "context": 4096,
+    "sampler": {"top_k": 40, "top_p": 0.95, "min_p": 0.05, "greedy_temperature": 0, "greedy_seed": 0, "sample_temperature": 0.7},
+    "runtime": "llama.cpp b11539 Vulkan, device selected by name 'RX 9070 XT'",
+    "selection_source": "experiments/EXP-CZ-001/phase1v2/selection.json",
+    "artifacts": {
+      "cz_exe_windows_sha256": "5dfd02b43647797ef5178800467db47da220248e9ff44d3c20f3c18a8c0b377c",
+      "cz_linux_sha256": "8424c210795ec44356964b85b26f0944e7b040e231f78910d68ffcf3aea95bfc",
+      "cz_route_linux_sha256": "0ad45b854951c8e3b1469218ce677c687fcc1197353284ade8474afc972bd3dc",
+      "laya_routes_sealed_sha256": "4e9e2957857cb83cd8f136f8a903f24dc232178bf1651848071dfc8775180d2f",
+      "laya_selector_logistic_sha256": "5fb94323a52abbe38ffac504963ba23afd02310d53ff9526972b422259053aff",
+      "laya_revision": "convaiinnovations/laya@7b928d828b7b0e022f929d9bd2e44165aa270148",
+      "run_sealed_sh_sha256": "d80f63e628b53d566592c9dd4706f91ee57cf9b2166c0786e30da886424ada02",
+      "spec_md_sha256": "cc1095f006f2fd91a5b093518432401d2e0d1812650fea725aedb2a77c51c858"
+    }
+  },
+  "models": [
+    {"arm": "M1", "id": "HuggingFaceTB__SmolLM2-360M-Instruct-q8_0", "params_m": 362, "template": "P3", "gguf_sha256": "946fbbb98c2418bf35d02f4311a56845bec914f2b5d27c26169aaa45891d11b3", "dev_solved": 68},
+    {"arm": "M2", "id": "ibm-granite__granite-4.0-h-350m-q8_0", "params_m": 340, "template": "P3", "gguf_sha256": "b58f4102317be22b2380cad89b9e6ac10f4c8c7b36288a967c618951aca288f5", "dev_solved": 98},
+    {"arm": "M3", "id": "Qwen__Qwen3-0.6B-q8_0", "params_m": 600, "template": "P3", "gguf_sha256": "ba247426cd8c29bd39912e0fc6509f38eb8c4f0abce62ce5ab29af6ac1adb435", "dev_solved": 107},
+    {"arm": "M4", "id": "Qwen__Qwen3.5-0.8B-q8_0", "params_m": 800, "template": "P2", "gguf_sha256": "0460cc9376a1074d4281be61fe2f872e10e349626cf5bab3b4462493481264c3", "dev_solved": 175}
+  ],
+  "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+  "budget": {"generated_tokens_cap": 40000000, "wall_hours_cap": 24, "planned_generations": 48000, "stop_rule": "stop and ask if a phase projects past 2x its Phase 0 estimate"},
+  "schema": "cz.manifest.v1"
+}

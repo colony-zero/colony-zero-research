@@ -124,7 +124,7 @@ Ledger roots for all 16 Phase 1 v2 runs:
 
 Contamination note: the first run of this matrix (Granite, P1) overlapped for a few minutes with another job on the same GPU. Answers are unaffected, because decoding was greedy and seeded, but that run's wall time and speed are not comparable.
 
-The ledgers themselves are not in this repository yet. They are released with the experiment's reveal package, and anyone can then check each one against the root above.
+The ledgers are released as the asset EXP-CZ-001-dev-ledgers.tar.gz (tag exp-cz-001-reveal); each verifies against the root above.
 
 ## What this does not show
 

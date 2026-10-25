@@ -1,6 +1,6 @@
 # EXP-CZ-001: Small-model baseline
 
-Run status: FROZEN 2026-10-24T23:45:20Z, before any member saw a sealed task. Commitment root c95f852c4967ede66f40f29bdfff8d3666127c940efef2fbe858e3b222d52ef9 (see ../../public-commitments/EXP-CZ-001.md). The design below, including the deviations, is binding. The sealed run is next.
+Run status: REPORTED 2026-10-25 (RESULTS.md); sealed set and salts revealed. Frozen 2026-10-24T23:45:20Z, before any member saw a sealed task. Commitment root c95f852c4967ede66f40f29bdfff8d3666127c940efef2fbe858e3b222d52ef9 (see ../../public-commitments/EXP-CZ-001.md). The design below, including the deviations, is binding. The sealed run is next.
 
 ## Question
 

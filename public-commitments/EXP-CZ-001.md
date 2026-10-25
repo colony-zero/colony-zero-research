@@ -1,6 +1,6 @@
 # EXP-CZ-001 commitments
 
-Status: FROZEN 2026-10-24T23:45:20Z. The freeze record is EXP-CZ-001-freeze.txt in this folder, and EXP-CZ-001-freeze.txt.ots is its OpenTimestamps proof.
+Status: REVEALED 2026-10-25; every value below verifies (reveal/EXP-CZ-001/README.md). Frozen 2026-10-24T23:45:20Z. The freeze record is EXP-CZ-001-freeze.txt in this folder, and EXP-CZ-001-freeze.txt.ots is its OpenTimestamps proof.
 
 | Commitment | What it covers | Value |
 |---|---|---|
