@@ -18,7 +18,7 @@ How do the five new founding members (Graham, Rowan, Erin, Bastien, Mina; see ..
 
 - H9.1 At least one new member passes R1.
 - H9.2 Graham (attention only) and Grace (Mamba-2 hybrid), siblings from one lab of almost the same size, differ in sealed solves (exact McNemar, alpha 0.05, one preregistered pair).
-- H9.3 The first four members' solve rates on sealed set 2 fall inside their Season 0 95% intervals, which checks that the two sealed sets are equally hard.
+- H9.3 The first four members' solve rates on sealed set 2 fall inside their Season 0 95% intervals. This compares the two sets; agreement is consistent with, but does not prove, equal difficulty.
 
 ## Dev split results used for template choice (not standings)
 

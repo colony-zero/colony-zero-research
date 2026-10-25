@@ -14,10 +14,15 @@ Status words: SPECIFIED (design written), FREEZE PENDING (design final; freeze c
 | EXP-CZ-007 | 5 | How much of the gap to a frozen frontier baseline closes? | SPECIFIED | PROPOSED |
 | EXP-CZ-008 | later | Can a swarm compress into one student? | SPECIFIED | PROPOSED |
 
-Design details for 002 to 008 are in ../ROADMAP.md. Only EXP-CZ-001 has a preregistration page.
+Design details for 002 to 008 are in ../ROADMAP.md. EXP-CZ-001 and EXP-CZ-009 have preregistration pages.
 
 EXP-CZ-001 pages:
 
 - EXP-CZ-001/PREREGISTRATION.md
 - EXP-CZ-001/RESULTS_SO_FAR.md
 - ../public-commitments/EXP-CZ-001.md
+
+EXP-CZ-009 pages:
+
+- EXP-CZ-009/PREREGISTRATION.md
+- ../public-commitments/EXP-CZ-009.md
