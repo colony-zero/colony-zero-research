@@ -29,11 +29,11 @@ Every member has a name, so the colony can be followed season after season. The 
 
 | Name | Model | Lab, architecture | Size | Season 0 sealed result |
 |---|---|---|---|---|
-| Quinn | Qwen3.5-0.8B | Alibaba Qwen, hybrid DeltaNet | 800M | 44.8% solved; reasons on graph questions |
+| Quinn | Qwen3.5-0.8B | Alibaba Qwen, hybrid DeltaNet | 800M | 44.8% solved; only member above guessing on graph questions |
 | Quentin | Qwen3-0.6B | Alibaba Qwen, transformer | 600M | 28.6% |
 | Grace | Granite-4.0-H-350M | IBM, hybrid Mamba | 340M | 25.1%; 99.8% of answers well formed |
 | Sam | SmolLM2-360M-Instruct | Hugging Face, transformer | 362M | 16.3%; the floor control |
-| Graham, Rowan, Erin, Bastien, Mina | Granite-4.0-350M, RWKV-7 0.4B, ERNIE-4.5-0.3B, Baguettotron, MiniCPM4-0.5B | IBM, RWKV, Baidu, PleIAs, OpenBMB | 350M to 608M | Second casting, in progress |
+| Graham, Rowan, Erin, Bastien, Mina | Granite-4.0-350M, RWKV-7 0.4B, ERNIE-4.5-0.3B, Baguettotron, MiniCPM4-0.5B | IBM, RWKV, Baidu, PleIAs, OpenBMB | 352M to 608M | Second casting, not yet tested |
 
 All nine are Apache-2.0.
 

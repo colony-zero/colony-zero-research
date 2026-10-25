@@ -26,7 +26,7 @@ Guessing baseline: 0.125 [0.108, 0.145]. All six pairwise differences are signif
 | Grace | 0.000 | 0.500 | 0.387 | 0.117 |
 | Sam | 0.003 | 0.500 | 0.140 | 0.010 |
 
-1. The balanced yes/no graph family separates reasoning from guessing. Quentin, Grace and Sam give the same answer to every graph question and score 50%. Only Quinn reasons: 81%, falling from 54 of 60 at difficulty 1 to 42 of 60 at difficulty 5.
+1. The balanced yes/no graph family separates reasoning from guessing. Quentin (49.7%), Grace (50.0%) and Sam (50.0%) score at the guessing level. Only Quinn does clearly better: 81%, falling from 54 of 60 at difficulty 1 to 42 of 60 at difficulty 5.
 2. Quinn solves 58 of 300 arithmetic tasks; the other three solve 6 between them.
 3. JSON extraction collapses at difficulty 4 for everyone (Quinn: 60 of 60 at difficulty 3, 18 of 60 at difficulty 4).
 4. List transforms are the weakest family, and the smallest member, Grace, leads it. Nobody solves a difficulty-5 list task.

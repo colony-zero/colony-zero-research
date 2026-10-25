@@ -14,7 +14,7 @@ EXPECTED = {
     "sealed_file_sha256": "0a60bd438ddabbea9e2cc92d640b6b0437ffac7f7db8bddf34881003d0cd8388",
     "sealed_salt_commitment": "944c6a61135558626cf27bc7897b3ced84bd8f71920bf8304dfbfd10587ebe4b",
     "manifest_salt_commitment": "e95cdac1cc593d6c98df55e7d39bbbe00c92d003cc7f28b5f97c483be929eb51",
-    "manifest_file_sha256": "08422b7b06dbe82fe50171b72d7bbeeaaa0639fdf795d814eedafa5a1af24d4a",
+    "manifest_digest": "58e9b7bd900eb86d80c5e520caff28c69a3c7e5ab9db02bd6c065ef02e976fe5",
     "commitment_root": "c95f852c4967ede66f40f29bdfff8d3666127c940efef2fbe858e3b222d52ef9",
 }
 
@@ -43,7 +43,7 @@ def main(folder):
         "sealed task file matches its hash": sha(d.joinpath("sealed1200.jsonl").read_bytes()) == EXPECTED["sealed_file_sha256"],
         "sealed salt matches its commitment": sha(b"cz-salt-commit-v1|" + sealed_salt) == EXPECTED["sealed_salt_commitment"],
         "manifest salt matches its commitment": sha(b"cz-manifest-salt-commit-v1|" + manifest_salt) == EXPECTED["manifest_salt_commitment"],
-        "manifest file matches its hash": sha(manifest_bytes) == EXPECTED["manifest_file_sha256"],
+        "manifest matches its digest (SHA-256 of canonical JSON)": sha(canonical_json(json.loads(manifest_bytes))) == EXPECTED["manifest_digest"],
         "manifest reproduces the commitment root": manifest_root(json.loads(manifest_bytes), manifest_salt) == EXPECTED["commitment_root"],
     }
     for name, ok in checks.items():

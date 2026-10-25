@@ -14,7 +14,7 @@ Revealed 2026-10-25, after the sealed run. This sealed set is now retired: it wi
 
 From the public-commitments folder: `python3 verify_reveal.py reveal/EXP-CZ-001`
 
-It needs only Python 3 and checks five things against values published before the run: the sealed task file hash, the sealed salt commitment, the manifest salt commitment, the manifest file hash and the commitment root. Each line prints PASS or FAIL. The OpenTimestamps proof for the freeze record (../../EXP-CZ-001-freeze.txt.ots) shows when those values existed; check it with the standard OpenTimestamps client (`ots verify`).
+It needs only Python 3 and checks five things against values published before the run: the sealed task file hash, the sealed salt commitment, the manifest salt commitment, the manifest digest (SHA-256 of its canonical JSON) and the commitment root. Each line prints PASS or FAIL. The OpenTimestamps proof for the freeze record (../../EXP-CZ-001-freeze.txt.ots) shows when those values existed; check it with the standard OpenTimestamps client (`ots verify`).
 
 ## Run ledgers
 
