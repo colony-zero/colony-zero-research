@@ -1,6 +1,10 @@
 # EXP-CZ-010 results: targeted adapter for every founding member (self-taught)
 
-Status: REPORTED 2026-10-26. Frozen 2026-10-26T04:30:59Z together with EXP-CZ-011 (root 1468e1c6..., ../../public-commitments/EXP-CZ-010.md). Sealed run 2026-10-26T04:32:02Z to 06:10:21Z on one 16 GB consumer GPU: first the untrained control (8 runs), then the self-taught adapters (8 runs), all with one frozen runner binary (SHA-256 4e9d101a...). Analysis by the frozen paired-analysis program (SHA-256 955bb78a..., bound in the manifest) with the frozen analysis plan. Sealed set 2: 1,200 tasks, SHA-256 578bc7a8.... Read the commitment-timing incident below before relying on the timestamps.
+Status: REPORTED 2026-10-26. Frozen 2026-10-26T04:30:59Z together with EXP-CZ-011 (root 1468e1c6..., ../../public-commitments/EXP-CZ-010.md). Sealed run 2026-10-26T04:32:02Z to 06:10:21Z on one 16 GB consumer GPU: first the untrained control (8 runs), then the self-taught adapters (8 runs), all with one frozen runner binary (SHA-256 4e9d101a...). Analysis by the frozen paired-analysis program (SHA-256 955bb78a..., bound in the manifest) with the frozen analysis plan. Sealed set 2: 1,200 tasks, SHA-256 578bc7a8..., revealed 2026-10-26 and retired; the manifest reveal is partial (../../public-commitments/reveal/EXP-CZ-009-011/README.md). Timing: published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z). The 04:30:59Z freeze time is our own record. Every adapter run began after the anchor; five untrained control runs began before it (see the incident below).
+
+Read first. Every adapter here was trained once, with one training seed. Our methodology asks for at least five seeds for anything that learns, so this is a departure from that rule: seed variance is unknown, and the learning results are preliminary on that axis. All gains are within four synthetic Forge task families, tested on fresh tasks from the same generators as the training tasks.
+
+The frozen analysis plan (analysis_plan.json) and the analysis output (analysis/results.json) are not published: both contain local file paths in a notes field, which our publication policy does not allow. The tests themselves are standard (exact McNemar, Holm, Wilson intervals) and can be recomputed from the per-task verdicts in the ledgers, but the frozen plan that maps runs to tests cannot be checked from this repository.
 
 ## Outcome
 
@@ -91,13 +95,13 @@ All of these were decided and recorded before any adapter saw sealed set 2.
 
 This is a real protocol slip. Our method says each commitment is pushed to the public repository and timestamped before its sealed run. The freeze roots of EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were frozen at 04:30:59Z and submitted to OpenTimestamps at about 04:33Z. They were not pushed to the public repository before the runs, and the sealed set 2 driver started at 04:32:02Z, before the timestamp was submitted.
 
-So the timing evidence is the Bitcoin attestation alone. All three roots (../../public-commitments/EXP-CZ-010-freeze.txt and its .ots proof) are anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Five runs started before that block: the untrained control runs for Sam, Grace, Quentin, Quinn and Rowan (04:32:02Z to 04:42:28Z). They are untrained base models, and their solve counts equal EXP-CZ-009's sealed results exactly. Every adapter run started after the anchor, the first at 05:08:02Z.
+So the external timing evidence is the Bitcoin attestation alone, and the 04:30:59Z freeze time is our own record, not independently established. All three roots (../../public-commitments/EXP-CZ-010-freeze.txt and its .ots proof) are anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Five runs started before that block: the untrained control runs for Sam, Grace, Quentin, Quinn and Rowan (04:32:02Z to 04:42:28Z). They are untrained base models, and their solve counts equal EXP-CZ-009's sealed results exactly. Every adapter run started after the anchor, the first at 05:08:02Z.
 
 Otherwise, all 16 runs ran once, in order, with no void run and no repeat. Serving several adapters from one server was found not to be equivalent to serving one, and was not used.
 
 ## Run ledgers
 
-The ledgers contain sealed set 2, so they are released with the joint reveal of EXP-CZ-009, EXP-CZ-010 and EXP-CZ-011 (../../public-commitments/reveal/EXP-CZ-009-011/README.md).
+The ledgers are published in the release asset EXP-CZ-009-011-sealed-run-ledgers.tar.gz (tag exp-cz-009-011-reveal; SHA-256 in ../../public-commitments/reveal/EXP-CZ-009-011/README.md). Each ledger records a verdict for every task, so the solve counts here can be recomputed from the ledgers. The runner and checker source is not public, so recomputing verdicts relies on those recorded per-task verdicts.
 
 | Run | Solved | Malformed | Tokens out | Ledger root | Result file SHA-256 |
 |---|---|---|---|---|---|
@@ -132,4 +136,4 @@ The ledgers contain sealed set 2, so they are released with the joint reveal of 
 
 ## Next
 
-Self-training on checked answers is a strong lever for these members on these task families: every tested member improved, and four now clear R1. It does not always help format, and for Erin it shifted skill from JSON to arithmetic while making her answers run long. EXP-CZ-011 compares these self-taught adapters with teacher-taught ones on the same sealed tasks. Open items: GPU-minute accounting, a fix for Graham's NaN logits, and the joint reveal of sealed set 2.
+Self-training on checked answers is a strong lever for these members on these task families: every tested member improved, and four now clear R1. It does not always help format, and for Erin it shifted skill from JSON to arithmetic while making her answers run long. EXP-CZ-011 compares these self-taught adapters with teacher-taught ones on the same sealed tasks. Open items: GPU-minute accounting, a fix for Graham's NaN logits, and more training seeds.

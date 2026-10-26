@@ -19,7 +19,7 @@ The fingerprint is a SHA-256 hash. Anyone can hash the same bytes and compare. I
 
 A commitment published after the run it covers is worth nothing. Commit dates alone are not timing evidence, because whoever makes a commit can set its date. So before any sealed run, each commitment is pushed to this public repository and its hash is timestamped with OpenTimestamps, which anchors the hash in the Bitcoin blockchain. The proof file is published beside the commitment, and anyone can check it with the standard OpenTimestamps tools.
 
-One exception so far. The commitments for EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were timestamped but not pushed here before their sealed runs, and the first runs began before the timestamp request. Their only timing evidence is the Bitcoin anchor, block 973187 (2026-10-26T04:42:29Z). Every trained model's run started after that block. Each of those pages says which runs started before it.
+One exception so far. EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z). They were not pushed here before their sealed runs, and the first control runs began before the timestamp request. Their freeze time, 04:30:59Z, is our own record and is not independently established. Every adapter and child run began after the anchor; five untrained control runs began before it. Each of those pages gives the details.
 
 ## Verify a reveal in one command
 
@@ -28,7 +28,7 @@ One exception so far. The commitments for EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 
 ## Pages
 
 - EXP-CZ-001.md (revealed: reveal/EXP-CZ-001/)
-- EXP-CZ-009.md (second casting; reveal with EXP-CZ-010 and EXP-CZ-011 in reveal/EXP-CZ-009-011/)
-- EXP-CZ-010.md (self-taught adapters)
-- EXP-CZ-011.md (teacher-taught adapters)
-- EXP-CZ-017.md (first children; reveal in reveal/EXP-CZ-017/)
+- EXP-CZ-009.md (second casting; revealed with EXP-CZ-010 and EXP-CZ-011: reveal/EXP-CZ-009-011/)
+- EXP-CZ-010.md (self-taught adapters; partial manifest reveal)
+- EXP-CZ-011.md (teacher-taught adapters; partial manifest reveal)
+- EXP-CZ-017.md (first children; revealed, partial manifest reveal: reveal/EXP-CZ-017/)

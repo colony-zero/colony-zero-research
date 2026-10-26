@@ -1,6 +1,10 @@
 # EXP-CZ-011 results: outside teacher
 
-Status: REPORTED 2026-10-26. Frozen 2026-10-26T04:30:59Z together with EXP-CZ-010 (root 5a7eed65..., ../../public-commitments/EXP-CZ-011.md). Sealed run of the teacher-taught adapters 2026-10-26T06:10:23Z to 06:46:01Z on one 16 GB consumer GPU, with EXP-CZ-010's frozen runner binary (4e9d101a...), in the same driver run as EXP-CZ-010 and after its control and self-taught arm. Analysis by the frozen paired-analysis program (955bb78a...) with the frozen analysis plan. Sealed set 2: 1,200 tasks, SHA-256 578bc7a8.... Read the commitment-timing incident below before relying on the timestamps.
+Status: REPORTED 2026-10-26. Frozen 2026-10-26T04:30:59Z together with EXP-CZ-010 (root 5a7eed65..., ../../public-commitments/EXP-CZ-011.md). Sealed run of the teacher-taught adapters 2026-10-26T06:10:23Z to 06:46:01Z on one 16 GB consumer GPU, with EXP-CZ-010's frozen runner binary (4e9d101a...), in the same driver run as EXP-CZ-010 and after its control and self-taught arm. Analysis by the frozen paired-analysis program (955bb78a...) with the frozen analysis plan. Sealed set 2: 1,200 tasks, SHA-256 578bc7a8..., revealed 2026-10-26 and retired; the manifest reveal is partial (../../public-commitments/reveal/EXP-CZ-009-011/README.md). Timing: published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z). The 04:30:59Z freeze time is our own record. Every teacher-taught run began after the anchor; five untrained control runs shared with EXP-CZ-010 began before it (see the incident below).
+
+Read first. Every adapter here was trained once, with one training seed. Our methodology asks for at least five seeds for anything that learns, so this is a departure from that rule: seed variance is unknown, and the learning results are preliminary on that axis. All gains are within four synthetic Forge task families, tested on fresh tasks from the same generators as the training tasks. This experiment compares the whole teacher pipeline, including its larger data volume, with self-training; it does not measure teacher quality alone.
+
+The frozen analysis plan (analysis_plan.json) and the analysis output (analysis/results.json) are not published: both contain local file paths in a notes field, which our publication policy does not allow. The tests themselves are standard (exact McNemar, Holm, Wilson intervals) and can be recomputed from the per-task verdicts in the ledgers, but the frozen plan that maps runs to tests cannot be checked from this repository.
 
 ## Outcome
 
@@ -92,13 +96,13 @@ All of these were decided and recorded before any adapter saw sealed set 2.
 
 This is a real protocol slip, shared with EXP-CZ-010 and EXP-CZ-017. Our method says each commitment is pushed to the public repository and timestamped before its sealed run. The freeze roots were frozen at 04:30:59Z and submitted to OpenTimestamps at about 04:33Z. They were not pushed to the public repository before the runs, and the sealed set 2 driver started at 04:32:02Z, before the timestamp was submitted.
 
-So the timing evidence is the Bitcoin attestation alone. All three roots (../../public-commitments/EXP-CZ-011-freeze.txt and its .ots proof) are anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Every teacher-taught run started after the anchor, the first at 06:10:23Z. The only runs that started before it were five untrained control runs shared with EXP-CZ-010, whose counts equal EXP-CZ-009's sealed results exactly.
+So the external timing evidence is the Bitcoin attestation alone, and the 04:30:59Z freeze time is our own record, not independently established. All three roots (../../public-commitments/EXP-CZ-011-freeze.txt and its .ots proof) are anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Every teacher-taught run started after the anchor, the first at 06:10:23Z. The only runs that started before it were five untrained control runs shared with EXP-CZ-010, whose counts equal EXP-CZ-009's sealed results exactly.
 
 Otherwise, all 8 teacher-arm runs ran once, in order, with no void run and no repeat.
 
 ## Run ledgers
 
-The untrained control and self-taught ledgers are listed in ../EXP-CZ-010/RESULTS.md. All of them contain sealed set 2, so they are released with the joint reveal (../../public-commitments/reveal/EXP-CZ-009-011/README.md).
+The untrained control and self-taught ledgers are listed in ../EXP-CZ-010/RESULTS.md. All of them are published in the release asset EXP-CZ-009-011-sealed-run-ledgers.tar.gz (tag exp-cz-009-011-reveal; SHA-256 in ../../public-commitments/reveal/EXP-CZ-009-011/README.md). Each ledger records a verdict for every task, so the solve counts here can be recomputed from the ledgers. The runner and checker source is not public, so recomputing verdicts relies on those recorded per-task verdicts.
 
 | Run | Solved | Malformed | Tokens out | Ledger root | Result file SHA-256 |
 |---|---|---|---|---|---|
@@ -124,4 +128,4 @@ The untrained control and self-taught ledgers are listed in ../EXP-CZ-010/RESULT
 
 ## Next
 
-On these task families, checked teacher answers lifted every tested member and left format intact, and seven members now clear R1. The teacher-versus-self difference is real in this design but cannot be credited to the teacher alone, because the teacher arm had more data. EXP-CZ-017 tests the teacher question with equal data, by giving teacher-trained children and a solver-label control exactly the same task ids. A follow-up for the founders would equalise the example count between arms. Open items: teacher spend and GPU-minute accounting, and the joint reveal of sealed set 2.
+On these task families, checked teacher answers lifted every tested member and left format intact, and seven members now clear R1. The teacher-versus-self difference is real in this design but cannot be credited to the teacher alone, because the teacher arm had more data. EXP-CZ-017 tests the teacher question with equal data, by giving teacher-trained children and a solver-label control exactly the same task ids. A follow-up for the founders would equalise the example count between arms. Open items: teacher spend and GPU-minute accounting, and more training seeds.

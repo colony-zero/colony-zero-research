@@ -39,9 +39,9 @@ Every member has a name, so the colony can be followed season after season. The 
 | Rowan | RWKV-7 G1d 0.4B | RWKV, recurrent | 400M | - / 12.8% |
 | Bastien | Baguettotron | PleIAs, transformer | 608M | - / 6.5%; thinking mode always on |
 
-All nine are Apache-2.0. No founder passes the viability bar (R1) untrained. With one small adapter trained on a teacher's checked answers, seven of the eight members tested pass it; with their own checked answers, four do (EXP-CZ-010, EXP-CZ-011).
+All nine are Apache-2.0. No founder passes the viability bar (R1) untrained. With one small adapter trained on a teacher's checked answers, seven of the eight members tested pass it; with their own checked answers, four do (EXP-CZ-010, EXP-CZ-011). These gains are within four synthetic Forge task families, tested on fresh tasks from the same generators as training. The teacher comparison measures the teacher pipeline together with its larger data volume, not teacher quality alone. Each adapter was trained with one seed, below our own five-seed rule, so seed variance is unknown and these learning results are preliminary.
 
-Generation 1 has two members, Theo and Hazel: 135M children of SmolLM2-135M-Instruct, each trained on checked answers from a different open-weight teacher. Both pass R1 on sealed set 3 (37.0% and 37.4%), up from 12.6% for their parent (EXP-CZ-017).
+Generation 1 has two members, Theo and Hazel: 135M children of SmolLM2-135M-Instruct, each trained on checked answers from a different open-weight teacher. Both pass R1 on sealed set 3 (37.0% and 37.4%) and beat their parent, which solves 12.6% (EXP-CZ-017). This is within four synthetic Forge task families, tested on fresh tasks from the same generators as training. Neither teacher beat a control trained on the generator's own correct answers. Three training seeds were run with seed 0 deciding, below our five-seed rule, so this result is also preliminary on seed variance.
 
 ## Where we are
 
@@ -58,19 +58,19 @@ Every row carries one tag: PROPOSED (designed, not built or tested), IMPLEMENTED
 | Sealed run of EXP-CZ-001 and first standings | MEASURED | experiments/EXP-CZ-001/RESULTS.md: no member viable alone under the frozen bar; best member 44.8% |
 | Sealed set, salts and manifest revealed; every commitment verifies | IMPLEMENTED | public-commitments/reveal/EXP-CZ-001/, verify_reveal.py |
 | Second casting: five more founding members on a fresh sealed set | MEASURED | experiments/EXP-CZ-009/RESULTS.md: no new member viable alone; Graham 34.5%, the arithmetic specialist |
-| One self-taught adapter per member, paired against the untrained member | MEASURED | experiments/EXP-CZ-010/RESULTS.md: all 8 tested members gain; 4 pass R1; format harmed for 2 |
-| One teacher-taught adapter per member, against self-taught | MEASURED | experiments/EXP-CZ-011/RESULTS.md: all 8 gain; teacher beats self for 7, but with more training data |
-| First children (Generation 1) admitted by a sealed test | MEASURED | experiments/EXP-CZ-017/RESULTS.md: Theo and Hazel pass R1; no teacher advantage over correct solver labels |
-| Sealed sets 2 and 3 revealed | PROPOSED | public-commitments/reveal/EXP-CZ-009-011/, reveal/EXP-CZ-017/: after owner approval |
+| One self-taught adapter per member, paired against the untrained member | MEASURED | experiments/EXP-CZ-010/RESULTS.md: all 8 tested members gain, within four synthetic Forge task families, tested on fresh tasks from the same generators as training; 4 pass R1; format harmed for 2; one training seed |
+| One teacher-taught adapter per member, against self-taught | MEASURED | experiments/EXP-CZ-011/RESULTS.md: all 8 gain; the teacher pipeline plus its larger data volume beats self-training for 7; not a teacher-quality effect alone; one training seed |
+| First children (Generation 1) admitted by a sealed test | MEASURED | experiments/EXP-CZ-017/RESULTS.md: Theo and Hazel pass R1 and beat their parent; no teacher advantage over correct solver labels; three seeds, seed 0 decides |
+| Sealed sets 2 and 3 revealed and retired; commitments verify (EXP-CZ-010, 011 and 017 with partial manifest reveals) | IMPLEMENTED | public-commitments/reveal/EXP-CZ-009-011/, reveal/EXP-CZ-017/, verify_reveal.py |
 | Elimination by popularity vote | REJECTED | METHODOLOGY.md: votes are predictions, measurement decides |
 | First Council and first measured elimination | PROPOSED | ROADMAP.md, Season 1 |
 | Randomized crowd-vote arm | PROPOSED | METHODOLOGY.md |
 | A generation replaced by offspring that beat their parents | PROPOSED | ROADMAP.md, Season 3 (EXP-CZ-017's children beat their parent, but no member has been replaced) |
 | The colony reaching the top rung of the Climb | PROPOSED | ROADMAP.md |
 
-One protocol slip: the commitments for EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were timestamped but published here only after their sealed runs, so the Bitcoin timestamp (block 973187) is their only timing evidence. Every trained model's run started after that block (public-commitments/README.md).
+One protocol slip: EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were published after the runs; they are externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z). Their 04:30:59Z freeze time is our own record. Every adapter and child run began after the anchor; five untrained control runs began before it (public-commitments/README.md).
 
-In Season 0 so far, the first casting is reported and revealed. The second casting, the two adapter experiments and the first children are reported; their sealed sets will be revealed after owner approval. No member has been eliminated; eliminations start in Season 1.
+In Season 0 so far, the first casting, the second casting, the two adapter experiments and the first children are reported, and sealed sets 1, 2 and 3 are revealed (2026-10-25 and 2026-10-26) and retired. No member has been eliminated; eliminations start in Season 1.
 
 ## Seasons
 

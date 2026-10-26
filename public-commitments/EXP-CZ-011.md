@@ -1,6 +1,6 @@
 # EXP-CZ-011 commitments (teacher-taught adapters)
 
-Status: FROZEN 2026-10-26T04:30:59Z, before any adapter saw sealed set 2. Published here after the sealed runs; see "Timing" below. The freeze record is EXP-CZ-011-freeze.txt in this folder, and EXP-CZ-011-freeze.txt.ots is its OpenTimestamps proof.
+Status: REVEALED 2026-10-26; the manifest reveal is partial (see below). Published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z). Our own freeze record gives 2026-10-26T04:30:59Z, before any adapter saw sealed set 2; that time is not independently established. The freeze record is EXP-CZ-011-freeze.txt in this folder, and EXP-CZ-011-freeze.txt.ots is its OpenTimestamps proof.
 
 | Commitment | What it covers | Value |
 |---|---|---|
@@ -16,6 +16,10 @@ The freeze record lists the commitment root and the freeze ledger root. The free
 
 ## Timing
 
-EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were frozen together at 04:30:59Z. Their freeze record was submitted to OpenTimestamps at about 04:33Z, and the proof is anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Our own rule says each commitment is pushed to this repository and timestamped before its sealed run. These were not pushed before the runs, and the sealed set 2 driver started at 04:32:02Z, before the timestamp was even submitted. So the only timing evidence is the Bitcoin anchor. Every teacher-taught run started after it (the first at 06:10:23Z). The only runs that started before it were five untrained control runs shared with EXP-CZ-010, whose results equal EXP-CZ-009's sealed results exactly. Details: ../experiments/EXP-CZ-011/RESULTS.md.
+By our own record, EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were frozen together at 04:30:59Z; that time is not independently established. Their freeze record was submitted to OpenTimestamps at about 04:33Z, and the proof is anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Our own rule says each commitment is pushed to this repository and timestamped before its sealed run. These were not pushed before the runs, and the sealed set 2 driver started at 04:32:02Z, before the timestamp was even submitted. So the only external timing evidence is the Bitcoin anchor: the commitments existed no later than block 973187. Every teacher-taught run started after it (the first at 06:10:23Z). The only runs that started before it were five untrained control runs shared with EXP-CZ-010, whose results equal EXP-CZ-009's sealed results exactly. Details: ../experiments/EXP-CZ-011/RESULTS.md.
 
-Sealed set 2, its salt, the manifest and its salt will be revealed together for EXP-CZ-009, EXP-CZ-010 and EXP-CZ-011 (reveal/EXP-CZ-009-011/README.md). verify_reveal.py already holds the values above.
+Confirmatory status: Every adapter run began after the anchor; five untrained control runs, shared with EXP-CZ-010, began before it.
+
+## Reveal
+
+Sealed set 2 and its salt were revealed on 2026-10-26 (reveal/EXP-CZ-009-011/README.md), and the set is retired. The manifest reveal is partial: the fields `models` and `task_spec` are withheld and published only as their committed leaves, because they contain local file paths, which our publication policy does not allow. verify_reveal.py checks the per-field commitment root, but it cannot check the manifest file hash or the canonical digest in the table above, and the model file hashes and artifact bindings inside `task_spec` cannot be audited publicly. The full manifest may be published later if the owner grants an exception to the policy.

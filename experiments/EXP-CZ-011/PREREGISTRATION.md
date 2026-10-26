@@ -1,6 +1,6 @@
 # EXP-CZ-011: Outside teacher
 
-Run status: FROZEN 2026-10-26T04:30:59Z, together with EXP-CZ-010, before any adapter saw sealed set 2 (../../public-commitments/EXP-CZ-011.md). This page was published after the sealed run. The commitment was timestamped (Bitcoin block 973187, 2026-10-26T04:42:29Z) but not pushed here before the run; see the timing note on the commitment page and in RESULTS.md.
+Run status: Published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z) (../../public-commitments/EXP-CZ-011.md). Our own freeze record gives 2026-10-26T04:30:59Z, together with EXP-CZ-010, before any adapter saw sealed set 2; that time is not independently established. Reported and revealed 2026-10-26 (RESULTS.md); sealed set 2 is retired.
 
 ## Question
 

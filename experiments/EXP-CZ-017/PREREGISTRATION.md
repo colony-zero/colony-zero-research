@@ -1,6 +1,6 @@
 # EXP-CZ-017: First Birth, two teachers and a solver-label control
 
-Run status: FROZEN 2026-10-26T04:30:59Z, before any child saw sealed set 3 (../../public-commitments/EXP-CZ-017.md). This page was published after the sealed run. The commitment was timestamped (Bitcoin block 973187, 2026-10-26T04:42:29Z) but not pushed here before the run; see the timing note on the commitment page and in RESULTS.md.
+Run status: Published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z) (../../public-commitments/EXP-CZ-017.md). Our own freeze record gives 2026-10-26T04:30:59Z, before any child saw sealed set 3; that time is not independently established. Reported and revealed 2026-10-26 (RESULTS.md); sealed set 3 is retired.
 
 ## Question
 

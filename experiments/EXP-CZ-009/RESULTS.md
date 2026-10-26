@@ -1,6 +1,6 @@
 # EXP-CZ-009 results: second casting
 
-Status: REPORTED 2026-10-26. Frozen 2026-10-25T03:32:59Z (root 1d3dc845..., ../../public-commitments/EXP-CZ-009.md). Sealed run 2026-10-25T03:37:41Z to 04:17:33Z, after the freeze, with the frozen Season 0 runner. Analysis by the frozen analysis program (version 2, bound in the manifest), run twice with byte-identical output. Sealed set 2: 1,200 tasks, SHA-256 578bc7a8... as committed. Sealed set 2 is shared with EXP-CZ-010 and EXP-CZ-011 and will be revealed with them (../../public-commitments/reveal/EXP-CZ-009-011/README.md). Member names: ../../COLONY.md.
+Status: REPORTED 2026-10-26. Frozen 2026-10-25T03:32:59Z (root 1d3dc845..., ../../public-commitments/EXP-CZ-009.md). Sealed run 2026-10-25T03:37:41Z to 04:17:33Z, after the freeze, with the frozen Season 0 runner. Analysis by the frozen analysis program (version 2, bound in the manifest), run twice with byte-identical output. Sealed set 2: 1,200 tasks, SHA-256 578bc7a8... as committed. Sealed set 2 is shared with EXP-CZ-010 and EXP-CZ-011; it was revealed with them on 2026-10-26 and is retired (../../public-commitments/reveal/EXP-CZ-009-011/README.md). The EXP-CZ-009 manifest is revealed in full. Member names: ../../COLONY.md.
 
 ## Outcome
 
@@ -90,7 +90,7 @@ Two notes on the record. Before the freeze, the analysis program was fixed so th
 
 ## Run ledgers
 
-The ledgers contain sealed set 2, so they are released with the joint reveal of EXP-CZ-009, EXP-CZ-010 and EXP-CZ-011.
+The ledgers are published in the release asset EXP-CZ-009-011-sealed-run-ledgers.tar.gz (tag exp-cz-009-011-reveal; SHA-256 in ../../public-commitments/reveal/EXP-CZ-009-011/README.md). Each ledger records a verdict for every task, so the solve counts here can be recomputed from the ledgers. The runner and checker source is not public, so recomputing verdicts relies on those recorded per-task verdicts.
 
 | Run | Solved | Malformed | Tokens out | Ledger root |
 |---|---|---|---|---|

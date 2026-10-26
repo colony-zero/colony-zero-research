@@ -1,6 +1,6 @@
 # EXP-CZ-017 commitments (first children: Theo and Hazel)
 
-Status: FROZEN 2026-10-26T04:30:59Z, before any child saw sealed set 3. Published here after the sealed runs; see "Timing" below. The freeze record is EXP-CZ-017-freeze.txt in this folder, and EXP-CZ-017-freeze.txt.ots is its OpenTimestamps proof.
+Status: REVEALED 2026-10-26; the manifest reveal is partial (see below). Published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z). Our own freeze record gives 2026-10-26T04:30:59Z, before any child saw sealed set 3; that time is not independently established. The freeze record is EXP-CZ-017-freeze.txt in this folder, and EXP-CZ-017-freeze.txt.ots is its OpenTimestamps proof.
 
 | Commitment | What it covers | Value |
 |---|---|---|
@@ -16,6 +16,10 @@ The freeze record lists the commitment root and the freeze ledger root. The free
 
 ## Timing
 
-EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were frozen together at 04:30:59Z. Their freeze record was submitted to OpenTimestamps at about 04:33Z, and the proof is anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Our own rule says each commitment is pushed to this repository and timestamped before its sealed run. These were not pushed before the runs. So the only timing evidence is the Bitcoin anchor. Every EXP-CZ-017 run started after it (the first at 06:46:24Z). Details: ../experiments/EXP-CZ-017/RESULTS.md.
+By our own record, EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were frozen together at 04:30:59Z; that time is not independently established. Their freeze record was submitted to OpenTimestamps at about 04:33Z, and the proof is anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Our own rule says each commitment is pushed to this repository and timestamped before its sealed run. These were not pushed before the runs. So the only external timing evidence is the Bitcoin anchor: the commitments existed no later than block 973187. Every EXP-CZ-017 run started after it (the first at 06:46:24Z). Details: ../experiments/EXP-CZ-017/RESULTS.md.
 
-Sealed set 3, its salt, the manifest and its salt will be revealed after owner approval (reveal/EXP-CZ-017/README.md). verify_reveal.py already holds the values above.
+Confirmatory status: Every EXP-CZ-017 run, and so every child run, began after the anchor.
+
+## Reveal
+
+Sealed set 3 and its salt were revealed on 2026-10-26 (reveal/EXP-CZ-017/README.md), and the set is retired. The manifest reveal is partial: the fields `models` and `task_spec` are withheld and published only as their committed leaves, because they contain local file paths, which our publication policy does not allow. verify_reveal.py checks the per-field commitment root, but it cannot check the manifest file hash or the canonical digest in the table above, and the model file hashes and artifact bindings inside `task_spec` cannot be audited publicly. The full manifest may be published later if the owner grants an exception to the policy.

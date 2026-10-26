@@ -1,6 +1,10 @@
 # EXP-CZ-017 results: First Birth
 
-Status: REPORTED 2026-10-26. Sealed set 3 and its salt stay secret until the reveal, after owner approval (../../public-commitments/reveal/EXP-CZ-017/README.md). Frozen 2026-10-26T04:30:59Z, before any child saw sealed set 3 (root 55a51dd3..., ../../public-commitments/EXP-CZ-017.md). Sealed run on one 16 GB consumer GPU with a frozen runner binary (e058fb4e...): the 13 planned runs 2026-10-26T06:46:24Z to 07:44:36Z, then the nine untrained founders as exploratory comparators, 07:44:39Z to 09:27:49Z. Analysis by the frozen paired-analysis program (955bb78a...) with the frozen analysis plan. Sealed set 3, scored file: 2,393 tasks, SHA-256 7531dc11... (7 chance-collision tasks excluded before any run). Read the commitment-timing incident below before relying on the timestamps.
+Status: REPORTED and REVEALED 2026-10-26. Sealed set 3 and its salt are revealed and the set is retired; the manifest reveal is partial (../../public-commitments/reveal/EXP-CZ-017/README.md). Timing: published after the runs; externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z); the 04:30:59Z freeze time is our own record. Every EXP-CZ-017 run began after the anchor. Frozen 2026-10-26T04:30:59Z, before any child saw sealed set 3 (root 55a51dd3..., ../../public-commitments/EXP-CZ-017.md). Sealed run on one 16 GB consumer GPU with a frozen runner binary (e058fb4e...): the 13 planned runs 2026-10-26T06:46:24Z to 07:44:36Z, then the nine untrained founders as exploratory comparators, 07:44:39Z to 09:27:49Z. Analysis by the frozen paired-analysis program (955bb78a...) with the frozen analysis plan. Sealed set 3, scored file: 2,393 tasks, SHA-256 7531dc11... (7 chance-collision tasks excluded before any run). See also the commitment-timing incident below.
+
+Read first. Each arm was trained with three seeds, and seed 0 alone decides every hypothesis and admission; seeds 1 and 2 are replications. Our methodology asks for at least five seeds for anything that learns, so this is a departure from that rule: seed variance is only partly known, and the learning results are preliminary on that axis. All results are within four synthetic Forge task families, tested on fresh tasks from the same generators as the training tasks.
+
+The frozen analysis plan (analysis_plan.json) and the analysis output (analysis/results.json) are not published: both contain local file paths in a notes field, which our publication policy does not allow. The tests themselves are standard (exact McNemar, Holm, Wilson intervals) and can be recomputed from the per-task verdicts in the ledgers, but the frozen plan that maps runs to tests cannot be checked from this repository.
 
 ## Outcome
 
@@ -70,7 +74,7 @@ Q4_K_M costs these 135M children between 2.7 and 5.7 points and adds some malfor
 
 ## Membership
 
-Under the frozen rule only the seed-0 Q8_0 runs of Theo and Hazel decide admission. Both pass R1 (Wilson lower bounds 0.351 and 0.354 against 0.25, format 1.000, solve rate above 0.1393). Theo and Hazel therefore join the colony as Q8_0 files (../../COLONY.md). The solver control and seeds 1 and 2 also pass R1, which is reported only; the solver control is a control, not a member. The parent fails all three R1 conditions: its solve rate sits at the guessing baseline, and only 41.8% of its answers are well formed.
+Under the frozen rule only the seed-0 Q8_0 runs of Theo and Hazel decide admission. Both pass R1 (Wilson lower bounds 0.351 and 0.354 against 0.25, format 1.000, solve rate above 0.1393). Theo and Hazel therefore join the colony as Q8_0 files (../../COLONY.md). They also beat their parent by a wide margin (H17.1 and H17.2), so the README rule that an offspring enters only if it beats its parent on a sealed test holds here. The EXP-CZ-017 gate itself did not require the parent comparison; future offspring specifications will require both R1 and a preregistered win over the parent. The solver control and seeds 1 and 2 also pass R1, which is reported only; the solver control is a control, not a member. The parent fails all three R1 conditions: its solve rate sits at the guessing baseline, and only 41.8% of its answers are well formed.
 
 ## By family and cell
 
@@ -152,13 +156,13 @@ All of these were decided and recorded before any child saw sealed set 3.
 
 This is a real protocol slip, shared with EXP-CZ-010 and EXP-CZ-011. Our method says each commitment is pushed to the public repository and timestamped before its sealed run. The freeze roots were frozen at 04:30:59Z and submitted to OpenTimestamps at about 04:33Z. They were not pushed to the public repository before the runs, and the sealed set 2 driver for EXP-CZ-010 started at 04:32:02Z, before the timestamp was submitted.
 
-So the timing evidence is the Bitcoin attestation alone. All three roots (../../public-commitments/EXP-CZ-017-freeze.txt and its .ots proof) are anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Every EXP-CZ-017 run started after the anchor, the first at 06:46:24Z.
+So the external timing evidence is the Bitcoin attestation alone, and the 04:30:59Z freeze time is our own record, not independently established. All three roots (../../public-commitments/EXP-CZ-017-freeze.txt and its .ots proof) are anchored in Bitcoin block 973187, mined at 2026-10-26T04:42:29Z. Every EXP-CZ-017 run started after the anchor, the first at 06:46:24Z.
 
 Otherwise, all 22 runs (13 planned, 9 exploratory) ran once, in order, with no void run and no repeat. Generated tokens: 673,123 for the planned runs and 1,855,321 for the exploratory runs (Bastien alone 1,130,905), 2.53 million in total against a cap of 27.0 million.
 
 ## Run ledgers
 
-The ledgers contain sealed set 3, so they are released with its reveal (../../public-commitments/reveal/EXP-CZ-017/README.md).
+The ledgers are published in the release asset EXP-CZ-017-sealed-run-ledgers.tar.gz (tag exp-cz-017-reveal; SHA-256 in ../../public-commitments/reveal/EXP-CZ-017/README.md). Each ledger records a verdict for every task, so the solve counts here can be recomputed from the ledgers. The runner and checker source is not public, so recomputing verdicts relies on those recorded per-task verdicts.
 
 | Run | Solved | Malformed | Tokens out | Ledger root | Result file SHA-256 |
 |---|---|---|---|---|---|
@@ -202,4 +206,4 @@ Exploratory runs (not in the plan):
 
 ## Next
 
-The colony can make small members of its own: a 135M parent trained on 8,621 checked answers nearly triples its solve rate and clears R1, with either teacher. On this evidence neither teacher showed a preregistered advantage over correct labels on the same tasks, which the generator supplies at no teacher cost. Solver labels are therefore a reasonable default to test for the next children, with teachers kept for tasks where no solver exists; a full cost comparison was not measured here. The children ship as Q8_0. Arithmetic is the open weakness at this size. A planned generator revision that states the JSON noun convention would let the exempt cells be gated normally. Open items: peak-memory and GPU-minute accounting, and the reveal of sealed set 3.
+The colony can make small members of its own: a 135M parent trained on 8,621 checked answers nearly triples its solve rate and clears R1, with either teacher. On this evidence neither teacher showed a preregistered advantage over correct labels on the same tasks, which the generator supplies at no teacher cost. Solver labels are therefore a reasonable default to test for the next children, with teachers kept for tasks where no solver exists; a full cost comparison was not measured here. The children ship as Q8_0. Arithmetic is the open weakness at this size. A planned generator revision that states the JSON noun convention would let the exempt cells be gated normally. Open items: peak-memory and GPU-minute accounting, and five or more training seeds for the next children.

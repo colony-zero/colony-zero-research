@@ -1,6 +1,6 @@
 # EXP-CZ-009: Second casting
 
-Run status: FROZEN 2026-10-25T03:32:59Z, before any member saw sealed set 2 (../../public-commitments/EXP-CZ-009.md).
+Run status: FROZEN 2026-10-25T03:32:59Z, before any member saw sealed set 2 (../../public-commitments/EXP-CZ-009.md). Reported and revealed 2026-10-26 (RESULTS.md); sealed set 2 is retired.
 
 ## Question
 
