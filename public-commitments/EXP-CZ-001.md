@@ -2,6 +2,8 @@
 
 Status: REVEALED 2026-10-25; every value below verifies (reveal/EXP-CZ-001/README.md). Frozen 2026-10-24T23:45:20Z. The freeze record is EXP-CZ-001-freeze.txt in this folder, and EXP-CZ-001-freeze.txt.ots is its OpenTimestamps proof.
 
+Bitcoin anchor: block 972993, 2026-10-24T23:56:01Z, about 9 minutes after the sealed run started (23:47:24Z). The commitment was pushed here at 23:47:08Z by GitHub's server log; see README.md, Timing evidence.
+
 | Commitment | What it covers | Value |
 |---|---|---|
 | Salt commitment | The secret salt that generates the sealed tasks | 944c6a61135558626cf27bc7897b3ced84bd8f71920bf8304dfbfd10587ebe4b |

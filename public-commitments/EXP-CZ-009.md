@@ -2,6 +2,8 @@
 
 Status: FROZEN 2026-10-25T03:32:59Z, before any member saw sealed set 2. Sealed run 2026-10-25T03:37:41Z to 04:17:33Z, after the freeze. Reported and REVEALED 2026-10-26, with EXP-CZ-010 and EXP-CZ-011 (reveal/EXP-CZ-009-011/); sealed set 2 is retired. The freeze record is EXP-CZ-009-freeze.txt in this folder, and EXP-CZ-009-freeze.txt.ots is its OpenTimestamps proof.
 
+Bitcoin anchor: block 973012, 2026-10-25T03:58:36Z, about 21 minutes after the sealed run started (03:37:41Z). The commitment was pushed here at 03:37:28Z by GitHub's server log; see README.md, Timing evidence.
+
 | Commitment | What it covers | Value |
 |---|---|---|
 | Sealed set 2 | SHA-256 of the task file: 1,200 tasks, 300 per family, no task shared with sealed set 1 | 578bc7a8e63dd1602a88318bed24ba24ffd9281a06c311a58130e1e1911a4297 |
