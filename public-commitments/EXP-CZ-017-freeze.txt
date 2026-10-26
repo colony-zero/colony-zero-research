@@ -1,0 +1,2 @@
+EXP-CZ-017 commitment_root 55a51dd37ca213dbc6ee99f51ca59b5baca1f747919a1ce567d06c9b7dd9500a
+EXP-CZ-017 freeze_ledger_root 35c648e696ae3b8c601fce5fb4930927c8179db5488f6b9155e8f851ebaf57b8

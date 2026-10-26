@@ -27,15 +27,21 @@ The colony is finished when it stops improving: three generations in a row fail 
 
 Every member has a name, so the colony can be followed season after season. The full registry is COLONY.md.
 
-| Name | Model | Lab, architecture | Size | Season 0 sealed result |
+| Name | Model | Lab, architecture | Size | Sealed result, untrained (set 1 / set 2) |
 |---|---|---|---|---|
-| Quinn | Qwen3.5-0.8B | Alibaba Qwen, hybrid DeltaNet | 800M | 44.8% solved; only member above guessing on graph questions |
-| Quentin | Qwen3-0.6B | Alibaba Qwen, transformer | 600M | 28.6% |
-| Grace | Granite-4.0-H-350M | IBM, hybrid Mamba | 340M | 25.1%; 99.8% of answers well formed |
-| Sam | SmolLM2-360M-Instruct | Hugging Face, transformer | 362M | 16.3%; the floor control |
-| Graham, Rowan, Erin, Bastien, Mina | Granite-4.0-350M, RWKV-7 0.4B, ERNIE-4.5-0.3B, Baguettotron, MiniCPM4-0.5B | IBM, RWKV, Baidu, PleIAs, OpenBMB | 352M to 608M | Second casting, not yet tested |
+| Quinn | Qwen3.5-0.8B | Alibaba Qwen, hybrid DeltaNet | 800M | 44.8% / 42.7%; only member above guessing on graph questions |
+| Quentin | Qwen3-0.6B | Alibaba Qwen, transformer | 600M | 28.6% / 29.5% |
+| Grace | Granite-4.0-H-350M | IBM, hybrid Mamba | 340M | 25.1% / 23.4%; 99.8% of answers well formed |
+| Sam | SmolLM2-360M-Instruct | Hugging Face, transformer | 362M | 16.3% / 15.8%; the floor control |
+| Graham | Granite-4.0-350M | IBM, transformer | 352M | - / 34.5%; arithmetic specialist |
+| Erin | ERNIE-4.5-0.3B | Baidu, transformer | 361M | - / 19.8% |
+| Mina | MiniCPM4-0.5B | OpenBMB, transformer | 434M | - / 18.2% |
+| Rowan | RWKV-7 G1d 0.4B | RWKV, recurrent | 400M | - / 12.8% |
+| Bastien | Baguettotron | PleIAs, transformer | 608M | - / 6.5%; thinking mode always on |
 
-All nine are Apache-2.0.
+All nine are Apache-2.0. No founder passes the viability bar (R1) untrained. With one small adapter trained on a teacher's checked answers, seven of the eight members tested pass it; with their own checked answers, four do (EXP-CZ-010, EXP-CZ-011).
+
+Generation 1 has two members, Theo and Hazel: 135M children of SmolLM2-135M-Instruct, each trained on checked answers from a different open-weight teacher. Both pass R1 on sealed set 3 (37.0% and 37.4%), up from 12.6% for their parent (EXP-CZ-017).
 
 ## Where we are
 
@@ -51,14 +57,20 @@ Every row carries one tag: PROPOSED (designed, not built or tested), IMPLEMENTED
 | EXP-CZ-001 design frozen and committed before the sealed run | IMPLEMENTED | public-commitments/EXP-CZ-001.md, root c95f852c... with an OpenTimestamps proof |
 | Sealed run of EXP-CZ-001 and first standings | MEASURED | experiments/EXP-CZ-001/RESULTS.md: no member viable alone under the frozen bar; best member 44.8% |
 | Sealed set, salts and manifest revealed; every commitment verifies | IMPLEMENTED | public-commitments/reveal/EXP-CZ-001/, verify_reveal.py |
-| Second casting: five more founding members, design frozen and committed | IMPLEMENTED | experiments/EXP-CZ-009/PREREGISTRATION.md, root 1d3dc845... with an OpenTimestamps proof |
+| Second casting: five more founding members on a fresh sealed set | MEASURED | experiments/EXP-CZ-009/RESULTS.md: no new member viable alone; Graham 34.5%, the arithmetic specialist |
+| One self-taught adapter per member, paired against the untrained member | MEASURED | experiments/EXP-CZ-010/RESULTS.md: all 8 tested members gain; 4 pass R1; format harmed for 2 |
+| One teacher-taught adapter per member, against self-taught | MEASURED | experiments/EXP-CZ-011/RESULTS.md: all 8 gain; teacher beats self for 7, but with more training data |
+| First children (Generation 1) admitted by a sealed test | MEASURED | experiments/EXP-CZ-017/RESULTS.md: Theo and Hazel pass R1; no teacher advantage over correct solver labels |
+| Sealed sets 2 and 3 revealed | PROPOSED | public-commitments/reveal/EXP-CZ-009-011/, reveal/EXP-CZ-017/: after owner approval |
 | Elimination by popularity vote | REJECTED | METHODOLOGY.md: votes are predictions, measurement decides |
 | First Council and first measured elimination | PROPOSED | ROADMAP.md, Season 1 |
 | Randomized crowd-vote arm | PROPOSED | METHODOLOGY.md |
-| A generation replaced by offspring that beat their parents | PROPOSED | ROADMAP.md, Season 3 |
+| A generation replaced by offspring that beat their parents | PROPOSED | ROADMAP.md, Season 3 (EXP-CZ-017's children beat their parent, but no member has been replaced) |
 | The colony reaching the top rung of the Climb | PROPOSED | ROADMAP.md |
 
-Season 0's first casting is complete and revealed. No member has been eliminated; eliminations start in Season 1.
+One protocol slip: the commitments for EXP-CZ-010, EXP-CZ-011 and EXP-CZ-017 were timestamped but published here only after their sealed runs, so the Bitcoin timestamp (block 973187) is their only timing evidence. Every trained model's run started after that block (public-commitments/README.md).
+
+In Season 0 so far, the first casting is reported and revealed. The second casting, the two adapter experiments and the first children are reported; their sealed sets will be revealed after owner approval. No member has been eliminated; eliminations start in Season 1.
 
 ## Seasons
 
@@ -97,6 +109,7 @@ Everything runs on a single consumer GPU (an AMD Radeon RX 9070 XT, 16 GB). Memb
 | experiments/README.md | Index of experiments and their status |
 | experiments/EXP-CZ-001/PREREGISTRATION.md | The first experiment, as designed before the sealed run |
 | experiments/EXP-CZ-001/RESULTS_SO_FAR.md | Dev-split measurements to date |
+| experiments/EXP-CZ-0xx/RESULTS.md | Sealed results for EXP-CZ-001, 009, 010, 011 and 017 |
 | public-commitments/ | Commitments and how to verify them |
 | PRIOR_ART.md | Related published work |
 | CITATION.cff, NOTICE.md | Citation data and rights notice |

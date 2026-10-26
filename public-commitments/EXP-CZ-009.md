@@ -1,6 +1,6 @@
 # EXP-CZ-009 commitments (second casting)
 
-Status: FROZEN 2026-10-25T03:32:59Z, before any member saw sealed set 2. The freeze record is EXP-CZ-009-freeze.txt in this folder, and EXP-CZ-009-freeze.txt.ots is its OpenTimestamps proof.
+Status: FROZEN 2026-10-25T03:32:59Z, before any member saw sealed set 2. Sealed run 2026-10-25T03:37:41Z to 04:17:33Z, after the freeze. Reported 2026-10-26 (../experiments/EXP-CZ-009/RESULTS.md); reveal pending, with EXP-CZ-010 and EXP-CZ-011. The freeze record is EXP-CZ-009-freeze.txt in this folder, and EXP-CZ-009-freeze.txt.ots is its OpenTimestamps proof.
 
 | Commitment | What it covers | Value |
 |---|---|---|
@@ -11,4 +11,4 @@ Status: FROZEN 2026-10-25T03:32:59Z, before any member saw sealed set 2. The fre
 | Manifest salt | SHA-256 of ASCII `cz-manifest-salt-commit-v1\|` plus the 32 raw manifest-salt bytes | 35c6b2c33583e4e4b7864add1b0ef5897edf0ad431856463c48c4aa301104356 |
 | Freeze ledger root | Root of the one-event hash-chained freeze ledger | aade5eba2744874c63df6f2a56ec2987039aa4c6436f52f8dff2525609ec852c |
 
-Sealed set 2 is shared with the targeted fine-tuning experiment (EXP-CZ-010) as a paired comparison, so it is revealed only after that experiment has also run on it. The same verifier (verify_reveal.py) will check it then.
+Sealed set 2 is shared with the targeted fine-tuning experiment (EXP-CZ-010) as a paired comparison, so it is revealed only after that experiment has also run on it. The same verifier (verify_reveal.py) will check it then (reveal/EXP-CZ-009-011/README.md). It also checks the manifest file hash, 79aadf666e33049ab3581c21c4baf9b861e2b473928a366dd1a6feb45d873cf1, which is recorded in the freeze ledger and therefore covered by the freeze ledger root above.
