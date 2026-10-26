@@ -1,0 +1,175 @@
+{
+ "root": "1d3dc84533898b3375b5f936508ca3f774f596d0dbf47bbb7ced667a9fa1327c",
+ "revealed": {
+  "arms": [
+   "M1 Sam HuggingFaceTB__SmolLM2-360M-Instruct-q8_0, template P3, greedy",
+   "M2 Grace ibm-granite__granite-4.0-h-350m-q8_0, template P3, greedy",
+   "M3 Quentin Qwen__Qwen3-0.6B-q8_0, template P3, greedy",
+   "M4 Quinn Qwen__Qwen3.5-0.8B-q8_0, template P2, greedy",
+   "N1 Graham ibm-granite__granite-4.0-350m-q8_0, template P4, greedy",
+   "N2 Rowan BlinkDL__rwkv7-g1-q8_0, template P3, greedy",
+   "N3 Erin baidu__ERNIE-4.5-0.3B-PT-q8_0, template P3, greedy",
+   "N4 Bastien PleIAs__baguettotron-600m-q8_0, template P3, greedy",
+   "N5 Mina openbmb__MiniCPM4-0.5B-q8_0, template P3, greedy"
+  ],
+  "budget": {
+   "generated_tokens_cap": 40000000,
+   "wall_hours_cap": 24,
+   "planned_generations": 10800
+  },
+  "decision_rule": "R1 to R4 exactly as in EXP-CZ-001 (manifest root c95f852c...), computed by cz.analyze.v2, whose only change from v1 is the arm mapping of the five new members; v2 reproduces the EXP-CZ-001 results.json exactly apart from the version string. H9.2 is read from the unadjusted pairwise p for Graham vs Grace. H9.3 compares each first-casting member's set 2 E1 point estimate with its EXP-CZ-001 Wilson interval.",
+  "exp_id": "EXP-CZ-009",
+  "failure_criteria": "A ledger that fails verification, a replay that differs from live state, token totals that differ from the result JSON, or a run against a tasks file whose sha256 differs from sealed set 2 voids that member's run and is reported.",
+  "hypotheses": [
+   "H9.1 At least one new member (Graham, Rowan, Erin, Bastien, Mina) passes R1 as defined in EXP-CZ-001.",
+   "H9.2 Graham (attention only) and Grace (Mamba-2 hybrid) differ in sealed solves: exact McNemar, alpha 0.05, single preregistered pair, not Holm-adjusted.",
+   "H9.3 Sam, Grace, Quentin and Quinn have sealed set 2 solve rates inside their Season 0 95% Wilson intervals."
+  ],
+  "models": [
+   {
+    "arm": "M1",
+    "name": "Sam",
+    "id": "HuggingFaceTB__SmolLM2-360M-Instruct-q8_0",
+    "params_m": 362,
+    "template": "P3",
+    "dev_solved": 68,
+    "gguf_sha256": "946fbbb98c2418bf35d02f4311a56845bec914f2b5d27c26169aaa45891d11b3",
+    "thinking": "not applicable"
+   },
+   {
+    "arm": "M2",
+    "name": "Grace",
+    "id": "ibm-granite__granite-4.0-h-350m-q8_0",
+    "params_m": 340,
+    "template": "P3",
+    "dev_solved": 98,
+    "gguf_sha256": "b58f4102317be22b2380cad89b9e6ac10f4c8c7b36288a967c618951aca288f5",
+    "thinking": "not applicable"
+   },
+   {
+    "arm": "M3",
+    "name": "Quentin",
+    "id": "Qwen__Qwen3-0.6B-q8_0",
+    "params_m": 600,
+    "template": "P3",
+    "dev_solved": 107,
+    "gguf_sha256": "ba247426cd8c29bd39912e0fc6509f38eb8c4f0abce62ce5ab29af6ac1adb435",
+    "thinking": "off"
+   },
+   {
+    "arm": "M4",
+    "name": "Quinn",
+    "id": "Qwen__Qwen3.5-0.8B-q8_0",
+    "params_m": 800,
+    "template": "P2",
+    "dev_solved": 175,
+    "gguf_sha256": "0460cc9376a1074d4281be61fe2f872e10e349626cf5bab3b4462493481264c3",
+    "thinking": "off"
+   },
+   {
+    "arm": "N1",
+    "name": "Graham",
+    "id": "ibm-granite__granite-4.0-350m-q8_0",
+    "params_m": 352,
+    "template": "P4",
+    "dev_solved": 127,
+    "gguf_sha256": "1428057c3813398493fcfb2fd83ffcb1c9caa6a8862d9cf71553acebe2b390b9",
+    "thinking": "not applicable"
+   },
+   {
+    "arm": "N2",
+    "name": "Rowan",
+    "id": "BlinkDL__rwkv7-g1-q8_0",
+    "params_m": 451,
+    "template": "P3",
+    "dev_solved": 52,
+    "gguf_sha256": "c440d7a19643d47135aa1482108d235daf56dcf6ccf0b5dcd14302dee866f12c",
+    "thinking": "off"
+   },
+   {
+    "arm": "N3",
+    "name": "Erin",
+    "id": "baidu__ERNIE-4.5-0.3B-PT-q8_0",
+    "params_m": 361,
+    "template": "P3",
+    "dev_solved": 78,
+    "gguf_sha256": "defbfb31eb798db89cebb02c1cad37b9cba2c77f02fa5ef59fc8e63d498bdf73",
+    "thinking": "not applicable"
+   },
+   {
+    "arm": "N4",
+    "name": "Bastien",
+    "id": "PleIAs__baguettotron-600m-q8_0",
+    "params_m": 608,
+    "template": "P3",
+    "dev_solved": 27,
+    "gguf_sha256": "6fbb42f1fd5cdc2bfcb083a1dd95603cc138ad4bf686a775cc9d2c1adc06aa99",
+    "thinking": "forced on by the chat template"
+   },
+   {
+    "arm": "N5",
+    "name": "Mina",
+    "id": "openbmb__MiniCPM4-0.5B-q8_0",
+    "params_m": 434,
+    "template": "P3",
+    "dev_solved": 75,
+    "gguf_sha256": "1b0c6fac649dcbf84819abf302a2501afc08c121b83d827cd754c96ff1125ace",
+    "thinking": "not applicable"
+   }
+  ],
+  "primary_endpoint": "E1 verified greedy solve rate on sealed set 2 with 95% Wilson intervals, overall, per family and per cell; E2 format validity; E3 solves per million all-in tokens; pairwise exact McNemar with Holm adjustment over all 36 pairs. No sampling arm.",
+  "schema": "cz.manifest.v1",
+  "seeds": [
+   0
+  ],
+  "task_spec": {
+   "forge": "cz.forge.v0.0.2",
+   "checker": "cz.checker.v3",
+   "split": "sealed",
+   "n_tasks": 1200,
+   "per_family": 300,
+   "per_cell": 60,
+   "sealed_file_sha256": "578bc7a8e63dd1602a88318bed24ba24ffd9281a06c311a58130e1e1911a4297",
+   "sealed_salt_commitment": "e9dd57a6be3b5dd871476b54441710d5614007d0dd3f1b01a207ef449b3ce4b4",
+   "sealed_salt_commitment_recipe": "sha256(b'cz-salt-commit-v1|' + 32 raw salt bytes)",
+   "overlap_with_sealed_set_1": 0,
+   "max_tokens": 512,
+   "context": 4096,
+   "sampler": {
+    "top_k": 40,
+    "top_p": 0.95,
+    "min_p": 0.05,
+    "temperature": 0,
+    "seed": 0
+   },
+   "runtime": "llama.cpp b11539 Vulkan, device selected by name 'RX 9070 XT'",
+   "selection_source": "experiments/EXP-CZ-009/selection_all9.json",
+   "dev_ledgers_for_analysis": "experiments/EXP-CZ-001/phase1v2 and experiments/EXP-CZ-009/phase1, copied into one directory",
+   "reveal": "after EXP-CZ-010 has also run on sealed set 2",
+   "artifacts": {
+    "cz_exe_probe_sha256": "5dfd02b43647797ef5178800467db47da220248e9ff44d3c20f3c18a8c0b377c",
+    "cz_exe_analyze_v2_sha256": "995ec7c0427102e8c76191625d8d4a77a64e606ba65990925c00e6b10d20128b",
+    "run_sealed2_sh_sha256": "3a92de07053a8c9ab5d2a1b704f464056c7661919f8515aa5cb54273a99b8ad8",
+    "spec_md_sha256": "28b3e0ee525897bd8b0e49b03181daf90d19d41ee9adbb83cdc3397431ac1ea1",
+    "selection_all9_sha256": "bc37be808dea46438ae2578ccd5b0d7b1c9fe7a197b104c16533c78b0c3c6722",
+    "phase1_selection_sha256": "9091f87f6b3c34fc091829920179d92ca3d3064c76de94a747e4fbadd9582fb7"
+   }
+  },
+  "title": "Second casting: all nine founding members on a fresh sealed set"
+ },
+ "field_salts": {
+  "arms": "65b52136a8cbaf2fea41eb06f7c097000875975ec37309ca7d3e091b29342bd6",
+  "budget": "f39f135969727b62a40f84d70529aa3bde73e4125e2f4c696d4c368ed6518281",
+  "decision_rule": "54fed4a1a2bc3a5f0c81cb3f318bf772ba29a4f232f42668852bccc77a3d49ec",
+  "exp_id": "1d37e252ff9ec309c940fdfa149f70694574fa8944c8699461d0a17050411cc4",
+  "failure_criteria": "9a78e110a41810261750ebfc6197b5e769cf6bce8d06a2269a8689d7e7646fca",
+  "hypotheses": "0e9ab009acb502fa8031bf7c69afc9d66c29f5cee124b45182dcd540e2456bce",
+  "models": "8777bad7d601f0e43266990cefb07dab8dc13bf2a99aedea6dde833220178d62",
+  "primary_endpoint": "143dc89b53a6475a5feb7729780eaf86149ce0fc2063e3e42e6db57a5bd8a62b",
+  "schema": "8e3a95f154fc12294d8eccd3e89b051540cabfb5e94c0c991ea8784d4a550240",
+  "seeds": "011c903d0e3643ad42396dc8b151f5ce0f248f299450104d3fa7821613af84e7",
+  "task_spec": "8eb6e4d48c55d948cb2b5747dffff38d823fa8db71e5042b9e6b3e854f8556ec",
+  "title": "e86e395366981b5151dd0dbbb372bb7c70c4386db2f2fabd0cae2d937ec4be04"
+ },
+ "other_leaves": {}
+}

@@ -1,0 +1,54 @@
+{
+ "root": "1468e1c64dbae2ac9b6cf2e482db2bf46a6cee122c6a4f1160ff2c85b9a70237",
+ "revealed": {
+  "arms": [
+   "M1 Sam self adapter (counted): HuggingFaceTB__SmolLM2-360M-Instruct-q8_0, template P3, epoch 1, llama-server --lora (convert_lora_to_gguf, F32), served sha256 57c2a5e0a53c376c8e62b78e6164f82650904fac06fa67b887a6ffad6f4e93c4, greedy",
+   "M2 Grace self adapter (counted): ibm-granite__granite-4.0-h-350m-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 0f2705a4252e559e9d3f10cca9533233d02c7d39fd290d39b3256bc55320ed52, greedy",
+   "M3 Quentin self adapter (counted): Qwen__Qwen3-0.6B-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 3548dcd1f3da0ffa1a001075127075ae271a43ab56db9ff38641e08e31d4ba53, greedy",
+   "M4 Quinn self adapter (counted): Qwen__Qwen3.5-0.8B-q8_0, template P2, epoch 1, llama-server --lora (convert_lora_to_gguf, F32), served sha256 3190631c45edf36136f76964155248555d19735d1f13a63dd35f3548a39d8d60, greedy",
+   "N1 Graham self adapter (excluded): ibm-granite__granite-4.0-350m-q8_0, template P4, not run (parity gate), greedy",
+   "N2 Rowan self adapter (counted): BlinkDL__rwkv7-g1-q8_0, template P3, epoch 1, merged Q8_0 (adapter folded into F32 weights, convert_hf_to_gguf, llama-quantize Q8_0), served sha256 4966d37cba3efd66f5e2ffe4c5557d1c3c28da111436e06f54bf3a4e4b17e23d, greedy",
+   "N3 Erin self adapter (counted): baidu__ERNIE-4.5-0.3B-PT-q8_0, template P3, epoch 1, llama-server --lora (convert_lora_to_gguf, F32), served sha256 196af6451522759b4ee44b420135e7b1ceff7f20dded8bb99fbec6c2d56f20d6, greedy",
+   "N4 Bastien self adapter (counted): PleIAs__baguettotron-600m-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 3942ea11fa2be92bc73801a17dd6ab95adcf476a388072fa4a3b8ac908ecfeac, greedy",
+   "N5 Mina self adapter (counted): openbmb__MiniCPM4-0.5B-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 dc8aa304a7345a990425ce9eab30ce371472cf51c8382427eec8139dcb7769d0, greedy",
+   "Primary control: each counted member untrained, rerun on sealed set 2 with the same runner binary as the adapters (build-final2/cz.exe 4e9d101a, no --lora), base Q8_0, same template and chat kwargs",
+   "Secondary reference (reported only): each member's EXP-CZ-009 greedy ledger on sealed set 2 (frozen Season 0 runner)"
+  ],
+  "budget": {
+   "generated_tokens_cap": 9830400,
+   "wall_hours_cap": 24,
+   "planned_generations": 19200,
+   "note": "self arm plus the same-binary untrained control, which EXP-CZ-011 shares"
+  },
+  "decision_rule": "Untrained means the same-binary rerun (primary control); EXP-CZ-009's ledgers are a secondary reference reported beside it. Holm is over m = 9 hypotheses: the eight counted members plus the excluded Graham entered at p = 1. R10.1: a member's adapter works if its McNemar test rejects after Holm (m = 9) and adapted > untrained. R10.2: an adapter that lowers E2 by more than 2 points (more than 24 extra format failures of 1,200) or lowers E1 significantly (Holm rejection with adapted < untrained) is recorded as harmful for that member. R10.3: H10.1 is supported only if at least five members meet R10.1. H10.2 uses R1 of EXP-CZ-001 (Wilson lower bound of E1 at least 0.25, E2 at least 0.90, E1 above the trivial baseline's upper Wilson bound) computed by cz paired, whose R1 and E3 reproduce cz analyze (test r1_and_trivial_baseline_match_cz_analyze); the trivial baseline is read back from all 24 ledgers in the plan (rerun control, EXP-CZ-009 reference, adapted). Graham is not counted (parity gate) and enters the Holm family as an untested hypothesis at p = 1; the five-member threshold is unchanged. Every number comes from cz paired with experiments/EXP-CZ-010/analysis_plan.json.",
+  "exp_id": "EXP-CZ-010",
+  "failure_criteria": "A run is void, and reported, if its ledger fails verification, its result JSON disagrees with the ledger (root, solves, tokens), its tasks_sha256 differs from sealed set 2, its model_id, template, weight_sha256 or adapter_sha256 differs from this manifest, it is not greedy, or it lacks one verdict per task. A void run counts as an untested hypothesis (p = 1) in its Holm family and cannot support any hypothesis. The driver refuses to run a row whose served file, base GGUF, runner or sealed file differs from the frozen sha256.",
+  "hypotheses": [
+   "H10.1 For at least five of the nine members, the adapted member solves more sealed tasks than the untrained member (exact McNemar, Holm-adjusted over the nine members, alpha 0.05).",
+   "H10.2 At least one member that fails R1 untrained passes R1 adapted, with R1 exactly as in EXP-CZ-001.",
+   "H10.3 Format validity (E2) does not fall for any member by more than 2 points."
+  ],
+  "primary_endpoint": "Per member, the paired difference in sealed set 2 solves, adapted minus untrained (the same-binary rerun), with exact two-sided McNemar and Holm adjustment over the nine members (alpha 0.05); the same comparison against EXP-CZ-009's ledgers is reported beside it. Also E1 to E4 exactly as in EXP-CZ-001 for each adapted member (E4 not applicable: no sampling arm), per family and per cell. Cost (reported, not tested): kept training samples, GPU minutes for sampling and training, adapter bytes.",
+  "schema": "cz.manifest.v1",
+  "seeds": [
+   0
+  ],
+  "title": "Targeted LoRA: one self-taught adapter per founding member, paired against the untrained member on sealed set 2"
+ },
+ "field_salts": {
+  "arms": "ca75e64f5adfd22a28bbc5aabc85c424d95c2cb22ff5ab5a2172213d3884e7ab",
+  "budget": "e53cb01f9798e5b2472d8a59e914601adb03530a23875f523e36ac8e4decfdf3",
+  "decision_rule": "3a75e842c893c58612c3a4dc8917794352aa0039404cc2b60a87c7cddbfa9fd6",
+  "exp_id": "58e41d559ccacfcd72d2bc41179c8808e8aae22369becaa39105edf47d220ee7",
+  "failure_criteria": "f65abc71e184f423427af6ee099f960a4ee8fe2e53aca7b9bfe4e9c899789a19",
+  "hypotheses": "95dab9030263e5170d4dd467a2820e0d27d1173d75668f67455293dd7be04f6d",
+  "primary_endpoint": "c720212fcafd4c0ab95b7e988f5c171c20a5cd1ab091f424141987d406c7de49",
+  "schema": "f698da91a4d2866e4c25d71f114779b4f5fe545a9c247adec96a0b6947c7a587",
+  "seeds": "d4d936d1130c75b50cb2ede6a4391f5f274443460ac8686ab1a3be110becd41c",
+  "title": "4e69a3af87a62ce4921a3197131881c05e3f1cb7e11acf232769c7aaa2568272"
+ },
+ "other_leaves": {
+  "task_spec": "e533b47fe4f88523f92b10e5620f02433c95f5a43c265092df73fac34a8199da",
+  "models": "1a62338bcd535fb81e5690bef8eda12a744d16340065ca218df3289d9eae2b13"
+ }
+}

@@ -32,3 +32,7 @@ The sealed-run ledgers and result files will be a release asset of this reposito
 ## What the reveal does not let you do
 
 Regenerating the tasks from the salt needs the task generator, which is not published.
+
+## Release asset
+
+`EXP-CZ-017-sealed-run-ledgers.tar.gz`, SHA-256 `ba6930c6be4b6f36c423756153b82b30fee87ee1169e966a3a2c157104540642`: result JSON and ledger JSONL for all 22 sealed set 3 runs, plus a SHA256SUMS file.

@@ -1,0 +1,55 @@
+{
+ "root": "5a7eed654b0dc2c7a9ca508b3fd99d8ad8f8ad59d0ac41dc6c92b179a56bd67f",
+ "revealed": {
+  "arms": [
+   "M1 Sam teacher adapter (counted): HuggingFaceTB__SmolLM2-360M-Instruct-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 3c6ac95d47eb819738d8e1f09fa8a7071c2b42a90b07d65e54cf5c01a81d98a1, greedy",
+   "M2 Grace teacher adapter (counted): ibm-granite__granite-4.0-h-350m-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 0e77f8b5b922cbead0de7cccead8ba658659275b7778b2f0dd45eb7244dc1b9a, greedy",
+   "M3 Quentin teacher adapter (counted): Qwen__Qwen3-0.6B-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 a30991c9325ab8289666f10a300ba7bf077832847ded6b5525515fec6f0fc355, greedy",
+   "M4 Quinn teacher adapter (counted): Qwen__Qwen3.5-0.8B-q8_0, template P2, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 ff0b03cfab4c87bbc17fe18f535dfca2a7dbae3b9c4940ead9b1b74ebf8d8da0, greedy",
+   "N1 Graham teacher adapter (excluded): ibm-granite__granite-4.0-350m-q8_0, template P4, not run (parity gate), greedy",
+   "N2 Rowan teacher adapter (counted): BlinkDL__rwkv7-g1-q8_0, template P3, epoch 2, merged Q8_0 (adapter folded into F32 weights, convert_hf_to_gguf, llama-quantize Q8_0), served sha256 3652f7776eed946706e6eb0bda2fde1bd1cc75a080d3f640ce15c87a29d85b1a, greedy",
+   "N3 Erin teacher adapter (counted): baidu__ERNIE-4.5-0.3B-PT-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 cde34e87d6aecdc046483ec62883699e508f94c27a0a7b105558b13859bd6049, greedy",
+   "N4 Bastien teacher adapter (counted): PleIAs__baguettotron-600m-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 3638313d5cc126dd29ca06aa6cf81187fea4b00fb926041fccdd5f65e65a2ed7, greedy",
+   "N5 Mina teacher adapter (counted): openbmb__MiniCPM4-0.5B-q8_0, template P3, epoch 2, llama-server --lora (convert_lora_to_gguf, F32), served sha256 076e70392b12211879f7799ab14751f8b2196a7115b66d9b7ab2117526068f5d, greedy",
+   "Primary control: each counted member untrained, the same-binary rerun on sealed set 2 shared with EXP-CZ-010 (build-final2/cz.exe 4e9d101a, no --lora)",
+   "Secondary reference (reported only): each member's EXP-CZ-009 greedy ledger on sealed set 2 (frozen Season 0 runner)",
+   "Comparator: each member's EXP-CZ-010 self adapter (arms and hashes in the EXP-CZ-010 manifest), its sealed set 2 ledger"
+  ],
+  "budget": {
+   "generated_tokens_cap": 4915200,
+   "wall_hours_cap": 16,
+   "planned_generations": 9600,
+   "note": "teacher arm only; the untrained control runs are budgeted in EXP-CZ-010"
+  },
+  "decision_rule": "Untrained means the same-binary rerun (primary control, shared with EXP-CZ-010); EXP-CZ-009's ledgers are a secondary reference reported beside it. Holm is over m = 9 hypotheses in each family: the eight counted members plus the excluded Graham entered at p = 1. H11.1 is supported if at least five members show a Holm-significant (m = 9) gain over the untrained member. H11.2 has no direction: the result is the number of members significantly better each way after Holm (m = 9). H11.3 holds if no counted member's E2 falls more than 2 points (24 tasks) below the untrained member. Graham is not counted (parity gate) and enters each family as an untested hypothesis at p = 1. Every number comes from cz paired with experiments/EXP-CZ-011/analysis_plan.json (the self-taught runs are EXP-CZ-010's).",
+  "exp_id": "EXP-CZ-011",
+  "failure_criteria": "A run is void, and reported, if its ledger fails verification, its result JSON disagrees with the ledger (root, solves, tokens), its tasks_sha256 differs from sealed set 2, its model_id, template, weight_sha256 or adapter_sha256 differs from this manifest, it is not greedy, or it lacks one verdict per task. A void run counts as an untested hypothesis (p = 1) in its Holm family and cannot support any hypothesis. The driver refuses to run a row whose served file, base GGUF, runner or sealed file differs from the frozen sha256.",
+  "hypotheses": [
+   "H11.1 For at least five of the nine members, the outside-taught member solves more sealed tasks than the untrained member (exact McNemar, Holm over nine, alpha 0.05).",
+   "H11.2 Outside-taught versus self-taught, per member: exact McNemar, Holm over nine, two-sided. No direction is predicted; the count of members significantly better each way is the result.",
+   "H11.3 Format validity (E2) of the outside-taught member does not fall more than 2 points below the untrained member for any member."
+  ],
+  "primary_endpoint": "Per member, the paired difference in sealed set 2 solves, outside-taught minus untrained (H11.1) and outside-taught minus self-taught (H11.2), each with exact two-sided McNemar and Holm adjustment over the nine members (alpha 0.05). E1 to E4 as in EXP-CZ-001 for each outside-taught member. Cost (reported): teacher requests, tokens and USD from the proxy ledger, kept examples, GPU minutes for training, adapter bytes.",
+  "schema": "cz.manifest.v1",
+  "seeds": [
+   0
+  ],
+  "title": "Outside teacher: one teacher-taught adapter per founding member, paired against the untrained and the self-taught member on sealed set 2"
+ },
+ "field_salts": {
+  "arms": "c81eb5171c3c31ab70d28c04c38bca9cc652f342fe844de56017edb067707076",
+  "budget": "b8eb3657fc89a3e9ec8f61e9b9b9ded7958acc5a89191f18e36a335c166c2702",
+  "decision_rule": "a6c4ac17bec5c9f8e4261fb11a0c129e1865b36a51ad92c678f7462bafcd0f99",
+  "exp_id": "0cbff647d5b5b13c4c371c2cdef55bb7de4519f274a692e68002faf0472508fb",
+  "failure_criteria": "35656909eb087ca625124706cff24afa5a939517dbfec9789eff2946deb280c8",
+  "hypotheses": "852aabbfbf05600a75f4ccad545ad3af01a0ac8f39cce5247e37854bb8440330",
+  "primary_endpoint": "0f305b3c8d76759d1c248718ed7e3f9f51ac0adb2a97a97e4fc955bedb6e77e9",
+  "schema": "4afa6033d6652f11c3daf97949325af762a4e6e47962fc72cb6587834efa4556",
+  "seeds": "9e14ddce448f0ce1f1fbfddcb760acaa5b20c2e28cd6a544ca74c6111fdde82a",
+  "title": "07a2ca61ed95a5b10599476157d99e9baff02872e8ba5c29db06f7d299b1ebf8"
+ },
+ "other_leaves": {
+  "task_spec": "3a7790b772226dc50315eefcaca226947aa290c851f3219d11b529e31e17bbd4",
+  "models": "aa37bd87e3b6e754a13b5ed1f356c7085602853e945e9a47740e888b20e04a52"
+ }
+}

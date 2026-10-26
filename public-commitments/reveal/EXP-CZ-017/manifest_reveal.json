@@ -1,0 +1,63 @@
+{
+ "root": "55a51dd37ca213dbc6ee99f51ca59b5baca1f747919a1ce567d06c9b7dd9500a",
+ "revealed": {
+  "arms": [
+   "P0 parent HuggingFaceTB__SmolLM2-135M-Instruct-q8_0, P3, greedy",
+   "theo-s0 exp012-theo-s0-e017 Q8_0 epoch 2 sha256 36734697cb89b9b48f32c7e4a3c3a3b9a5e4801f4ec97aaaf52e94c16dfefba6, P3, greedy",
+   "theo-s1 exp012-theo-s1-e017 Q8_0 epoch 2 sha256 b5b705ca71bd13cd9bae3686f8db6eb26459ce12d1f78873c8f0b04dfb83773b, P3, greedy",
+   "theo-s2 exp012-theo-s2-e017 Q8_0 epoch 2 sha256 8de5b999bd52c65d0f16a6539b192de3cd61a52dcfa5745e98a3cc224c543662, P3, greedy",
+   "hazel-s0 exp012-hazel-s0-e017 Q8_0 epoch 2 sha256 1c24bfc5bf5a1ce44d0905ee491a5d9adf662102aadf62c5f16ef7d72e40f942, P3, greedy",
+   "hazel-s1 exp012-hazel-s1-e017 Q8_0 epoch 2 sha256 f317cdfc64a82a29ada20a61c9685c56f4ae06548fb0a514128c40b8b8b2514f, P3, greedy",
+   "hazel-s2 exp012-hazel-s2-e017 Q8_0 epoch 2 sha256 a06e6d09f745bc50c0206539e58b7e5f21fbdaa90c9a4203c418e01b39e7a340, P3, greedy",
+   "solver-s0 exp012-solver-s0-e017 Q8_0 epoch 2 sha256 0068f15bb2258f12dd2cea774e952da795cb663fb32b6c2ada7ab37e25ae502a, P3, greedy",
+   "solver-s1 exp012-solver-s1-e017 Q8_0 epoch 2 sha256 5992eb943ec3b21a71df5a3e8abc0fe5bf38a13dd2ca1f01dfc0d873d5f0a2a6, P3, greedy",
+   "solver-s2 exp012-solver-s2-e017 Q8_0 epoch 2 sha256 535d7f331b218b10978f248cc15cc964a4bf3fcae83ab222135273e7c385bb20, P3, greedy",
+   "theo-s0 exp012-theo-s0-e017-q4_k_m Q4_K_M sha256 65119e48cc75bc7992c239fa3f66c7bab67032b2ac5b8a223ba18a958489b7b6, P3, greedy",
+   "hazel-s0 exp012-hazel-s0-e017-q4_k_m Q4_K_M sha256 979418ad4886a6a64cf7440a35310e902255a3b9eddce9fc3ca776fa3ddc2a2a, P3, greedy",
+   "solver-s0 exp012-solver-s0-e017-q4_k_m Q4_K_M sha256 c37e3a6f40796771887706311dedf7b68d860325cfc10d084587f33f0ed018d1, P3, greedy",
+   "Exploratory (not hypotheses): the nine untrained founders with their frozen templates (sealed_runs_exploratory.tsv), run after the 13 primary runs; no EXP-CZ-010/011 adapter is run on sealed set 3 (owner decision 2026-10-25); Holm-adjusted if ranked"
+  ],
+  "budget": {
+   "generated_tokens_cap": 26954752,
+   "wall_hours_cap": 40,
+   "planned_generations": 31109,
+   "planned_generations_exploratory": 21537
+  },
+  "decision_rule": "H17.1 and H17.2: Holm-adjusted p <= 0.05 and child minus parent >= 5 points (in whole tasks: 100 x difference >= 5 x 2,393). H17.3: Holm-adjusted p <= 0.05 in either direction. H17.4a and H17.4b: Holm-adjusted p <= 0.05 and child minus solver control >= 2 points. Holm is over exactly these five tests. H17.5 per child (Theo, Hazel): the one-sided 95% Wald lower bound of rate(Q4_K_M) - rate(Q8_0) on paired outcomes, d - 1.6449 x sqrt(((b + c) - (b - c)^2 / n) / n^2), is above -0.02; if not, the child ships as Q8_0. Replications: the same five tests for seed 1 and for seed 2 (each its own Holm family of five); a seed-0 success whose difference has the opposite sign in both replications is reported as not robust. Membership: a child joins only if its seed-0 Q8_0 run passes R1 exactly as in EXP-CZ-001 (Wilson lower bound of E1 >= 0.25, E2 >= 0.90, E1 above the trivial baseline's upper bound; trivial baseline read back from the 13 planned ledgers). Every number comes from cz paired with experiments/EXP-CZ-017/analysis_plan.json.",
+  "exp_id": "EXP-CZ-017",
+  "failure_criteria": "A run is void, and reported, if its ledger fails verification, its result JSON disagrees with the ledger, its tasks_sha256 differs from the sealed set 3 scored file, its model_id, template or weight_sha256 differs from this manifest, it is not greedy, or it lacks one verdict per task. A void run counts as an untested hypothesis (p = 1) in its Holm family and supports nothing. The driver refuses a row whose GGUF, runner or sealed file differs from the frozen sha256.",
+  "hypotheses": [
+   "On sealed set 3, greedy, P3, 512 tokens, Q8_0 children of seed 0, exact McNemar, Holm over the five tests H17.1 to H17.4:",
+   "H17.1 Theo solves at least 5 points more than the parent, and the difference is significant.",
+   "H17.2 Hazel solves at least 5 points more than the parent, and the difference is significant.",
+   "H17.3 Theo and Hazel differ (two-sided, no direction predicted). This is the head-to-head.",
+   "H17.4a and H17.4b Each child solves at least 2 points more than the solver control, and the difference is significant.",
+   "H17.5 For each child, Q4_K_M loses no more than 2 points against Q8_0 (one-sided 95% lower bound of the paired difference above -0.02). If it fails, the child ships as Q8_0.",
+   "Seeds 1 and 2 are reported for every arm; a hypothesis that holds for seed 0 but reverses in both replications is reported as not robust."
+  ],
+  "primary_endpoint": "E1 (greedy verified solve rate on the 2,393 scored tasks of sealed set 3, Wilson 95%) for the parent and each child; the paired differences of H17.1 to H17.4b with exact two-sided McNemar, Holm over those five tests (alpha 0.05); H17.5 one-sided 95% lower bound of the Q4_K_M minus Q8_0 paired difference. Also E1 to E4 as in EXP-CZ-001 (E4 not applicable), per family and per cell with json_extract d4 and d5 marked exempt, GGUF bytes, peak VRAM and tokens per second from the run logs, each child's share of training examples per cell (train-shared summary), API requests, tokens and USD per teacher, GPU minutes per arm.",
+  "schema": "cz.manifest.v1",
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "title": "First Birth v3: Theo and Hazel, children of SmolLM2-135M-Instruct, against the parent and a solver-label control on sealed set 3"
+ },
+ "field_salts": {
+  "arms": "35255e171d6e0433ed79f597f7601610a4fd7d9d80a53ebd651afdf3255f2ae9",
+  "budget": "6e4fd250f21d58d709972a0fa1c2d3b5d84d0b201a847ba1f7e14947b85df604",
+  "decision_rule": "55339ad5cc4236dcd342635e54342c60f3a1127f682167c5236c7e485d453fcf",
+  "exp_id": "f80b7143231d6a2e4fb398c0e41d9f9dbf60321de0539e5e623a1980ceed2daa",
+  "failure_criteria": "8237a3031c757a6064422e1dd804729a898b17670eb50e06824bf5d907cae8a4",
+  "hypotheses": "5bc7b0762a401287a64edd0c421fc8bcd520236e1f6ce160bbadec2acceede76",
+  "primary_endpoint": "5273e99e9501ec9262098e9c1d29a1c8df139ab761f1bc57c35d5552b30760e9",
+  "schema": "f4c77b59fb4c7fc222e1787f2db8be10eded195839e59e3380a2b55c50bebcdd",
+  "seeds": "0cdd9e4af631d8d54e5d7635a7f5a808d13643947a63bb6965baa2953bd2ebd0",
+  "title": "03bb1238533294e08b501d74765125051e274e328eed42969cbf7f9af967f5a4"
+ },
+ "other_leaves": {
+  "task_spec": "4815686562629757e8b2a941813c263378c85486086e5a5552c246c8c7f4c873",
+  "models": "2e7aa265e7d11ea9fa64944a7792336c79c95379bf1b9b26637dd0535519db77"
+ }
+}
