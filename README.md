@@ -84,6 +84,18 @@ In Season 0 so far, the first casting, the second casting, the two adapter exper
 | 5 The Gap | Gen N | How much of the gap to a frozen frontier model has the colony closed? | EXP-CZ-007 |
 | 6 and on | Gen N+1 | Keep breeding until three generations in a row fail to improve | promotion gate, Final Exam |
 
+## Anchored in Bitcoin
+
+Before a sealed run, we publish a hash commitment to its design and its sealed task set. Then we timestamp that commitment with [OpenTimestamps](https://opentimestamps.org), which anchors it in a Bitcoin block. Once the block is mined, nobody, including us, can change the commitment or backdate it without the change being detectable. Only the hash goes on the chain. No data, code or results do.
+
+| Commitment | Bitcoin block |
+|---|---|
+| EXP-CZ-001 | 972993 (2026-10-24 23:56 UTC) |
+| EXP-CZ-009 | 973012 (2026-10-25 03:58 UTC) |
+| EXP-CZ-010, 011, 017 | 973187 (2026-10-26 04:42 UTC) |
+
+These first anchors were confirmed after their runs had started. The timing evidence for each is in [public-commitments](public-commitments/README.md). From now on, a sealed run starts only after its anchor is confirmed. Anyone can check a proof with `ots verify public-commitments/<file>.ots`.
+
 ## How we keep it honest
 
 1. Every model call, vote and verdict goes into a hash-chained ledger that anyone can replay and verify.
