@@ -16,7 +16,7 @@ H17.4a and H17.4b are NOT SUPPORTED. Neither child beats the solver-label contro
 
 H17.5 fails for both children. The Q4_K_M files lose more than the allowed 2 points against Q8_0 (lower bounds -3.5 points for Hazel, -6.6 for Theo), so both children ship as Q8_0.
 
-All 9 trained children pass R1 and the parent does not. Under the membership rule, the seed-0 Theo and Hazel are admitted to the colony.
+All nine trained Q8_0 runs (three seeds each of Theo, Hazel and the solver-label control, which is a control and not a member) pass R1, and the parent does not. Under the membership rule, the seed-0 Theo and Hazel are admitted to the colony.
 
 The main reading: for this parent on these task families, no preregistered teacher advantage over correct solver labels on the same tasks was observed. These were superiority tests, not equivalence tests, so they do not show that teachers and solver labels are equal.
 
