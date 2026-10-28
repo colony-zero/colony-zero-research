@@ -30,6 +30,7 @@ A Bitcoin anchor proves a hash existed no later than the time of its block. It d
 | EXP-CZ-001 | 2026-10-24T23:47:08Z (commit aa65ad0) | 2026-10-24T23:47:24Z | block 972993, 2026-10-24T23:56:01Z |
 | EXP-CZ-009 | 2026-10-25T03:37:28Z (push of 3b40fa1, which contains the freeze commit 1021c5d) | 2026-10-25T03:37:41Z | block 973012, 2026-10-25T03:58:36Z |
 | EXP-CZ-010, 011, 017 | 2026-10-26, after the runs | 2026-10-26T04:32:02Z (first adapter run 05:08:02Z) | block 973187, 2026-10-26T04:42:29Z |
+| EXP-CZ-003a | 2026-10-28, before any sealed run (time to be filled from GitHub's record) | not started | pending |
 
 From now on a sealed run starts only after its commitment is pushed here and its Bitcoin anchor is confirmed.
 
@@ -44,3 +45,4 @@ From now on a sealed run starts only after its commitment is pushed here and its
 - EXP-CZ-010.md (self-taught adapters; partial manifest reveal)
 - EXP-CZ-011.md (teacher-taught adapters; partial manifest reveal)
 - EXP-CZ-017.md (first children; revealed, partial manifest reveal: reveal/EXP-CZ-017/)
+- EXP-CZ-003a.md (routing across the colony; committed, not yet run)
