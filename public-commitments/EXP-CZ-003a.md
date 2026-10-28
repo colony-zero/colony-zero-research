@@ -1,6 +1,6 @@
 # EXP-CZ-003a commitments (who does what: routing across the colony)
 
-Status: COMMITTED 2026-10-28, not yet run. This page and its freeze record are pushed here before any sealed run. Sealed set 4 and its salt stay secret until the report. The freeze record is EXP-CZ-003a-freeze.txt in this folder, and EXP-CZ-003a-freeze.txt.ots is its OpenTimestamps proof. That proof was submitted at about 2026-10-28T03:00Z and is waiting for its Bitcoin block; no sealed run starts until the attestation verifies.
+Status: COMMITTED 2026-10-28, not yet run. This page and its freeze record are pushed here before any sealed run. Sealed set 4 and its salt stay secret until the report. The freeze record is EXP-CZ-003a-freeze.txt in this folder, and EXP-CZ-003a-freeze.txt.ots is its OpenTimestamps proof. That proof was submitted at about 2026-10-28T03:00Z and is anchored in Bitcoin block 973489, mined at 2026-10-28T03:10:30Z. No sealed run started before the anchor verified.
 
 | Commitment | What it covers | Value |
 |---|---|---|
