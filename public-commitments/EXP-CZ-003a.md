@@ -17,7 +17,7 @@ The freeze record lists the commitment root, the freeze ledger root, the manifes
 
 ## Post-run record
 
-The sealed runs finished at 2026-10-28T13:48:39Z and the route records at about 2026-10-29T02:05Z. Before any scoring, EXP-CZ-003a-postrun.txt in this folder lists the SHA-256 of all 97 files the scorer will read: each run's result, ledger and command file, and every route record. Its own SHA-256 is 554e6ca09728109043036981222fafbd7cee8677364dd48a38fccdaf6d5a8bad. EXP-CZ-003a-postrun.txt.ots is its OpenTimestamps proof, submitted at about 2026-10-29T02:11Z and waiting for its Bitcoin block. The scorer refuses to run unless every file still matches this record.
+The sealed runs finished at 2026-10-28T13:48:39Z and the route records at about 2026-10-29T02:05Z. Before any scoring, EXP-CZ-003a-postrun.txt in this folder lists the SHA-256 of all 97 files the scorer will read: each run's result, ledger and command file, and every route record. Its own SHA-256 is 554e6ca09728109043036981222fafbd7cee8677364dd48a38fccdaf6d5a8bad. EXP-CZ-003a-postrun.txt.ots is its OpenTimestamps proof, submitted at about 2026-10-29T02:11Z and anchored in Bitcoin block 973627, mined at 2026-10-29T02:18:57Z. The verification beacon is block 973633. The scorer refuses to run unless every file still matches this record.
 
 ## Deviations recorded before scoring
 
