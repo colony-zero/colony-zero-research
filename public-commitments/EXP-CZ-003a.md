@@ -1,6 +1,6 @@
 # EXP-CZ-003a commitments (who does what: routing across the colony)
 
-Status: COMMITTED 2026-10-28, not yet run. This page and its freeze record are pushed here before any sealed run. Sealed set 4 and its salt stay secret until the report. The freeze record is EXP-CZ-003a-freeze.txt in this folder, and EXP-CZ-003a-freeze.txt.ots is its OpenTimestamps proof. That proof was submitted at about 2026-10-28T03:00Z and is anchored in Bitcoin block 973489, mined at 2026-10-28T03:10:30Z. No sealed run started before the anchor verified.
+Status: RUN 2026-10-28, not yet scored. This page and its freeze record were pushed here before any sealed run. Sealed set 4 and its salt stay secret until the report. The freeze record is EXP-CZ-003a-freeze.txt in this folder, and EXP-CZ-003a-freeze.txt.ots is its OpenTimestamps proof. That proof was submitted between the freeze at 2026-10-28T02:50:41Z and the push that carried it at 02:54:10Z (GitHub server time), and is anchored in Bitcoin block 973489, mined at 2026-10-28T03:10:30Z. The first sealed run started at 2026-10-28T04:20:02Z, after the anchor verified.
 
 | Commitment | What it covers | Value |
 |---|---|---|
@@ -15,6 +15,20 @@ Status: COMMITTED 2026-10-28, not yet run. This page and its freeze record are p
 
 The freeze record lists the commitment root, the freeze ledger root, the manifest file hash and the freeze ledger file hash. The freeze ledger's one event records every other value in this table, so the timestamp on the record dates all of them.
 
+## Post-run record
+
+The sealed runs finished at 2026-10-28T13:48:39Z and the route records at about 2026-10-29T02:05Z. Before any scoring, EXP-CZ-003a-postrun.txt in this folder lists the SHA-256 of all 97 files the scorer will read: each run's result, ledger and command file, and every route record. Its own SHA-256 is 554e6ca09728109043036981222fafbd7cee8677364dd48a38fccdaf6d5a8bad. EXP-CZ-003a-postrun.txt.ots is its OpenTimestamps proof, submitted at about 2026-10-29T02:11Z and waiting for its Bitcoin block. The scorer refuses to run unless every file still matches this record.
+
+## Deviations recorded before scoring
+
+Three post-run scripts that were frozen with the design had bugs that stopped them before they did any work. We did not edit them, because each is bound by hash to the freeze. Instead, each ran unchanged with a small wrapper that fixes one call. All three are written up in full in the report.
+
+1. Route records and scoring called the integrity check without the experiment folder it needs, so it refused. The wrapper supplies the folder. The check itself runs in full.
+2. Route records stopped at the first record, because deleting a file that did not exist yet counted as a failure. The wrapper makes that one delete succeed when there is nothing to delete.
+3. The post-run hash command was garbled in transit (shell quoting) and was longer than the Windows command-line limit. The wrapper sends the same SHA-256 hashing command intact and shorter.
+
+None of the three changes a hypothesis, margin, test, task or route program. Each was found and fixed before the step it affects produced any output.
+
 ## What comes next
 
-After the sealed runs, a post-run record of result hashes is pushed and timestamped here before any scoring. A Bitcoin block mined after that record then picks which route records are re-verified, so nobody could choose them in advance.
+Once the post-run record's proof is anchored in a Bitcoin block, the block six above it picks which route records are re-verified, so nobody could choose them in advance. Then the scorer runs and the report follows.
