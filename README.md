@@ -61,7 +61,9 @@ Every row carries one tag: PROPOSED (designed, not built or tested), IMPLEMENTED
 | One self-taught adapter per member, paired against the untrained member | MEASURED | experiments/EXP-CZ-010/RESULTS.md: all 8 tested members gain, within four synthetic Forge task families, tested on fresh tasks from the same generators as training; 4 pass R1; format harmed for 2; one training seed |
 | One teacher-taught adapter per member, against self-taught | MEASURED | experiments/EXP-CZ-011/RESULTS.md: all 8 gain; the teacher pipeline plus its larger data volume beats self-training for 7; not a teacher-quality effect alone; one training seed |
 | First children (Generation 1) admitted by a sealed test | MEASURED | experiments/EXP-CZ-017/RESULTS.md: Theo and Hazel pass R1 and beat their parent; no teacher advantage over correct solver labels; three seeds, seed 0 decides |
+| The colony's fixed per-family lookup rule against its dev-selected comparator, and learned routers against rules | MEASURED | experiments/EXP-CZ-003a/RESULTS.md: the fixed per-family lookup rule solves 96.5% against 87.5% (+9.0 points, lower bound +8.2), almost all from one task family; learned routers are formally INCONCLUSIVE under a post-scoring interpretation of an underspecified power rule, no valid arm met the gate, and the fine-tuned arm was void with no result |
 | Sealed sets 2 and 3 revealed and retired; commitments verify (EXP-CZ-010, 011 and 017 with partial manifest reveals) | IMPLEMENTED | public-commitments/reveal/EXP-CZ-009-011/, reveal/EXP-CZ-017/, verify_reveal.py |
+| Sealed set 4 revealed and retired; all published EXP-CZ-003a hash commitments verify, including the full manifest reveal | IMPLEMENTED | public-commitments/reveal/EXP-CZ-003a/, verify_reveal.py; task generation and verdict recomputation remain unavailable |
 | Elimination by popularity vote | REJECTED | METHODOLOGY.md: votes are predictions, measurement decides |
 | First Council and first measured elimination | PROPOSED | ROADMAP.md, Season 1 |
 | Randomized crowd-vote arm | PROPOSED | METHODOLOGY.md |
@@ -93,8 +95,9 @@ Before a sealed run, we publish a hash commitment to its design and its sealed t
 | EXP-CZ-001 | 972993 (2026-10-24 23:56 UTC) |
 | EXP-CZ-009 | 973012 (2026-10-25 03:58 UTC) |
 | EXP-CZ-010, 011, 017 | 973187 (2026-10-26 04:42 UTC) |
+| EXP-CZ-003a | 973489 (2026-10-28 03:10 UTC), before its first sealed run |
 
-These first anchors were confirmed after their runs had started. The timing evidence for each is in [public-commitments](public-commitments/README.md). From now on, a sealed run starts only after its anchor is confirmed. Anyone can check a proof with `ots verify public-commitments/<file>.ots`.
+The first three anchors (EXP-CZ-001, EXP-CZ-009, and EXP-CZ-010, 011 and 017) were confirmed after their runs had started. The EXP-CZ-003a anchor was confirmed before its first sealed run. The timing evidence for each is in [public-commitments](public-commitments/README.md). From now on, a sealed run starts only after its anchor is confirmed. Anyone can check a proof with `ots verify public-commitments/<file>.ots`.
 
 ## How we keep it honest
 
@@ -121,7 +124,7 @@ Everything runs on a single consumer GPU (an AMD Radeon RX 9070 XT, 16 GB). Memb
 | experiments/README.md | Index of experiments and their status |
 | experiments/EXP-CZ-001/PREREGISTRATION.md | The first experiment, as designed before the sealed run |
 | experiments/EXP-CZ-001/RESULTS_SO_FAR.md | Dev-split measurements to date |
-| experiments/EXP-CZ-0xx/RESULTS.md | Sealed results for EXP-CZ-001, 009, 010, 011 and 017 |
+| experiments/EXP-CZ-0xx/RESULTS.md | Sealed results for EXP-CZ-001, 009, 010, 011, 017 and 003a |
 | public-commitments/ | Commitments and how to verify them |
 | PRIOR_ART.md | Related published work |
 | CITATION.cff, NOTICE.md | Citation data and rights notice |

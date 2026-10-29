@@ -45,4 +45,4 @@ From now on a sealed run starts only after its commitment is pushed here and its
 - EXP-CZ-010.md (self-taught adapters; partial manifest reveal)
 - EXP-CZ-011.md (teacher-taught adapters; partial manifest reveal)
 - EXP-CZ-017.md (first children; revealed, partial manifest reveal: reveal/EXP-CZ-017/)
-- EXP-CZ-003a.md (routing across the colony; committed, not yet run)
+- EXP-CZ-003a.md (routing across the colony; reported and revealed: [reveal/EXP-CZ-003a/](reveal/EXP-CZ-003a/))

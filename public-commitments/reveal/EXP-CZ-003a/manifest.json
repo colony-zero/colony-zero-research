@@ -1,0 +1,1130 @@
+{
+  "exp_id": "EXP-CZ-003a",
+  "title": "Colony router versus the best single member at equal compute, on a fresh sealed set (first stage of EXP-CZ-003)",
+  "hypotheses": [
+    "H3a.1 (family F1, primary, alpha 0.05): on sealed set 4, greedy, the dev-fitted per-family rules router over the 27-member pool ({'arith_chain': 'quentin-self', 'graph_reach': 'quentin-teacher', 'json_extract': 'quinn-teacher', 'list_transform': 'quinn-teacher'}) beats the dev-chosen best single member (quinn-teacher) by more than 5 points: the one-sided 95% Newcombe method 10 lower bound of the paired difference exceeds 0.05, and the router's all-in compute does not exceed the comparator's",
+    "H3a.2 (F1, Holm over 2, tested only if H3a.1 is supported): the full-pool rules router beats the rules router fitted on the nine untrained founders: lower bound above 0",
+    "H3a.3 (F1, Holm over 2, only if H3a.1 is supported): at k = 4 samples per task for both arms, the full-pool rules router with self-consistency-4 beats the best single member with self-consistency-4: lower bound above 0, at no more all-in compute",
+    "H3a.4 (family F2, alpha 0.05, tested whatever H3a.1 shows; the ROADMAP stage 3 gate as written): (a) at least one of four learned routers (kNN, logistic, Laya zero-shot, Laya fine-tuned) beats rules by more than 2 points (lower bound above 0.02), or is non-inferior to rules within 1 point while its all-in compute is at most 90% of rules; and (b) a Laya router beats kNN or logistic (lower bound above 0); every seed of a seeded router must pass. Failure: no learned router beats rules; ship rules and drop learned controllers"
+  ],
+  "arms": [
+    "C0 best single member, dev-chosen (quinn-teacher), greedy",
+    "A1 per-family rules router, full pool of 27, greedy (main arm; rules {'arith_chain': 'quentin-self', 'graph_reach': 'quentin-teacher', 'json_extract': 'quinn-teacher', 'list_transform': 'quinn-teacher'})",
+    "A2 per-family rules router, nine untrained founders only, greedy",
+    "A3 rules router + self-consistency-4 (k = 4, temperature 0.7, seeds 1-4)",
+    "C1 best single + self-consistency-4",
+    "C2 random router over the 27 members (control, reported, five hash seeds)",
+    "L1 kNN router and L2 logistic router (rung 2), L3 Laya zero-shot and L4 Laya fine-tuned router (rung 3); seeds 0-4 each except L3 (no trained parameters, routed once); no generative router (rung 4 excluded before the freeze)",
+    "X1 per-cell rules router (exploratory, reported only); X2 oracle (ceiling, reported only); X3 leave-one-out contribution (reported only)"
+  ],
+  "primary_endpoint": "F1: sealed accuracy (checker v3) of A1 minus C0, paired over the scored tasks of sealed set 4, one-sided 95% Newcombe method 10 lower bound against a 5-point margin; F2 (outline endpoint): verified solves per all-in compute of the learned routers against rules",
+  "decision_rule": "F1: H3a.1 first at alpha 0.05; only if supported, Holm over H3a.2 and H3a.3 at alpha 0.05. F2: H3a.4 at alpha 0.05 regardless of F1, intersection of part a (Holm over 8 tests) and part b (Holm over 4 tests). Every test, raw p and adjusted p is listed in analysis_plan.json tests and families",
+  "failure_criteria": "H3a.1 fails: 009's exploratory router gain did not replicate as a preregistered result with this pool and set; 009's 60.7% stays in the record unchanged; M1a stays unmet. H3a.4 fails: no learned router beats rules; ship rules, drop learned controllers (ROADMAP stage 3). A sealed task found in a public file or any overlap in the bound audit: void the set and regenerate before any scoring",
+  "task_spec": {
+    "forge": "cz.forge.v0.0.2",
+    "checker": "cz.checker.v3",
+    "split": "sealed",
+    "sealed_set": 4,
+    "n_generated": 3600,
+    "n_tasks": 3581,
+    "sealed_minimums": {
+      "n_scored": 3525,
+      "per_family": 878,
+      "per_cell": 165,
+      "rule": "after cz sealed-prep the scored file must hold at least these counts; otherwise the set is discarded unread, a new salt is created and the set regenerated with the same command; at most three attempts, each attempt's full sha256, excluded-id sha256 and counts recorded in sealed4_record.json attempts; after three failures the experiment stops before the freeze for an owner decision"
+    },
+    "sealed_file_sha256": "525da50809ff284fe5e4ee458320e5a01152717e8c7ca089b72317435914a530",
+    "sealed_full_file_sha256": "021e59686b4c58b25fec1d7fc80e0283c687cc24c382a8a15ff32fce93093d65",
+    "excluded_ids_sha256": "0da9391bc558a763fe940340fe90f2318467e1321fc27c012215fe71ce5accdf",
+    "sealed_salt_commitment": "0d3724b9d80714aa27a0284d6fc525e150a0c055176f0a7aa7e15d2312a2d617",
+    "sealed_salt_commitment_recipe": "sha256(b'cz-salt-commit-v1|' + 32 raw salt bytes)",
+    "sealed_attempts": [
+      {
+        "excluded_ids_sha256": "0da9391bc558a763fe940340fe90f2318467e1321fc27c012215fe71ce5accdf",
+        "n_scored": 3581,
+        "sealed_sha256": "021e59686b4c58b25fec1d7fc80e0283c687cc24c382a8a15ff32fce93093d65"
+      }
+    ],
+    "sealed_generation": "cz forge --split sealed --n 3600 with a new salt on the secrets host, then cz sealed-prep against dev 0-479, test 0-799, the EXP-CZ-010 train file, the EXP-CZ-012 practice file and sealed sets 1, 2 and 3 (scored and full files); never read by an agent",
+    "overlap_audit": {
+      "file": "experiments/EXP-CZ-003a/overlap_audit.json",
+      "sha256": "4185a85560bd5d21c4b64be7436bd074fd542943b277ec3d88df6443416a720f",
+      "program": "tools/overlap_audit_003a.py"
+    },
+    "max_tokens": 512,
+    "context": 4096,
+    "parallel_slots": 1,
+    "decoding": "greedy, sequential, one llama-server per run, single-adapter serving (no --adapters, no multi-LoRA)",
+    "sampler_greedy": {
+      "temperature": 0,
+      "seed": 0,
+      "top_k": 40,
+      "top_p": 0.95,
+      "min_p": 0.05
+    },
+    "sampler_sc4": {
+      "temperature": 0.7,
+      "samples": 4,
+      "sample_seeds": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "top_k": 40,
+      "top_p": 0.95,
+      "min_p": 0.05
+    },
+    "per_member_decoding": "template and chat_kwargs exactly as in each member's frozen run (models below); thinking off where the frozen run had it off; members without a switch run as frozen",
+    "runtime": "llama.cpp b11539, Vulkan backend, one 16 GB consumer GPU",
+    "runner_sha256": "f8e2110dd601c3109ec028f30a7193920fcdd428ab174e998e3dbcb9de996786",
+    "llama_server_sha256": "5b92164b26a620b56d38470d29ff9b36390b87ee19bc21f25b487d61482f6723",
+    "runner_reproduction": {
+      "file": "experiments/EXP-CZ-003a/runner_reproduction.json",
+      "sha256": "a9c99ff163c5b737a89e4375e3a2b10e38d6aa99f509b3913f43abf8b4ed5db8",
+      "rule": "before the freeze the pinned runner reruns two frozen set-2 rows on dev 0-399 with their frozen serving and decoding and --ledger-protocol on, as every sealed row runs: quinn-teacher (EXP-CZ-011, LoRA) and rowan-self (EXP-CZ-010, merged); for each, the sequence of task_issued, attempt and verdict payloads must equal the frozen dev ledger in dev/ exactly, after removing the attempt seed field the flag adds (always 0 for greedy); run_started metadata and run ids differ by design; any difference blocks the freeze"
+    },
+    "placement": "16 GB reference only (D-37 c)",
+    "analysis_program": {
+      "schema": "cz.router-plan.v1",
+      "sha256": "f8e2110dd601c3109ec028f30a7193920fcdd428ab174e998e3dbcb9de996786"
+    },
+    "learned_router_artifacts": {
+      "knn/seed0": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+      "knn/seed1": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+      "knn/seed2": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+      "knn/seed3": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+      "knn/seed4": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+      "laya_fine_tuned/seed0": "3427f2542766d153f1be35310e42ef75022b450e40049cc5500812c1bad51a4e",
+      "laya_fine_tuned/seed1": "3c5542c2c80316382849a82c9b2d73a0d07bb99a66a083ea5ef6411fd0b8346c",
+      "laya_fine_tuned/seed2": "ecd6509e939a9ec77997f4511e51ee2991b5a2ef10c2ee9b9b9f173ccab9c188",
+      "laya_fine_tuned/seed3": "190f2d89b55ecc4680cf7cbf441c66df4ad4018905255c4a033b7db99a58100e",
+      "laya_fine_tuned/seed4": "118b0c27642a9b32874cf4b7a6b9a982b67bd5e8212b768791683e41bf8fd558",
+      "laya_zero_shot/seed0": "850a05bcb2491462fc5f0b5d1c7a4aa495226db1430a2af8310324bf296024a2",
+      "logistic/seed0": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+      "logistic/seed1": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+      "logistic/seed2": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+      "logistic/seed3": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+      "logistic/seed4": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938"
+    },
+    "learned_router_compute": {
+      "embed/dev_answers": {
+        "artifact_sha256": "bbf50a5637fda3fd9499e15a38425121c5b91f325a3857c4aca31f2ade178a25",
+        "cpu_s": 27704.266,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "inference",
+        "log_sha256": "434573f90e01a3e5d3d6e77d61efc0e94e507ccb5354bd57b421758197660eee",
+        "params_m": 421.293827,
+        "rows": 10800,
+        "tokens": 2212640,
+        "wall_s": 1751.19
+      },
+      "embed/dev_prompts": {
+        "artifact_sha256": "6be6a3dbfdfdc3c9b91b6df18afc72235fed2b9720c54eca20810fde8d8e18bc",
+        "cpu_s": 431.406,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "inference",
+        "log_sha256": "cdc94cabf1f94b105bc52f8a4f1cca29ba2691b05458b9341dbe6b76bf47207d",
+        "params_m": 421.293827,
+        "rows": 400,
+        "tokens": 40032,
+        "wall_s": 35.812
+      },
+      "knn/seed0": {
+        "artifact_sha256": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+        "cpu_s": 15.328,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.526
+      },
+      "knn/seed1": {
+        "artifact_sha256": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+        "cpu_s": 15.328,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.617
+      },
+      "knn/seed2": {
+        "artifact_sha256": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+        "cpu_s": 15.234,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.666
+      },
+      "knn/seed3": {
+        "artifact_sha256": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+        "cpu_s": 15.203,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.553
+      },
+      "knn/seed4": {
+        "artifact_sha256": "29d92b8dbae1551c02e4a8e624ecc9269d29604ade7f79ad84fe3bc9d8bbd423",
+        "cpu_s": 15.266,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.447
+      },
+      "laya_fine_tuned/seed0": {
+        "artifact_sha256": "3427f2542766d153f1be35310e42ef75022b450e40049cc5500812c1bad51a4e",
+        "cpu_s": 132502.047,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "training",
+        "log_sha256": "3c233f5921a7de8f912bbef170536d09f77d1192b59ed3849353552ffa729efd",
+        "params_m": 421.293827,
+        "rows": 400,
+        "tokens": 11059200,
+        "wall_s": 8353.142
+      },
+      "laya_fine_tuned/seed1": {
+        "artifact_sha256": "3c5542c2c80316382849a82c9b2d73a0d07bb99a66a083ea5ef6411fd0b8346c",
+        "cpu_s": 134919.109,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "training",
+        "log_sha256": "2ba0cd2a600fc4aeff74f9926bc1d653cc40fd05940527dfc31c889b3f25a70f",
+        "params_m": 421.293827,
+        "rows": 400,
+        "tokens": 11059200,
+        "wall_s": 8531.94
+      },
+      "laya_fine_tuned/seed2": {
+        "artifact_sha256": "ecd6509e939a9ec77997f4511e51ee2991b5a2ef10c2ee9b9b9f173ccab9c188",
+        "cpu_s": 138206.562,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "training",
+        "log_sha256": "bf9db60676942947f09d0efc7be4ded341de3f6cbc4ef2dd99338cb5da633eb4",
+        "params_m": 421.293827,
+        "rows": 400,
+        "tokens": 11059200,
+        "wall_s": 8859.508
+      },
+      "laya_fine_tuned/seed3": {
+        "artifact_sha256": "190f2d89b55ecc4680cf7cbf441c66df4ad4018905255c4a033b7db99a58100e",
+        "cpu_s": 139312.562,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "training",
+        "log_sha256": "b2dc78975ee38b9b0d47d950d99ac11862598baf63f13edfc85d70aace743e45",
+        "params_m": 421.293827,
+        "rows": 400,
+        "tokens": 11059200,
+        "wall_s": 8896.096
+      },
+      "laya_fine_tuned/seed4": {
+        "artifact_sha256": "118b0c27642a9b32874cf4b7a6b9a982b67bd5e8212b768791683e41bf8fd558",
+        "cpu_s": 146933.906,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "training",
+        "log_sha256": "5edd4862da3078baf9d4b20c57c6b2862c7813af629da2230dbfb79246e72262",
+        "params_m": 421.293827,
+        "rows": 400,
+        "tokens": 11059200,
+        "wall_s": 10164.325
+      },
+      "laya_zero_shot/seed0": {
+        "artifact_sha256": "850a05bcb2491462fc5f0b5d1c7a4aa495226db1430a2af8310324bf296024a2",
+        "cpu_s": 0.0,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "params_m": 0,
+        "rows": 0,
+        "tokens": 0,
+        "wall_s": 0.374
+      },
+      "logistic/seed0": {
+        "artifact_sha256": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+        "cpu_s": 15.312,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.423
+      },
+      "logistic/seed1": {
+        "artifact_sha256": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+        "cpu_s": 15.25,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.494
+      },
+      "logistic/seed2": {
+        "artifact_sha256": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+        "cpu_s": 15.25,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.886
+      },
+      "logistic/seed3": {
+        "artifact_sha256": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+        "cpu_s": 15.281,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.45
+      },
+      "logistic/seed4": {
+        "artifact_sha256": "e360d1193f51ade866e320b0064bf1cca0284c79421de7820cf1afafc5253938",
+        "cpu_s": 15.281,
+        "device": "CPU",
+        "discarded": [],
+        "kind": "cpu_fit",
+        "log_sha256": "2ea91e8233ab93c57a2aad1c6eb60a8ac4b17480efb7134a38abac0daab141a4",
+        "params_m": 0,
+        "rows": 400,
+        "tokens": 0,
+        "wall_s": 16.563
+      }
+    },
+    "comparator": {
+      "member": "quinn-teacher",
+      "chosen_on": "dev 0-399",
+      "rule": "most dev 0-399 solves; ties: fewer format failures (verdict reason starts with 'format:'), then the member's rank in the pool's dev order (solves, then format failures, then name), then name; the same rule as crates/cz-analyze/src/router.rs fit_router",
+      "dev_solved": 354
+    },
+    "routers_sha256": {
+      "best_single": "bef79f168190ec197eaa5b25ec010981b36230bbec6902b0662ad26ad7ddda12",
+      "rules_family_full": "73b940b0d05951b5711fe972fe23774f2902922ed9a279fd8f1c4399936ea2f4",
+      "rules_family_founders": "dc9edcfacb7d56435d2f043a25675b47f38a0182d9d870ba9c8d530c7ff5f736",
+      "rules_cell_full": "3f2a33ff2596854363acbde48a20d88088bf7bc91ae8d9ac9690d2f61e98d757"
+    },
+    "sc4_members": [
+      "quentin-self",
+      "quentin-teacher",
+      "quinn-teacher"
+    ],
+    "dev_ledgers": {
+      "sam": {
+        "file": "experiments/EXP-CZ-001/phase1v2/HuggingFaceTB__SmolLM2-360M-Instruct-q8_0-p1v2-P3.jsonl",
+        "sha256": "e3c8ca257ff4836ba618e8391d3d5721862979fd524ce84987e413a2a00afdae",
+        "ledger_root": "badca3e222a12355bccabf747111be04eb4a16f6334526d2a70e40a489ea9d8c"
+      },
+      "grace": {
+        "file": "experiments/EXP-CZ-001/phase1v2/ibm-granite__granite-4.0-h-350m-q8_0-p1v2-P3.jsonl",
+        "sha256": "15edd448efcfff97e55afb2a985ef64ab164b30ca0859dc3dc757a203b3a6592",
+        "ledger_root": "96366c1ca698820a807cf16b809453ee41e61fd63fe4dec6b0910ae58fb59230"
+      },
+      "quentin": {
+        "file": "experiments/EXP-CZ-001/phase1v2/Qwen__Qwen3-0.6B-q8_0-p1v2-P3.jsonl",
+        "sha256": "67ab85106cfee7d5bbfde7649d68f24887dd369bf79ce9d4687bc74c93682390",
+        "ledger_root": "08304a5db733f9b8d2f13f5305ccb0ab0f1b8a495d9c76922aa60971a3cbfc00"
+      },
+      "quinn": {
+        "file": "experiments/EXP-CZ-001/phase1v2/Qwen__Qwen3.5-0.8B-q8_0-p1v2-P2.jsonl",
+        "sha256": "3a34a3d3a48bf4fe8560797b9f0f74ec8ffe5273f451f0250338d4ebcd7763fe",
+        "ledger_root": "e4a71fbcf837b92d395745036beea807a67fafca96ad2200002c956e33a3ed6b"
+      },
+      "graham": {
+        "file": "experiments/EXP-CZ-009/phase1/ibm-granite__granite-4.0-350m-q8_0-p9-P4.jsonl",
+        "sha256": "3f6a5e912351368b1958fd49ef5a01c4307a0fee3ac94f5b5298b31bd6ca91cb",
+        "ledger_root": "aa31bbd6deecc73b660736c56629ea91f0e46abb845dfaaeadd71b48a7a77eea"
+      },
+      "rowan": {
+        "file": "experiments/EXP-CZ-009/phase1/BlinkDL__rwkv7-g1-q8_0-p9-P3.jsonl",
+        "sha256": "3d4f05ba2c1f72fc3701fec3e708b3f4a0400cd83b9bf17db9510a47fa5ceb25",
+        "ledger_root": "2d7f414b2429d2043fdf7ac055c8100941aad64d0792661a088219faf5373383"
+      },
+      "erin": {
+        "file": "experiments/EXP-CZ-009/phase1/baidu__ERNIE-4.5-0.3B-PT-q8_0-p9-P3.jsonl",
+        "sha256": "2c0c37c7ecd932f3abce0b87b3e8851c26ae6ac44153ceef44da4738b01fdade",
+        "ledger_root": "b1d7c156557bcbfb8bb0e9bc0d106963b17303a286b85f4ff63bb3042642da24"
+      },
+      "bastien": {
+        "file": "experiments/EXP-CZ-009/phase1/PleIAs__baguettotron-600m-q8_0-p9-P3.jsonl",
+        "sha256": "f6ba6eb3c73ccfcd07a5ab05e40afc9fe1d8a7360e0d679f2e492e96a9fca5f8",
+        "ledger_root": "03b3ff2d3eda6f8eef1edea34fd315baab653d93be6b3078172a172fcd7a98a0"
+      },
+      "mina": {
+        "file": "experiments/EXP-CZ-009/phase1/openbmb__MiniCPM4-0.5B-q8_0-p9-P3.jsonl",
+        "sha256": "ba8aa34f0494164adf9a3adbc9163bcabc8842400c13683cb92a9d9be7eeea2c",
+        "ledger_root": "21706a2733af8bba4c97d46f788b6b94e8ecd805edbe2405945d6820acb3fde9"
+      },
+      "sam-self": {
+        "file": "experiments/EXP-CZ-003a/dev/sam-self.jsonl",
+        "sha256": "8782e1dfbe43cc70ebf8ed2df8dc743826138ef810b1564d2c26159af93ad053",
+        "ledger_root": "a9fda09f16afedfc3a76af668b84bd4aee69bd370d17ebca37b4bcd30f6b6d1d"
+      },
+      "grace-self": {
+        "file": "experiments/EXP-CZ-003a/dev/grace-self.jsonl",
+        "sha256": "1bea5695dc4b778786c15c09e01a221cb484e2e3b1b3c1cb19dc0862ceb8759f",
+        "ledger_root": "19643080f00ac34c928541466691d2187431f447901ed30a05b5330848a41e7e"
+      },
+      "quentin-self": {
+        "file": "experiments/EXP-CZ-003a/dev/quentin-self.jsonl",
+        "sha256": "3b590bebb52401b33a9dd8d3de811371c39203fdfc48a0d00186d043a8639dbb",
+        "ledger_root": "bf4eb6b6ed652ec18ac1bf602da0eb7a918cfd8e8f10118c2a25bb0f7f810bae"
+      },
+      "quinn-self": {
+        "file": "experiments/EXP-CZ-003a/dev/quinn-self.jsonl",
+        "sha256": "bbcb8b4abc1ebde8e12ba179fe1bbdef642b79c7d932da0bb1704b41b01c3ea8",
+        "ledger_root": "d82d0d62215e64be88e14972d92309561e56f1d3324655449648205820743f85"
+      },
+      "rowan-self": {
+        "file": "experiments/EXP-CZ-003a/dev/rowan-self.jsonl",
+        "sha256": "27ecd5a5ddd7345edb8feee3730d8eb52af202f5c04787fe6323ac4b5ccab771",
+        "ledger_root": "2d98288f1e36ff1362e831d02143f61b20648617b29d98a10e7f1d2842df531e"
+      },
+      "erin-self": {
+        "file": "experiments/EXP-CZ-003a/dev/erin-self.jsonl",
+        "sha256": "a432668fe4717c02a7ebd8b280b20ed1f4dabbdcf4f580be1cdda6cb96879219",
+        "ledger_root": "91a82bdc1e696eb418582de9a689b8c338438d0bbbb10cb66a88e0c63d89e9e7"
+      },
+      "bastien-self": {
+        "file": "experiments/EXP-CZ-003a/dev/bastien-self.jsonl",
+        "sha256": "5aaf4d2ff7041bc0815da4ca123e173f9ff7e9e3001ff0f72a9232d09ed5e19c",
+        "ledger_root": "2c2061e63adb1b6c23e87bc4abb958fd91b4cc05c0f7e5e76cd783f01142d1ea"
+      },
+      "mina-self": {
+        "file": "experiments/EXP-CZ-003a/dev/mina-self.jsonl",
+        "sha256": "53a5293577e1b65af91888990853d7666bf1c482dea596867ece8b159509c5e5",
+        "ledger_root": "5d8603bf99053fc756d671a30f015d25b88a31d54128d26d88b519ff3712a0a7"
+      },
+      "sam-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/sam-teacher.jsonl",
+        "sha256": "64cd359df1122fbdec77210adf50f0b0143576efc170dc3fc8e40162bc2d1481",
+        "ledger_root": "373e9e2c5939610f457f89e916047b3ebe79c769070b58d6e958a02677ce9cc5"
+      },
+      "grace-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/grace-teacher.jsonl",
+        "sha256": "d864ff0e7a8515c74e014b4bbf8414e55a582ff41b2969c57818819f17f9371d",
+        "ledger_root": "c9ac185553f8b770453ff2f50962ccc3b221e3521b2918306ad443d31bd4bf6c"
+      },
+      "quentin-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/quentin-teacher.jsonl",
+        "sha256": "9a154053c09bdb0e844551dd0a85597bf107dfaca2790f6d673983a978a15c31",
+        "ledger_root": "5064b4d04832aaad03abebd91357d2ea93e2f9e14b130d2eeefd326ebe590c2d"
+      },
+      "quinn-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/quinn-teacher.jsonl",
+        "sha256": "206f9181a5c08d39a7d5420118c2f38591fe6c86960b2b465d3b9473f5f1a626",
+        "ledger_root": "f4aea3fa082964ed78f055ec0bd34831384a81d3806f6b6f87fb083f027dd6a8"
+      },
+      "rowan-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/rowan-teacher.jsonl",
+        "sha256": "582e9b09b204f79bcbafc21cddb6c9d17e228c5e99ef4d97511fb4bdd8eae2be",
+        "ledger_root": "2057f3f3e889cfa70cd72af779be281926e05df41cd79a35e77565a6073547e5"
+      },
+      "erin-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/erin-teacher.jsonl",
+        "sha256": "bb7cb75c180d4b0c17c73bce71b18bebac42ca3dc004a492734bae4a665d45af",
+        "ledger_root": "36e571a699a66c9da141e7b36cfca28c2fbc4d087aea99d100ebf7649097e14c"
+      },
+      "bastien-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/bastien-teacher.jsonl",
+        "sha256": "20966a90b3e1c536a68a81c263fd5b2a7129a97f34eaf6f6ecd984f1ebe38806",
+        "ledger_root": "eb5b41b30e83771e282eec9d2d596d3de6538e4699a859c021e6d594ea42a162"
+      },
+      "mina-teacher": {
+        "file": "experiments/EXP-CZ-003a/dev/mina-teacher.jsonl",
+        "sha256": "296439434d9a2da5f81e974cf67c6176d2d00ae78319375bb5e4f15db2c3d3ce",
+        "ledger_root": "10cc2db905a5f482aedbde40e165523fe48fb90b63249204447fa0ac4cbf4f4e"
+      },
+      "theo-s0": {
+        "file": "experiments/EXP-CZ-003a/dev/theo-s0.jsonl",
+        "sha256": "23a9f54010906a4368ab8f70dbc17673fe3ab99826cc32c12a6349af41a4342f",
+        "ledger_root": "5881941681ca7f8868fb94e3de0b0ab3785cec88ff6aa59cc1c49c2524d7d32a"
+      },
+      "hazel-s0": {
+        "file": "experiments/EXP-CZ-003a/dev/hazel-s0.jsonl",
+        "sha256": "8d83d7b0c995e4a5b24b778edb5f32cca4ad9f7037aaf6c30846d5bfb8c895a9",
+        "ledger_root": "605e6e02668c94932db47e471df9a28bd9885e751659bc8e12c92fcfa7c776ba"
+      }
+    },
+    "run_rows": [
+      "experiments/EXP-CZ-003a/sealed_runs.tsv",
+      "experiments/EXP-CZ-003a/sealed_runs_sc4.tsv"
+    ],
+    "timestamp_rule": "the freeze record is pushed to the public research repository; freeze/ROOTS.txt holds four lines, the commitment root, the freeze ledger root, the manifest.json sha256 and the freeze.jsonl sha256; the sealed driver refuses to start unless every line matches the files, the freeze files and manifest are tracked and clean in git, and tools/ots_check.sh verifies freeze/ROOTS.txt.ots: the proof is for this ROOTS.txt and it holds a Bitcoin block header attestation whose merkle root matches the raw block header served by both mempool.space and blockstream.info",
+    "freeze_blockers": [],
+    "artifacts": {
+      "experiments/EXP-CZ-003a/SPEC.md": "339f91993caa7e5213863d3036c3ff5a8e44677f2e620cacf12ca9fa00a9ef4e",
+      "experiments/EXP-CZ-003a/FREEZE_PLAN.md": "6e7bfa16ff0798cd08ad4078043818d591d93bfccb58c5957e945643254fcdce",
+      "docs/research/expansion/PROPOSAL-EXP-CZ-003a.md": "48ad876c2b3f7faf0668e5c2fcd8a4a35cbd2aab06e81761ead5d1188356bbd7",
+      "tools/make_kit_003a.py": "88eba9e3242b6b5c80d163678cebc073221c726d9bc1de8779535b550738f787",
+      "tools/run_sealed_003a.sh": "805d812368ee8d3072b1f31315339a4d3d1fe301cd4f8f55551ae4e8c56ccaa7",
+      "tools/sealed_runs_lib.sh": "35fd4e56438778eead6bd726ee15bd3b68785b2274bd1decb5dbcf4576878af1",
+      "tools/sealed_verify.ps1": "d13a41e50671e850a492d23f994f4cd689977c6aa44efd21a7c5f4e2e2c613a1",
+      "tools/vram_peak.ps1": "39c3d2f76905c0ad2cba9783de3d19be26628fee9b575352dc2b1575874a6e31",
+      "tools/ots_check.sh": "aedcef95f3faaeaa1cdac7fdb15fd966d1d034d83e0d48b7ca63c74c8e6bd42d",
+      "tools/ots_check.py": "b0ddb6919520e9030676ea9a064110e6dba2160817b3db0a03cec2394466f29d",
+      "tools/overlap_audit_003a.py": "2d86daedb383d2a795b855100ff01f2161ba072d671a9b05eb26211a99bfcf7e",
+      "tools/repro_check_003a.sh": "ced0561c5154b97284793a184b45afe50621257d82c9377f2efacf1f4be54e3a",
+      "tools/verify_bound_003a.py": "01ee82fc97a6937b9995461ed4dd5e4680b487dcea9904b3b9364715dfdc6f67",
+      "tools/postrun_003a.py": "17e895a3501565afd6f49c5fe0173631e4faa9468ffc9b929d192653d82c2f9d",
+      "tools/score_003a.sh": "0064e454973a4a60bda51661c28f99862fa01cd2a1b3a30e9bfb0ea594dae87b",
+      "tools/beacon_003a.sh": "7f063221965a1f4aa358de712f5d1abd9622e01b6968f8e6d15799792abf67c5",
+      "tools/beacon_003a.py": "73d93c7a910fcce8c93b8956339d130c1b4b0f8cbf54ea024d4dad92f5555c19",
+      "tools/laya/fit_padding_003a.py": "deb01b6a7b5ec9a3eab8495d10e3bdc72e1a5587b5f33cccc017713e02624703",
+      "tools/laya/route_determinism_003a.sh": "a3765d75c98c0f9b7d64aa531c6ad216440e551023a6780dc49519cff758017e",
+      "tools/laya/route_sealed_003a.sh": "fe647e3d11e6170bd387baa8a2c4bd06c8965d805bd1e4f99c104ea9d3b4529c",
+      "tools/laya/fit_003a.sh": "f3f8d41cce3de25c8f38ac46dc98477960667b0b4ae84191bc78274ba3c05a5d",
+      "tools/laya/fit_job.ps1": "cd45c8c97f68dee81d4cec4fefebe8b25dcfeb4be389d1e913397703b4d97387",
+      "tools/laya/fit_launch.ps1": "5934d002c54be3c2ba6e177f98ee2024ef8f5afb0e0e4a74ea6828fc48021d21",
+      "tests/test_route_003a.py": "8c9eb4f968ed5fb5f3bb2560a8bb7df38755d4ca5863ac968f534999ea5ff6fe",
+      "crates/cz-run/src/probe.rs": "9ccd025de2fa8d0bd92231a4ebf4bcabf8c3c5b13927466c6f94e3c6046df541",
+      "crates/cz-run/src/cli.rs": "9de65aa27901d9360fa68c69e4ac1d586fa7ef61390669fe2f46223714287563",
+      "crates/cz-run/tests/sampling.rs": "0387ba60c529c9246a268d4ce40ef0036292143871e2173af54992dc9ffbaab3",
+      "crates/cz-analyze/src/router.rs": "2771f8341b2294873ea007d366d951dcbb9fdaed31d397184ebcbc0e94ea77f8",
+      "crates/cz-analyze/src/norm.rs": "beca1bc502cc1b0e72fab2c80c7a66b1c0906f638340e9c13dc2440dbc1a1656",
+      "crates/cz-analyze/src/stats.rs": "6d06b6278185f1233b76ac1a6f22a7ab169a3fa8f1aec520b4873dc5d51789b4",
+      "crates/cz-analyze/src/paired_rd.rs": "c56e7bf826b7c47f4028ab40e4f2ee5dd7c410459e3dc50367bbbba9b8744a70",
+      "crates/cz-analyze/tests/paired_rd.rs": "f2097136c2262c09b6a829d7d5c5bd2eda39eaebcecc87a49ae12b1d0edcd18e",
+      "crates/cz-analyze/src/router_plan.rs": "307be21c57cadf80c6ab360f484fc97d1611b05015a3caf654dfc9697506f974",
+      "crates/cz-analyze/tests/router_plan.rs": "2fcbcf3dfb25c120baf5350dbc39000b7049db435acede480ce4eb1524cd4fbf",
+      "crates/cz-analyze/src/load.rs": "1dfee403da16cdfd5ab3818f7738740756ed472219816482b76350d82d88b2df",
+      "crates/cz-run/src/main.rs": "814e438fa076e258ef00b68a76f59f694df64d2eef339e8a57e1ee6337e374aa",
+      "experiments/EXP-CZ-003a/analysis_plan.json": "ae0d543b03daed2d9982a53646eedf1b66a4e9a15d95f19c9aa6e25953c2e870",
+      "experiments/EXP-CZ-003a/compute_ledger.json": "971cc3be9bd9a4face9868b726278044a4d3fec331206cf708bc8fa15215a3b7",
+      "experiments/EXP-CZ-003a/routers/best_single.json": "bef79f168190ec197eaa5b25ec010981b36230bbec6902b0662ad26ad7ddda12",
+      "experiments/EXP-CZ-003a/routers/rules_cell_full.json": "3f2a33ff2596854363acbde48a20d88088bf7bc91ae8d9ac9690d2f61e98d757",
+      "experiments/EXP-CZ-003a/routers/rules_family_founders.json": "dc9edcfacb7d56435d2f043a25675b47f38a0182d9d870ba9c8d530c7ff5f736",
+      "experiments/EXP-CZ-003a/routers/rules_family_full.json": "73b940b0d05951b5711fe972fe23774f2902922ed9a279fd8f1c4399936ea2f4",
+      "experiments/EXP-CZ-003a/sealed_runs.tsv": "9dd0d6187f331d58f63c0dfc9db25c19650956e67bd78362482172421a9db2fd",
+      "experiments/EXP-CZ-003a/sealed_runs_sc4.tsv": "d250b817b36a1655159d9590301453188978ce5230717e71e01aa5111491a2f9",
+      "experiments/EXP-CZ-003a/dev/bastien-self.e1.result.json": "b68e67f3a67aa974b8f0c505d1f6ccc3fb0bdb409c42a21efa5e1441810f6cf4",
+      "experiments/EXP-CZ-003a/dev/bastien-self.e2.result.json": "412cfef90d727d1e7a2c80642fb79b9050383d045895a6dfd340673d13fa3624",
+      "experiments/EXP-CZ-003a/dev/bastien-teacher.e1.result.json": "dd11475b2756e0bfd90ee8f37e3217ee1f3d701faa6943d18aa4b016233c3a3c",
+      "experiments/EXP-CZ-003a/dev/bastien-teacher.e2.result.json": "1a46b28086d9c9270fbb8ea705bb051c9f2a767d1cdad9b940ee6b19496042f4",
+      "experiments/EXP-CZ-003a/dev/erin-self.e1.result.json": "fe2bec51c2356ffa04bd5d4dd288770289e29b0d91b13759e4c7c0f92757d182",
+      "experiments/EXP-CZ-003a/dev/erin-self.e2.result.json": "0601b443f8f801257f532930b33ec7727a83d76f5011dea4a29c8bd2433c875d",
+      "experiments/EXP-CZ-003a/dev/erin-teacher.e1.result.json": "5cf3b501edfb0772fc9f7b7e28cf9c9100926077219197c960063a286b8055eb",
+      "experiments/EXP-CZ-003a/dev/erin-teacher.e2.result.json": "eb33c9af688c1954a5acdfdefbebbc84b2ae6ce0be1b40f0bf35fcccc238a2e0",
+      "experiments/EXP-CZ-003a/dev/grace-self.e1.result.json": "0bcc4c6bc153a143d79814b0872f7d9ae7e20e888cd8feb5f25ef431cc223e7f",
+      "experiments/EXP-CZ-003a/dev/grace-self.e2.result.json": "887381ec4e6ac41d60cb6dc167673f518da09f5c840d35cd5a18d24a6ae3396e",
+      "experiments/EXP-CZ-003a/dev/grace-teacher.e1.result.json": "84171bbf6cc63328d9d66d01e0ddce6a7786e7966582a88075bacb7ea7c50930",
+      "experiments/EXP-CZ-003a/dev/grace-teacher.e2.result.json": "33a207c7d7cbaf96924c5747227c3c0b59591a9da0c447f52612797b4c663267",
+      "experiments/EXP-CZ-003a/dev/hazel-s0.e1.result.json": "59813c2eb4721ac9b0a2167aa47d66c924ab8246105a0c0f888754cb1df88228",
+      "experiments/EXP-CZ-003a/dev/hazel-s0.e2.result.json": "c94e15e81d47351f873bde5b9e2d531d111db64f711d683b9f755097ee5b955f",
+      "experiments/EXP-CZ-003a/dev/mina-self.e1.result.json": "fafe13dd5adf19d966ca6cc15003d292350fda37bd124948376d654c652fad3e",
+      "experiments/EXP-CZ-003a/dev/mina-self.e2.result.json": "8da823a212b8bc11966568eafb57b38aaea43a50f69ada01e3349c0d428562c2",
+      "experiments/EXP-CZ-003a/dev/mina-teacher.e1.result.json": "bfc1e91d60c288b648ff3a50fc7883cf11155ab68950dbd4d72de5d7098f69fc",
+      "experiments/EXP-CZ-003a/dev/mina-teacher.e2.result.json": "e2978e4aaae39d39ad4343368509f7c41e44bf33b067cde23f78040392226863",
+      "experiments/EXP-CZ-003a/dev/quentin-self.e1.result.json": "29cd34d083c90ddbd47cb897b29ca44a8bc976552b1de896b25c6c88a9a2a8b9",
+      "experiments/EXP-CZ-003a/dev/quentin-self.e2.result.json": "de415f53112b6f401abdcd826eb6ae0ad84538b94009a57d46afdd932ae6e9b7",
+      "experiments/EXP-CZ-003a/dev/quentin-teacher.e1.result.json": "70f99933ba300c066941c2d2683a354ea8226cb81ab565cf14f6cb97308ba38b",
+      "experiments/EXP-CZ-003a/dev/quentin-teacher.e2.result.json": "204e45cf96883ca2451176d619b33ba80c4456adbbd005f5cdc2e8f8d1dd6fab",
+      "experiments/EXP-CZ-003a/dev/quinn-self.e1.result.json": "d7fd36606904aa60758eb1ed486d39e7c7ccace648424251d5ce8c807fe1bdaf",
+      "experiments/EXP-CZ-003a/dev/quinn-self.e2.result.json": "a6cc6f7bdad27a258f06545cc7645132b38f123d19727d4c2011613260cef654",
+      "experiments/EXP-CZ-003a/dev/quinn-teacher.e1.result.json": "f47592eee6f1041d49ee6f45b11e46376c16f7e39ed9ef2aaac2ebbfefad2643",
+      "experiments/EXP-CZ-003a/dev/quinn-teacher.e2.result.json": "02a278027d916b13316559d19ab4afc8d59f3b83cb0267d3daffa89e111f90b0",
+      "experiments/EXP-CZ-003a/dev/rowan-self.e1.result.json": "f28df47a744c052553cd81669cd15998c37df1e5446e053d77d7db95873cf898",
+      "experiments/EXP-CZ-003a/dev/rowan-self.e2.result.json": "e89e86cfe47745258463969bb16456e0c4a11513533b3177d3769ab9e7f72645",
+      "experiments/EXP-CZ-003a/dev/rowan-teacher.e1.result.json": "d71492189b01ac81037aa26f3d4053cb5d453f1cdf1077a129506de914df022b",
+      "experiments/EXP-CZ-003a/dev/rowan-teacher.e2.result.json": "745b72ca747c42ef49ddebe4171589265bde888713fee599c8a0fb4c63e27976",
+      "experiments/EXP-CZ-003a/dev/sam-self.e1.result.json": "9c2b389006c328ac7f1d8c24625c8a86c12f0500411049e34bc34f7279999423",
+      "experiments/EXP-CZ-003a/dev/sam-self.e2.result.json": "ecd1492b655cb338d1686cf74c2bfcc4bef0fa226f5413451b9ab79c520a1708",
+      "experiments/EXP-CZ-003a/dev/sam-teacher.e1.result.json": "eaf69469858cc739c61c730ae56bd297818a89e99546e0006fd0752c60f85554",
+      "experiments/EXP-CZ-003a/dev/sam-teacher.e2.result.json": "e4ebd8f5b8aba1bf541df846f2642bbdd62424546cef04187ec96297ca460cad",
+      "experiments/EXP-CZ-003a/dev/theo-s0.e1.result.json": "e9678a9790d76cededbc7341f7c1dc324f9b6eda4505b9aa069387d788696403",
+      "experiments/EXP-CZ-003a/dev/theo-s0.e2.result.json": "5110949c6a4098a6f5fdd8e07a7625ac4c9bc443a4afa39d814c428ae8c2d30b",
+      "experiments/EXP-CZ-003a/sealed4_record.json": "17322152e72f1ed5ed088f317b1c84406406a04da1b560bb7ea577c2596723c8",
+      "experiments/EXP-CZ-003a/bindings.json": "d499e0e080d7b20a333a1fd86feda667c3f7fee749c4f475f2728277f61fa9fd",
+      "experiments/EXP-CZ-003a/runner_reproduction.json": "a9c99ff163c5b737a89e4375e3a2b10e38d6aa99f509b3913f43abf8b4ed5db8",
+      "experiments/EXP-CZ-003a/overlap_audit.json": "4185a85560bd5d21c4b64be7436bd074fd542943b277ec3d88df6443416a720f",
+      "experiments/EXP-CZ-003a/route_determinism.json": "8c5b4acef0c7529261a2aa558d583de1daac684e7ca4f5e6d789bf958b4be01e",
+      "tools/laya/fit_003a.py": "2eba5c9747a8c72a16614324175f67a4a28849d11518b1b7bf63b1b2a8a1ea5d",
+      "tools/laya/laya_embed.py": "9e2dc4fd64e23e4c52e62b37e1509e92651bd4732ea16c2fc550b0922a803250",
+      "tools/laya/laya_score.py": "3809eaf44c4896de0de8fc39d256219e00462a141598817b97ea38c00b26ba0d",
+      "tools/laya/laya_tune.py": "22582711032d82d4cac737c94712194b9d54af6ae045cfc759a44f6dded0646c",
+      "tools/laya/route_003a.py": "ccd25455af5698683302b3927722eeb1471b8795ea2f6b6383662230a4006c3a",
+      "crates/cz-route/src/cli.rs": "7f1e752f739cc995a01092491c10bad71c06a6a4e83ccd78b555a4fadf4e782b",
+      "crates/cz-route/src/data.rs": "f1e8731c12275233a14b55f93fb747bd5d4e20db571bd436a17079fdd6460bc6",
+      "crates/cz-route/src/emb.rs": "d0fd4d0aedb69f0552488b19e05f733340b8b2f3f81892e849985bcf7e995e3c",
+      "crates/cz-route/src/eval.rs": "ac58b79978ce53979d80602376f0ee47c3910ed3edf6cbf460058bd6d128996d",
+      "crates/cz-route/src/knn.rs": "e7dd32760d973e78c1358a287617aa00aa1ea467d9f103f7b22e5dda4a38eff8",
+      "crates/cz-route/src/lib.rs": "33e5121abef181792957fe8e3c8b843e76d9fea175c602bdb18a2d17d57c7589",
+      "crates/cz-route/src/logistic.rs": "3a243a5397efc1e54b8a573f605c54c5418d1ff0a599cb406563c937e85155d4",
+      "experiments/EXP-CZ-001/laya/pip_freeze.txt": "8ddcdecef77438f546480e112fa8a5a02280ad2a4877af14963edc59f81ec337",
+      "experiments/EXP-CZ-001/laya/hashes.txt": "41145d46b3708c5669358c20c3f90d881bcc3e33b7e1efe299283d62e87b9905",
+      "crates/cz-route/Cargo.toml": "a25f1826ff20a16eece211eefaf7cf69db297b768a37bbdc5c4a41f8a5c54dde"
+    }
+  },
+  "models": [
+    {
+      "name": "sam",
+      "arm": "untrained",
+      "model_id": "HuggingFaceTB__SmolLM2-360M-Instruct-q8_0",
+      "template": "P3",
+      "params_m": 362,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "946fbbb98c2418bf35d02f4311a56845bec914f2b5d27c26169aaa45891d11b3",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 68,
+        "format_failures": 99,
+        "source": "experiments/EXP-CZ-001/phase1v2/selection.json"
+      }
+    },
+    {
+      "name": "grace",
+      "arm": "untrained",
+      "model_id": "ibm-granite__granite-4.0-h-350m-q8_0",
+      "template": "P3",
+      "params_m": 340,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "b58f4102317be22b2380cad89b9e6ac10f4c8c7b36288a967c618951aca288f5",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 98,
+        "format_failures": 0,
+        "source": "experiments/EXP-CZ-001/phase1v2/selection.json"
+      }
+    },
+    {
+      "name": "quentin",
+      "arm": "untrained",
+      "model_id": "Qwen__Qwen3-0.6B-q8_0",
+      "template": "P3",
+      "params_m": 600,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "ba247426cd8c29bd39912e0fc6509f38eb8c4f0abce62ce5ab29af6ac1adb435",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 107,
+        "format_failures": 165,
+        "source": "experiments/EXP-CZ-001/phase1v2/selection.json"
+      }
+    },
+    {
+      "name": "quinn",
+      "arm": "untrained",
+      "model_id": "Qwen__Qwen3.5-0.8B-q8_0",
+      "template": "P2",
+      "params_m": 800,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "0460cc9376a1074d4281be61fe2f872e10e349626cf5bab3b4462493481264c3",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 175,
+        "format_failures": 51,
+        "source": "experiments/EXP-CZ-001/phase1v2/selection.json"
+      }
+    },
+    {
+      "name": "graham",
+      "arm": "untrained",
+      "model_id": "ibm-granite__granite-4.0-350m-q8_0",
+      "template": "P4",
+      "params_m": 352,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "1428057c3813398493fcfb2fd83ffcb1c9caa6a8862d9cf71553acebe2b390b9",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 127,
+        "format_failures": 181,
+        "source": "experiments/EXP-CZ-009/phase1/selection.json"
+      }
+    },
+    {
+      "name": "rowan",
+      "arm": "untrained",
+      "model_id": "BlinkDL__rwkv7-g1-q8_0",
+      "template": "P3",
+      "params_m": 451,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "c440d7a19643d47135aa1482108d235daf56dcf6ccf0b5dcd14302dee866f12c",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 52,
+        "format_failures": 36,
+        "source": "experiments/EXP-CZ-009/phase1/selection.json"
+      }
+    },
+    {
+      "name": "erin",
+      "arm": "untrained",
+      "model_id": "baidu__ERNIE-4.5-0.3B-PT-q8_0",
+      "template": "P3",
+      "params_m": 361,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "defbfb31eb798db89cebb02c1cad37b9cba2c77f02fa5ef59fc8e63d498bdf73",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 78,
+        "format_failures": 133,
+        "source": "experiments/EXP-CZ-009/phase1/selection.json"
+      }
+    },
+    {
+      "name": "bastien",
+      "arm": "untrained",
+      "model_id": "PleIAs__baguettotron-600m-q8_0",
+      "template": "P3",
+      "params_m": 608,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "6fbb42f1fd5cdc2bfcb083a1dd95603cc138ad4bf686a775cc9d2c1adc06aa99",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 27,
+        "format_failures": 347,
+        "source": "experiments/EXP-CZ-009/phase1/selection.json"
+      }
+    },
+    {
+      "name": "mina",
+      "arm": "untrained",
+      "model_id": "openbmb__MiniCPM4-0.5B-q8_0",
+      "template": "P3",
+      "params_m": 434,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "1b0c6fac649dcbf84819abf302a2501afc08c121b83d827cd754c96ff1125ace",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-009 (casting; selection_all9.json)",
+      "merged": false,
+      "dev400": {
+        "solved": 75,
+        "format_failures": 158,
+        "source": "experiments/EXP-CZ-009/phase1/selection.json"
+      }
+    },
+    {
+      "name": "sam-self",
+      "arm": "self",
+      "model_id": "HuggingFaceTB__SmolLM2-360M-Instruct-q8_0",
+      "template": "P3",
+      "params_m": 362,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "946fbbb98c2418bf35d02f4311a56845bec914f2b5d27c26169aaa45891d11b3",
+      "adapter_sha256": "57c2a5e0a53c376c8e62b78e6164f82650904fac06fa67b887a6ffad6f4e93c4",
+      "frozen_in": "EXP-CZ-010",
+      "merged": false,
+      "dev400": {
+        "solved": 86,
+        "format_failures": 8,
+        "ledger_root": "a9fda09f16afedfc3a76af668b84bd4aee69bd370d17ebca37b4bcd30f6b6d1d",
+        "epoch": 1
+      }
+    },
+    {
+      "name": "grace-self",
+      "arm": "self",
+      "model_id": "ibm-granite__granite-4.0-h-350m-q8_0",
+      "template": "P3",
+      "params_m": 340,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "b58f4102317be22b2380cad89b9e6ac10f4c8c7b36288a967c618951aca288f5",
+      "adapter_sha256": "0f2705a4252e559e9d3f10cca9533233d02c7d39fd290d39b3256bc55320ed52",
+      "frozen_in": "EXP-CZ-010",
+      "merged": false,
+      "dev400": {
+        "solved": 193,
+        "format_failures": 8,
+        "ledger_root": "19643080f00ac34c928541466691d2187431f447901ed30a05b5330848a41e7e",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "quentin-self",
+      "arm": "self",
+      "model_id": "Qwen__Qwen3-0.6B-q8_0",
+      "template": "P3",
+      "params_m": 600,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "ba247426cd8c29bd39912e0fc6509f38eb8c4f0abce62ce5ab29af6ac1adb435",
+      "adapter_sha256": "3548dcd1f3da0ffa1a001075127075ae271a43ab56db9ff38641e08e31d4ba53",
+      "frozen_in": "EXP-CZ-010",
+      "merged": false,
+      "dev400": {
+        "solved": 253,
+        "format_failures": 9,
+        "ledger_root": "bf4eb6b6ed652ec18ac1bf602da0eb7a918cfd8e8f10118c2a25bb0f7f810bae",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "quinn-self",
+      "arm": "self",
+      "model_id": "Qwen__Qwen3.5-0.8B-q8_0",
+      "template": "P2",
+      "params_m": 800,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "0460cc9376a1074d4281be61fe2f872e10e349626cf5bab3b4462493481264c3",
+      "adapter_sha256": "3190631c45edf36136f76964155248555d19735d1f13a63dd35f3548a39d8d60",
+      "frozen_in": "EXP-CZ-010",
+      "merged": false,
+      "dev400": {
+        "solved": 337,
+        "format_failures": 10,
+        "ledger_root": "d82d0d62215e64be88e14972d92309561e56f1d3324655449648205820743f85",
+        "epoch": 1
+      }
+    },
+    {
+      "name": "rowan-self",
+      "arm": "self",
+      "model_id": "BlinkDL__rwkv7-g1-q8_0",
+      "template": "P3",
+      "params_m": 451,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "4966d37cba3efd66f5e2ffe4c5557d1c3c28da111436e06f54bf3a4e4b17e23d",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-010",
+      "merged": true,
+      "dev400": {
+        "solved": 190,
+        "format_failures": 1,
+        "ledger_root": "2d98288f1e36ff1362e831d02143f61b20648617b29d98a10e7f1d2842df531e",
+        "epoch": 1
+      }
+    },
+    {
+      "name": "erin-self",
+      "arm": "self",
+      "model_id": "baidu__ERNIE-4.5-0.3B-PT-q8_0",
+      "template": "P3",
+      "params_m": 361,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "defbfb31eb798db89cebb02c1cad37b9cba2c77f02fa5ef59fc8e63d498bdf73",
+      "adapter_sha256": "196af6451522759b4ee44b420135e7b1ceff7f20dded8bb99fbec6c2d56f20d6",
+      "frozen_in": "EXP-CZ-010",
+      "merged": false,
+      "dev400": {
+        "solved": 129,
+        "format_failures": 179,
+        "ledger_root": "91a82bdc1e696eb418582de9a689b8c338438d0bbbb10cb66a88e0c63d89e9e7",
+        "epoch": 1
+      }
+    },
+    {
+      "name": "bastien-self",
+      "arm": "self",
+      "model_id": "PleIAs__baguettotron-600m-q8_0",
+      "template": "P3",
+      "params_m": 608,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "6fbb42f1fd5cdc2bfcb083a1dd95603cc138ad4bf686a775cc9d2c1adc06aa99",
+      "adapter_sha256": "3942ea11fa2be92bc73801a17dd6ab95adcf476a388072fa4a3b8ac908ecfeac",
+      "frozen_in": "EXP-CZ-010",
+      "merged": false,
+      "dev400": {
+        "solved": 52,
+        "format_failures": 296,
+        "ledger_root": "2c2061e63adb1b6c23e87bc4abb958fd91b4cc05c0f7e5e76cd783f01142d1ea",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "mina-self",
+      "arm": "self",
+      "model_id": "openbmb__MiniCPM4-0.5B-q8_0",
+      "template": "P3",
+      "params_m": 434,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "1b0c6fac649dcbf84819abf302a2501afc08c121b83d827cd754c96ff1125ace",
+      "adapter_sha256": "dc8aa304a7345a990425ce9eab30ce371472cf51c8382427eec8139dcb7769d0",
+      "frozen_in": "EXP-CZ-010",
+      "merged": false,
+      "dev400": {
+        "solved": 117,
+        "format_failures": 109,
+        "ledger_root": "5d8603bf99053fc756d671a30f015d25b88a31d54128d26d88b519ff3712a0a7",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "sam-teacher",
+      "arm": "teacher",
+      "model_id": "HuggingFaceTB__SmolLM2-360M-Instruct-q8_0",
+      "template": "P3",
+      "params_m": 362,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "946fbbb98c2418bf35d02f4311a56845bec914f2b5d27c26169aaa45891d11b3",
+      "adapter_sha256": "3c6ac95d47eb819738d8e1f09fa8a7071c2b42a90b07d65e54cf5c01a81d98a1",
+      "frozen_in": "EXP-CZ-011",
+      "merged": false,
+      "dev400": {
+        "solved": 125,
+        "format_failures": 0,
+        "ledger_root": "373e9e2c5939610f457f89e916047b3ebe79c769070b58d6e958a02677ce9cc5",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "grace-teacher",
+      "arm": "teacher",
+      "model_id": "ibm-granite__granite-4.0-h-350m-q8_0",
+      "template": "P3",
+      "params_m": 340,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "b58f4102317be22b2380cad89b9e6ac10f4c8c7b36288a967c618951aca288f5",
+      "adapter_sha256": "0e77f8b5b922cbead0de7cccead8ba658659275b7778b2f0dd45eb7244dc1b9a",
+      "frozen_in": "EXP-CZ-011",
+      "merged": false,
+      "dev400": {
+        "solved": 235,
+        "format_failures": 1,
+        "ledger_root": "c9ac185553f8b770453ff2f50962ccc3b221e3521b2918306ad443d31bd4bf6c",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "quentin-teacher",
+      "arm": "teacher",
+      "model_id": "Qwen__Qwen3-0.6B-q8_0",
+      "template": "P3",
+      "params_m": 600,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "ba247426cd8c29bd39912e0fc6509f38eb8c4f0abce62ce5ab29af6ac1adb435",
+      "adapter_sha256": "a30991c9325ab8289666f10a300ba7bf077832847ded6b5525515fec6f0fc355",
+      "frozen_in": "EXP-CZ-011",
+      "merged": false,
+      "dev400": {
+        "solved": 246,
+        "format_failures": 0,
+        "ledger_root": "5064b4d04832aaad03abebd91357d2ea93e2f9e14b130d2eeefd326ebe590c2d",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "quinn-teacher",
+      "arm": "teacher",
+      "model_id": "Qwen__Qwen3.5-0.8B-q8_0",
+      "template": "P2",
+      "params_m": 800,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "0460cc9376a1074d4281be61fe2f872e10e349626cf5bab3b4462493481264c3",
+      "adapter_sha256": "ff0b03cfab4c87bbc17fe18f535dfca2a7dbae3b9c4940ead9b1b74ebf8d8da0",
+      "frozen_in": "EXP-CZ-011",
+      "merged": false,
+      "dev400": {
+        "solved": 354,
+        "format_failures": 0,
+        "ledger_root": "f4aea3fa082964ed78f055ec0bd34831384a81d3806f6b6f87fb083f027dd6a8",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "rowan-teacher",
+      "arm": "teacher",
+      "model_id": "BlinkDL__rwkv7-g1-q8_0",
+      "template": "P3",
+      "params_m": 451,
+      "chat_kwargs": {
+        "enable_thinking": false
+      },
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "3652f7776eed946706e6eb0bda2fde1bd1cc75a080d3f640ce15c87a29d85b1a",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-011",
+      "merged": true,
+      "dev400": {
+        "solved": 197,
+        "format_failures": 0,
+        "ledger_root": "2057f3f3e889cfa70cd72af779be281926e05df41cd79a35e77565a6073547e5",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "erin-teacher",
+      "arm": "teacher",
+      "model_id": "baidu__ERNIE-4.5-0.3B-PT-q8_0",
+      "template": "P3",
+      "params_m": 361,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "defbfb31eb798db89cebb02c1cad37b9cba2c77f02fa5ef59fc8e63d498bdf73",
+      "adapter_sha256": "cde34e87d6aecdc046483ec62883699e508f94c27a0a7b105558b13859bd6049",
+      "frozen_in": "EXP-CZ-011",
+      "merged": false,
+      "dev400": {
+        "solved": 159,
+        "format_failures": 106,
+        "ledger_root": "36e571a699a66c9da141e7b36cfca28c2fbc4d087aea99d100ebf7649097e14c",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "bastien-teacher",
+      "arm": "teacher",
+      "model_id": "PleIAs__baguettotron-600m-q8_0",
+      "template": "P3",
+      "params_m": 608,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "6fbb42f1fd5cdc2bfcb083a1dd95603cc138ad4bf686a775cc9d2c1adc06aa99",
+      "adapter_sha256": "3638313d5cc126dd29ca06aa6cf81187fea4b00fb926041fccdd5f65e65a2ed7",
+      "frozen_in": "EXP-CZ-011",
+      "merged": false,
+      "dev400": {
+        "solved": 144,
+        "format_failures": 42,
+        "ledger_root": "eb5b41b30e83771e282eec9d2d596d3de6538e4699a859c021e6d594ea42a162",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "mina-teacher",
+      "arm": "teacher",
+      "model_id": "openbmb__MiniCPM4-0.5B-q8_0",
+      "template": "P3",
+      "params_m": 434,
+      "chat_kwargs": null,
+      "serving": "base GGUF plus one LoRA adapter (--lora), one llama-server",
+      "weight_sha256": "1b0c6fac649dcbf84819abf302a2501afc08c121b83d827cd754c96ff1125ace",
+      "adapter_sha256": "076e70392b12211879f7799ab14751f8b2196a7115b66d9b7ab2117526068f5d",
+      "frozen_in": "EXP-CZ-011",
+      "merged": false,
+      "dev400": {
+        "solved": 228,
+        "format_failures": 0,
+        "ledger_root": "10cc2db905a5f482aedbde40e165523fe48fb90b63249204447fa0ac4cbf4f4e",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "theo-s0",
+      "arm": "child",
+      "model_id": "exp012-theo-s0-e017",
+      "template": "P3",
+      "params_m": 135,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "36734697cb89b9b48f32c7e4a3c3a3b9a5e4801f4ec97aaaf52e94c16dfefba6",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-017",
+      "merged": true,
+      "dev400": {
+        "solved": 146,
+        "format_failures": 0,
+        "ledger_root": "5881941681ca7f8868fb94e3de0b0ab3785cec88ff6aa59cc1c49c2524d7d32a",
+        "epoch": 2
+      }
+    },
+    {
+      "name": "hazel-s0",
+      "arm": "child",
+      "model_id": "exp012-hazel-s0-e017",
+      "template": "P3",
+      "params_m": 135,
+      "chat_kwargs": null,
+      "serving": "merged GGUF, one llama-server",
+      "weight_sha256": "1c24bfc5bf5a1ce44d0905ee491a5d9adf662102aadf62c5f16ef7d72e40f942",
+      "adapter_sha256": null,
+      "frozen_in": "EXP-CZ-017",
+      "merged": true,
+      "dev400": {
+        "solved": 146,
+        "format_failures": 0,
+        "ledger_root": "605e6e02668c94932db47e471df9a28bd9885e751659bc8e12c92fcfa7c776ba",
+        "epoch": 2
+      }
+    }
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "budget": {
+    "planned_generations": 140400,
+    "generated_tokens_cap": 71884800,
+    "gpu_hours_estimate": "11 to 14",
+    "wall_hours_cap": 22,
+    "api_spend_usd": 0
+  },
+  "schema": "cz.manifest.v1"
+}

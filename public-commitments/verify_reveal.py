@@ -4,6 +4,7 @@ Usage:
   python3 verify_reveal.py reveal/EXP-CZ-001
   python3 verify_reveal.py reveal/EXP-CZ-009-011
   python3 verify_reveal.py reveal/EXP-CZ-017
+  python3 verify_reveal.py reveal/EXP-CZ-003a
   python3 verify_reveal.py --self-test
 
 A reveal folder holds one experiment's files, or, when several experiments share one sealed set, the shared
@@ -68,6 +69,15 @@ EXPECTED = {
         "commitment_root": "55a51dd37ca213dbc6ee99f51ca59b5baca1f747919a1ce567d06c9b7dd9500a",
         "manifest_file_sha256": "2c5ab6893fddd502a8bbbdb0d067f04ea7c6b06e1d3991443df7cded83f29aa1",
         "freeze_ledger_root": "35c648e696ae3b8c601fce5fb4930927c8179db5488f6b9155e8f851ebaf57b8",
+    },    "EXP-CZ-003a": {
+        "sealed_file": "sealed-s4-scored.jsonl",
+        "sealed_file_sha256": "525da50809ff284fe5e4ee458320e5a01152717e8c7ca089b72317435914a530",
+        "sealed_salt_commitment": "0d3724b9d80714aa27a0284d6fc525e150a0c055176f0a7aa7e15d2312a2d617",
+        "manifest_salt_commitment": "63eb8c0e1be202d8bc1cfe493126cc46508f61c7056093c82113ade9356ad804",
+        "manifest_digest": "e455e58c029263e0c3e50d948083578ebe8cf560a7fedf7cf693563fa7ba7574",
+        "commitment_root": "a8f0663504e03c7c2ce455aff69203351ca3432842b958b39d52b802d18c2c6e",
+        "manifest_file_sha256": "5a114f2bc73696ea5a3a2e8bf87dda6fc4db4c4ab41b35bead47a7b6dbbe1227",
+        "freeze_ledger_root": "5123db066ad93aef1bf0c5aba30453cc8619b3362443b53ec076ca8fa0f2d988",
     },
 }
 GENESIS = "0" * 64

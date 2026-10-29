@@ -1,6 +1,6 @@
 # EXP-CZ-003a commitments (who does what: routing across the colony)
 
-Status: RUN 2026-10-28, not yet scored. This page and its freeze record were pushed here before any sealed run. Sealed set 4 and its salt stay secret until the report. The freeze record is EXP-CZ-003a-freeze.txt in this folder, and EXP-CZ-003a-freeze.txt.ots is its OpenTimestamps proof. That proof was submitted between the freeze at 2026-10-28T02:50:41Z and the push that carried it at 02:54:10Z (GitHub server time), and is anchored in Bitcoin block 973489, mined at 2026-10-28T03:10:30Z. The first sealed run started at 2026-10-28T04:20:02Z, after the anchor verified.
+Status: REPORTED and sealed set 4 REVEALED 2026-10-29. See the [results](../experiments/EXP-CZ-003a/RESULTS.md) and the [reveal folder](reveal/EXP-CZ-003a/). The pre-run version of this page and its freeze record were pushed before any sealed run in [commit a6ea353](https://github.com/colony-zero/colony-zero-research/commit/a6ea353). The freeze record is EXP-CZ-003a-freeze.txt in this folder, and EXP-CZ-003a-freeze.txt.ots is its OpenTimestamps proof. That proof was submitted between the freeze at 2026-10-28T02:50:41Z and the push that carried it at 02:54:10Z (GitHub server time), and is anchored in Bitcoin block 973489, mined at 2026-10-28T03:10:30Z. The first sealed run started at 2026-10-28T04:20:02Z, after the anchor verified.
 
 | Commitment | What it covers | Value |
 |---|---|---|
@@ -25,10 +25,10 @@ Three post-run scripts that were frozen with the design had bugs that stopped th
 
 1. Route records and scoring called the integrity check without the experiment folder it needs, so it refused. The wrapper supplies the folder. The check itself runs in full.
 2. Route records stopped at the first record, because deleting a file that did not exist yet counted as a failure. The wrapper makes that one delete succeed when there is nothing to delete.
-3. The post-run hash command was garbled in transit (shell quoting) and was longer than the Windows command-line limit. The wrapper sends the same SHA-256 hashing command intact and shorter.
+3. The post-run hash command was garbled in transit (shell quoting) and was longer than the platform's command-line limit. The wrapper sends the same SHA-256 hashing command intact and shorter.
 
 None of the three changes a hypothesis, margin, test, task or route program. Each was found and fixed before the step it affects produced any output.
 
-## What comes next
+## What happened next
 
-Once the post-run record's proof is anchored in a Bitcoin block, the block six above it picks which route records are re-verified, so nobody could choose them in advance. Then the scorer runs and the report follows.
+The post-run record's proof was anchored in Bitcoin block 973627. Block 973633, six blocks later, picked the route records to re-verify, so nobody could choose them in advance. The scorer then ran, and the results and reveal were published.
