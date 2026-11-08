@@ -19,7 +19,7 @@ Each season is one turn of the colony loop: casting or birth, trials, Council, m
 | Season | Generation | Experiments | Decision the season makes |
 |---|---|---|---|
 | 0 The Casting | Gen 0 | EXP-CZ-001 | Founding standings on sealed tasks |
-| 1 The First Colony | Gen 0 | EXP-CZ-002 plus Council arm | First elimination. Does the colony beat its best member? |
+| 1 The First Colony | Gen 0 | EXP-CZ-002 plus Council arm | REPORTED: the frozen T3 arm beat the pooled tool reference at 4x; see experiments/EXP-CZ-002/RESULTS.md. First elimination remains separate. |
 | 2 Who Does What | Gen 0 | EXP-CZ-003 | Routing policy for the colony |
 | 3 Inheritance | Gen 1 | EXP-CZ-004, EXP-CZ-005 | First generational replacement through the promotion gate |
 | 4 Invention | Gen 2+ | EXP-CZ-006 | A colony-built component enters only if it beats established ones |
@@ -31,7 +31,7 @@ Each season is one turn of the colony loop: casting or birth, trials, Council, m
 | Stage | Experiment | Question | Primary endpoint | Success gate | If it fails |
 |---|---|---|---|---|---|
 | 1 | EXP-CZ-001 | What can one frozen tiny model solve, objectively verified? | Verified solve rate on sealed tasks, greedy decoding | See experiments/EXP-CZ-001/PREREGISTRATION.md | No member clears the viability gate: the class is too weak for this suite. Test a larger size lane as a disclosed control or change the suite |
-| 2 | EXP-CZ-002 | At identical total tokens, does a small team beat one model and best-of-N? | Verified solve rate at equal tokens, budgets 1x to 8x | Team beats the best non-oracle best-of-N by at least 3 points with the Holm-adjusted interval above zero in one regime, and is not worse in the other | Record "no amplification found for this class" and stop the social line |
+| 2 | EXP-CZ-002 | At identical total tokens, does a small team beat one model and best-of-N? | Verified solve rate at equal tokens, budgets 1x to 4x | REPORTED: H2.1, H2.2, H2.4, and H2.5 supported; H2.3 not supported. See experiments/EXP-CZ-002/RESULTS.md | The recorded result is positive within the founders-pool instrument |
 | 3 | EXP-CZ-003 | Does a learned router improve success per unit of compute? | Verified solves per all-in compute | A learned router beats rules by at least 2 points or cuts compute by 10 percent at equal solve rate | Ship rules and drop learned controllers |
 | 4 | EXP-CZ-004 | Do verified skills transfer to unseen problems and across models? | Held-out solve delta, five seeds | Gain exceeds seed spread on unseen families and survives a change of model family | Stop skill claims and publish the null |
 | 5 | EXP-CZ-005 | Does a descendant beat its predecessor? | Promotion gate on sealed tasks with a protected regression suite | Gate passes in at least four of five seeds | A fresh candidate or a simple fine-tuning control matches it: evolution adds nothing here |

@@ -36,7 +36,7 @@ From now on a sealed run starts only after its commitment is pushed here and its
 
 ## Verify a reveal in one command
 
-`python3 verify_reveal.py reveal/<folder>` checks a reveal against the values published here. It needs only Python 3. `python3 verify_reveal.py --self-test` builds fake reveals from random salts and checks that they pass and that tampering fails.
+`python3 verify_reveal.py reveal/<folder>` checks a reveal against the values published here. EXP-CZ-002 also takes its downloaded release archive as the second argument. It needs only Python 3. `python3 verify_reveal.py --self-test` builds fake reveals from random salts and checks that they pass and that tampering fails.
 
 ## Pages
 
@@ -46,3 +46,4 @@ From now on a sealed run starts only after its commitment is pushed here and its
 - EXP-CZ-011.md (teacher-taught adapters; partial manifest reveal)
 - EXP-CZ-017.md (first children; revealed, partial manifest reveal: reveal/EXP-CZ-017/)
 - EXP-CZ-003a.md (routing across the colony; reported and revealed: [reveal/EXP-CZ-003a/](reveal/EXP-CZ-003a/))
+- EXP-CZ-002.md (first colony amplification; reported and revealed: [reveal/EXP-CZ-002/](reveal/EXP-CZ-002/))
