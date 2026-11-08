@@ -1,0 +1,82 @@
+{
+  "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+  "version": "v1.1.0",
+  "entity": {
+    "type": "organisation",
+    "role": "owner",
+    "name": "TriplePass Labs LLC",
+    "email": "hello@triplepasslabs.com",
+    "description": "Independent empirical AI evaluation and research lab benchmarking sub-1B open-weight models on equal compute limits with cryptographic commitments anchored to Bitcoin.",
+    "webpageUrl": {
+      "url": "https://triplepasslabs.com"
+    }
+  },
+  "projects": [
+    {
+      "guid": "colony-zero",
+      "name": "Colony Zero",
+      "description": "Equal-compute small-model swarm benchmark and empirical coordination suite testing sub-1B open-weight models with pre-registered cryptographic commitments.",
+      "webpageUrl": {
+        "url": "https://github.com/colony-zero/colony-zero-research"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/colony-zero/colony-zero-research"
+      },
+      "licenses": [
+        "spdx:Apache-2.0"
+      ],
+      "tags": [
+        "ai",
+        "benchmarking",
+        "small-language-models",
+        "opentimestamps",
+        "evaluations"
+      ]
+    },
+    {
+      "guid": "prove",
+      "name": "Prove",
+      "description": "Cryptographic benchmark pre-registration, Bitcoin-anchored OpenTimestamps attestation, and agent harness drift observatory.",
+      "webpageUrl": {
+        "url": "https://triplepasslabs.com"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/colony-zero/colony-zero-research"
+      },
+      "licenses": [
+        "spdx:Apache-2.0"
+      ],
+      "tags": [
+        "ai-safety",
+        "reproducibility",
+        "opentimestamps",
+        "bitcoin",
+        "drift-monitoring"
+      ]
+    }
+  ],
+  "funding": {
+    "channels": [
+      {
+        "guid": "mercury-bank-wire",
+        "type": "bank",
+        "address": "hello@triplepasslabs.com",
+        "description": "Direct ACH or domestic/international wire transfer to TriplePass Labs LLC (Mercury business checking account)."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "floss-infrastructure-grant-10k",
+        "status": "active",
+        "name": "FLOSS Open Evaluation Infrastructure Grant",
+        "description": "Unrestricted grant supporting public reproducible benchmark datasets, Bitcoin OpenTimestamps calendar server anchoring, and open-source small-model coordination evaluation.",
+        "amount": 10000,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "mercury-bank-wire"
+        ]
+      }
+    ]
+  }
+}
