@@ -424,7 +424,8 @@ def check_exp002(d, spec, release_asset):
 
     check("PREGEN and PRERUN differ only at the three authorized binding fields", records_have_only_allowed_changes)
     check("KIT_MANIFEST matches the canonical hash recorded before the run", lambda: (
-        sha(canonical_json(json.loads(kit.read_bytes()))) == pregen_json["canonical_kit_manifest_sha256"]
+        kit.read_bytes() == canonical_json(json.loads(kit.read_bytes())) + b"\n"
+        and sha(kit.read_bytes()) == pregen_json["canonical_kit_manifest_sha256"]
     ))
     check("SEALED_MANIFEST matches the PRERUN record and release manifest", lambda: (
         sha(sealed_manifest.read_bytes()) == prerun_json["sealed_manifest_sha256"]
@@ -749,7 +750,7 @@ def self_test():
             "schema": "cz.manifest.v1",
             "task_spec": {"sealed_file_sha256": sha(sealed), "split": "sealed"},
         }
-        kit_raw = json.dumps(kit_json, indent=2).encode("utf-8")
+        kit_raw = canonical_json(kit_json) + b"\n"
         sealed_manifest_raw = json.dumps(sealed_manifest_json, indent=2).encode("utf-8")
         frozen = {
             "phase": "PREGEN",
@@ -757,7 +758,7 @@ def self_test():
             "sealed_manifest_sha256": "0" * 64,
             "sealed_task_count": 20,
             "sealed_task_split": task_split,
-            "canonical_kit_manifest_sha256": sha(canonical_json(kit_json)),
+            "canonical_kit_manifest_sha256": sha(kit_raw),
             "executor_sha256": "3" * 64,
             "worker_binary_sha256": "4" * 64,
             "probe_binary_sha256": "5" * 64,
