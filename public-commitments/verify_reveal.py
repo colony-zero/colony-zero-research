@@ -244,16 +244,19 @@ def exp002_postrun_hashes(raw):
         if len(fields) != 4 or fields[:2] != ["EXP-CZ-002", "postrun"]:
             raise ValueError("POSTRUN record grammar is invalid")
         relative = Path(fields[2])
-        if (relative.is_absolute() or ".." in relative.parts or len(relative.parts) != 3
+        if (relative.is_absolute() or ".." in relative.parts or len(relative.parts) not in (2, 3)
                 or relative.parts[0] != "set5" or len(fields[3]) != 64
                 or any(character not in "0123456789abcdef" for character in fields[3])):
             raise ValueError("POSTRUN record path or digest is invalid")
+        # The record binds every run file; only tuple results and ledgers are released.
         name = relative.name
-        is_result = relative.suffix == ".json" and name not in {
+        is_result = len(relative.parts) == 3 and relative.suffix == ".json" and name not in {
             "timing-vram.json", "live-identity.json", "command.json"}
-        is_ledger = relative.suffix == ".jsonl" and not name.endswith(".timing.jsonl")
-        if not (is_result or is_ledger) or name in values:
-            raise ValueError("POSTRUN record contains an unexpected or duplicate release file")
+        is_ledger = len(relative.parts) == 3 and relative.suffix == ".jsonl" and not name.endswith(".timing.jsonl")
+        if not (is_result or is_ledger):
+            continue
+        if name in values:
+            raise ValueError("POSTRUN record contains a duplicate release file")
         values[name] = fields[3]
     if len(values) != 44:
         raise ValueError(f"POSTRUN record has {len(values)} release files instead of 44")
@@ -782,8 +785,9 @@ def self_test():
         release.mkdir()
         postrun_lines = []
         for number in range(1, 23):
-            result_name = f"tuple-{number:02d}-result.json"
-            ledger_name = f"tuple-{number:02d}-ledger.jsonl"
+            # Production names carry no "result" or "ledger" marker.
+            result_name = f"Fixture-Model-q8_0-exp002-s5-arm{number:02d}-member-src.json"
+            ledger_name = f"Fixture-Model-q8_0-exp002-s5-arm{number:02d}-member-src.jsonl"
             result_raw = json.dumps({"fixture": result_name}, sort_keys=True).encode() + b"\n"
             ledger_raw = json.dumps({"fixture": ledger_name}, sort_keys=True).encode() + b"\n"
             release.joinpath(result_name).write_bytes(result_raw)
@@ -792,6 +796,12 @@ def self_test():
                 f"EXP-CZ-002 postrun set5/tuple-{number:02d}/{result_name} {sha(result_raw)}",
                 f"EXP-CZ-002 postrun set5/tuple-{number:02d}/{ledger_name} {sha(ledger_raw)}",
             ))
+            # The real POSTRUN record also binds files that are never released.
+            for extra in ("command.json", "live-identity.json", "timing-vram.json", "child-stderr.log",
+                          f"arm{number:02d}-server.log", ledger_name.replace(".jsonl", ".timing.jsonl")):
+                postrun_lines.append(f"EXP-CZ-002 postrun set5/tuple-{number:02d}/{extra} {sha(extra.encode())}")
+        for extra in ("RUN_STATE.json", "run-summary.json"):
+            postrun_lines.append(f"EXP-CZ-002 postrun set5/{extra} {sha(extra.encode())}")
         postrun_raw = ("\n".join(sorted(postrun_lines)) + "\n").encode()
         postrun_commitment = f"private_postrun_record_sha256 {sha(postrun_raw)}\n".encode()
         beacon_private_sha = "b" * 64
@@ -1037,7 +1047,7 @@ def self_test():
         if code != 0 or text.count("PASS") != 23:
             failures.append("EXP-CZ-002 tarball fixture should pass 23 checks:\n" + text)
 
-        for name in ("tuple-01-result.json", "scorer.json", "SCORING_ENVELOPE.json"):
+        for name in ("Fixture-Model-q8_0-exp002-s5-arm01-member-src.json", "scorer.json", "SCORING_ENVELOPE.json"):
             target = release_fixture / name
             original = target.read_bytes()
             target.write_bytes(original + b"changed\n")
