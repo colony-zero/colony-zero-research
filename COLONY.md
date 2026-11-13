@@ -8,7 +8,7 @@ Every member has a name, so the colony can be followed season after season. A na
 |---|---|---|---|---|---|---|---|
 | Quinn | Qwen/Qwen3.5-0.8B | Alibaba Qwen | Hybrid: Gated DeltaNet and attention | about 0.8B | Apache-2.0 | Season 0 | Active |
 | Quentin | Qwen/Qwen3-0.6B | Alibaba Qwen | Transformer | about 0.6B | Apache-2.0 | Season 0 | Active |
-| Grace | ibm-granite/granite-4.0-h-350m | IBM | Hybrid: Mamba-2 and attention | about 340M | Apache-2.0 | Season 0 | Active |
+| Grace | ibm-granite/granite-4.0-h-350m | IBM | Hybrid: Mamba-2 and attention | about 340M | Apache-2.0 | Season 0 | Archived 2026-11-11: eliminated in Season 1 by measured contribution (EXP-CZ-002b); returns only through a later preregistered menu |
 | Sam | HuggingFaceTB/SmolLM2-360M-Instruct | Hugging Face | Transformer | about 362M | Apache-2.0 | Season 0 | Active, floor control |
 | Graham | ibm-granite/granite-4.0-350m | IBM | Attention only (Grace's sibling without Mamba layers) | 352M | Apache-2.0 | Season 0, second casting | Active; his adapters failed the parity gate, so he was not in the adapter experiments |
 | Rowan | BlinkDL/rwkv7-g1 (G1d 0.4B) | RWKV | Recurrent (RWKV-7), no attention | about 0.4B | Apache-2.0 | Season 0, second casting | Active |
