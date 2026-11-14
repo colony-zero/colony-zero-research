@@ -12,7 +12,7 @@ Status words: SPECIFIED (design written), FREEZE PENDING (design final; freeze c
 | EXP-CZ-002 | 1 | At equal total tokens, does a small team beat one model and best-of-N? | SPECIFIED | PROPOSED |
 | EXP-CZ-002b | 1 | Season 1 Council and measured elimination: does removing the least useful member, by measured contribution, keep the team as good? | REPORTED and REVEALED 2026-11-11; sets S and V retired | Sealed results MEASURED (EXP-CZ-002b/RESULTS.md) |
 | EXP-CZ-003 | 2 | Does a learned router improve success per unit of compute? | SPECIFIED | PROPOSED |
-| EXP-CZ-004 | 3 | Do verified skills transfer to unseen problems and across models? | SPECIFIED | PROPOSED |
+| EXP-CZ-004 | 3 | Do verified skills transfer to unseen problems and across models? | PILOT BLOCKED 2026-11-14 at its preregistered competence floor; no library or sealed set built (EXP-CZ-004/PILOT.md) | Pilot counts MEASURED on public calibration data |
 | EXP-CZ-005 | 3 | Does a descendant beat its predecessor? | SPECIFIED | PROPOSED |
 | EXP-CZ-006 | 4 | Can the population produce a new testable component that beats established ones? | SPECIFIED | PROPOSED |
 | EXP-CZ-007 | 5 | How much of the gap to a frozen frontier baseline closes? | SPECIFIED | PROPOSED |
