@@ -16,7 +16,7 @@ Status words: SPECIFIED (design written), FREEZE PENDING (design final; freeze c
 | EXP-CZ-005 | 3 | Does a descendant beat its predecessor? | SPECIFIED | PROPOSED |
 | EXP-CZ-006 | 4 | Can the population produce a new testable component that beats established ones? | SPECIFIED | PROPOSED |
 | EXP-CZ-007 | 5 | How much of the gap to a frozen frontier baseline closes? | SPECIFIED | PROPOSED |
-| EXP-CZ-008 | later | Can a swarm compress into one student? | SPECIFIED | PROPOSED |
+| EXP-CZ-008 | 1 | Can a swarm compress into one student? | PILOT BLOCKED 2026-11-13 by its preregistered futility rule; no sealed set built (EXP-CZ-008/PILOT.md) | Pilot counts MEASURED on public dev data |
 
 Design details for 002 to 008 are in ../ROADMAP.md. EXP-CZ-001, 009, 010, 011 and 017 have preregistration and results pages. EXP-CZ-010, 011 and 017 were published after the runs; they are externally anchored no later than Bitcoin block 973187 (2026-10-26T04:42:29Z), and their 04:30:59Z freeze time is our own record. Every adapter and child run began after the anchor; five untrained control runs began before it (../public-commitments/README.md). The results of EXP-CZ-010, 011 and 017 are within four synthetic Forge task families, tested on fresh tasks from the same generators as training. They used one training seed (010, 011) or three with seed 0 deciding (017), below the five-seed rule in ../METHODOLOGY.md, so they are preliminary on seed variance. EXP-CZ-011 compares the teacher pipeline plus its larger data volume with self-training, not teacher quality alone. Two earlier specifications of the First Birth question stopped at their data gate before any child was trained and before sealed set 3 was used; EXP-CZ-017/PREREGISTRATION.md explains why.
 
