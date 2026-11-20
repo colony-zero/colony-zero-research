@@ -49,8 +49,8 @@ tasks. This is a finding about the size of the effect, not a machine fault.
 
 ## Budget
 
-The time budget was split before the run counted: 72 hours for scientific work (55.2 hours used in total, including
-earlier preparation) and a separate 4-hour cap for packaging and launch work (1.75 hours used).
+The time budget was split before the run counted: 72 hours for scientific work (55.7 hours used in total, including
+earlier preparation and the closeout) and a separate 4-hour cap for packaging and launch work (1.75 hours used).
 
 ## What comes next
 
