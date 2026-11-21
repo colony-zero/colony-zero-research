@@ -15,6 +15,7 @@ Status words: SPECIFIED (design written), FREEZE PENDING (design final; freeze c
 | EXP-CZ-004 | 3 | Do verified skills transfer to unseen problems and across models? | PILOT BLOCKED 2026-11-14 at its preregistered competence floor; no library or sealed set built (EXP-CZ-004/PILOT.md) | Pilot counts MEASURED on public calibration data |
 | EXP-CZ-005 | 3 | Does a descendant beat its predecessor? | BLOCKED 2026-11-16 during data preparation by its own data rule; no model trained (EXP-CZ-005/RUN.md) | Untested |
 | EXP-CZ-005b | 3 | Successor to EXP-CZ-005: does a descendant trained on its own bare checked answers beat its parent? | BLOCKED 2026-11-20 at its preregistered power stop, before the sealed test; no sealed set built (EXP-CZ-005b/RUN.md) | Dev accuracy MEASURED on public dev; hypotheses untested |
+| EXP-CZ-005c | 3 | Fresh confirmation of the 005b lead: does the fresh adapter F beat its parent, and the self-trained descendants D, on sealed tasks? | BLOCKED 2026-11-21 by a verification step's time limit (a tooling defect), before any model was evaluated; sealed set retired unused (EXP-CZ-005c/RUN.md) | Untested |
 | EXP-CZ-006 | 4 | Can the population produce a new testable component that beats established ones? | SPECIFIED | PROPOSED |
 | EXP-CZ-007 | 5 | How much of the gap to a frozen frontier baseline closes? | SPECIFIED | PROPOSED |
 | EXP-CZ-008 | 1 | Can a swarm compress into one student? | PILOT BLOCKED 2026-11-13 by its preregistered futility rule; no sealed set built (EXP-CZ-008/PILOT.md) | Pilot counts MEASURED on public dev data |
